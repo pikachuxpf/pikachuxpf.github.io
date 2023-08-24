@@ -3,7 +3,7 @@
   <entry>
     <title>Hexo食用手册</title>
     <url>/2023/08/23/Hexo%E9%A3%9F%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h4 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g #生成文件</span><br><span class="line">hexo s #本地服务器查看</span><br><span class="line">hexo d #部署到github上</span><br><span class="line">hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h4 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g #生成文件</span><br><span class="line">hexo s #本地服务器查看</span><br><span class="line">hexo d #部署到github上</span><br><span class="line">hexo n &quot;文章标题&quot;</span><br><span class="line">hexo new page &quot;新页面&quot;</span><br></pre></td></tr></table></figure>
 <h4 id="文章可以拥有的属性"><a href="#文章可以拥有的属性" class="headerlink" title="文章可以拥有的属性"></a>文章可以拥有的属性</h4><table>
 <thead>
 <tr>
@@ -62,6 +62,15 @@
 <td>文件名字</td>
 </tr>
 </tbody></table>
+<h3 id="一篇文章的基本框架"><a href="#一篇文章的基本框架" class="headerlink" title="一篇文章的基本框架"></a>一篇文章的基本框架</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: My awesome title</span><br><span class="line">date: 2023-8-23 18:38:45</span><br><span class="line">categories: </span><br><span class="line">    - 分类1</span><br><span class="line">    - 分类2</span><br><span class="line">tags: </span><br><span class="line">    - 标签1</span><br><span class="line">    - 标签2</span><br><span class="line">mp3: http://domain.com/awesome.mp3</span><br><span class="line">cover: http://domain.com/awesome.jpg</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h4 id="可能遇见的bug"><a href="#可能遇见的bug" class="headerlink" title="可能遇见的bug"></a>可能遇见的bug</h4><ol>
+<li>解决Hexo部署时报错：Error: Spawn failed</li>
+</ol>
+<p>打开博客主目录配置文件 __config.yml,修改deploy.repo<br>改为如下格式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git@github.com:&#123;用户名&#125;.github.io</span><br></pre></td></tr></table></figure>
+<p>重新执行 hexo clean 等指令</p>
+<h6 id="或者"><a href="#或者" class="headerlink" title="或者"></a>或者</h6><p>删除<code>.deplot_git</code>文件夹,在git bash中<code>git config --global core.autocrlf false</code>并且重新执行hexo clean等指令</p>
 ]]></content>
       <categories>
         <category>hexo</category>
