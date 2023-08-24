@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo食用手册</title>
+    <url>/2023/08/23/Hexo%E9%A3%9F%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h4 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g #生成文件</span><br><span class="line">hexo s #本地服务器查看</span><br><span class="line">hexo d #部署到github上</span><br><span class="line">hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="文章可以拥有的属性"><a href="#文章可以拥有的属性" class="headerlink" title="文章可以拥有的属性"></a>文章可以拥有的属性</h4><table>
+<thead>
+<tr>
+<th>-</th>
+<th>Settings</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>layout</td>
+<td>Layout</td>
+<td>post or page</td>
+</tr>
+<tr>
+<td>2</td>
+<td>title</td>
+<td>标题</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>data</td>
+<td>创建日期</td>
+<td>文件的创建日期</td>
+</tr>
+<tr>
+<td>4</td>
+<td>updated</td>
+<td>修改日期</td>
+<td>文件的修改日期</td>
+</tr>
+<tr>
+<td>5</td>
+<td>comments</td>
+<td>是否开启评论</td>
+<td>true</td>
+</tr>
+<tr>
+<td>6</td>
+<td>tags</td>
+<td>标签</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>categories</td>
+<td>分类</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>permalink</td>
+<td>url中的名字</td>
+<td>文件名字</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+</search>
