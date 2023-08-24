@@ -89,6 +89,9 @@
 <li>n$&lt;&#x3D; 10^{100000}$ &#x3D;&gt;O($logk$ x $loglogk$),k表示数位,高精度加减,FFT?NTT</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
       <tags>
         <tag>algorithm</tag>
       </tags>
