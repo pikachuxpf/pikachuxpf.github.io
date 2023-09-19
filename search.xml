@@ -176,4 +176,44 @@
         <tag>kuangbin</tag>
       </tags>
   </entry>
+  <entry>
+    <title>求逆序对的数量</title>
+    <url>/2023/09/19/%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9%E7%9A%84%E6%95%B0%E9%87%8F/</url>
+    <content><![CDATA[<h1 id="求逆序对的数量"><a href="#求逆序对的数量" class="headerlink" title="求逆序对的数量"></a>求逆序对的数量</h1><h2 id="什么是逆序对"><a href="#什么是逆序对" class="headerlink" title="什么是逆序对"></a>什么是逆序对</h2><p>设 A 为一个有 n 个数字的有序集 (n&gt;1)，其中所有数字各不相同。<br>如果存在正整数 i, j 使得 1 ≤ i &lt; j ≤ n 而且 A[i] &gt; A[j]，则 &lt;A[i], A[j]&gt; 这个有序对称为 A 的一个逆序对，也称作逆序数。</p>
+<h2 id="使用树状数组求逆序对"><a href="#使用树状数组求逆序对" class="headerlink" title="使用树状数组求逆序对"></a>使用树状数组求逆序对</h2><p>在树状数组中，我们维护一个tr数组，这个数组的含义是目前A中的数字出现的次数</p>
+<p>我们便可以通过逆序对的<code>query</code>操作和<code>add</code>操作进行动态求解。</p>
+<blockquote>
+<p>因为A的数据可能不是一个标准的排列，所以我们需要离散化一下数据，防止数据过大，</p>
+</blockquote>
+<br>
+
+<p>下面使用<code>unordered_map&lt;int,int&gt; S;</code>进行离散化，进行一个值的映射，获取映射值的函数为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">auto get(auto x)</span><br><span class="line">&#123;</span><br><span class="line">    if(S.count(x) == 0) S[x] = ++ idx;</span><br><span class="line">    return S[x];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们首先要吧映射值给求一遍，这要求我们的数据是有序的，所以我们需要先进行一次<strong>排序</strong>获取映射值。</p>
+<br>
+
+<p>之后动态对tr数组进行<code>add</code>和<code>query</code>,从最后一个往前推，每次答案加上<code>query(y-1)</code>,是求在当前已经有的数字，有多少个小于当前数字（正确顺序是大于）。</p>
+<blockquote>
+<p>如果正推，则为<code>query(n) - query(y)</code>。</p>
+</blockquote>
+<p>每次查询完，将当前数字插入tr数组</p>
+<h3 id="代码片段"><a href="#代码片段" class="headerlink" title="代码片段"></a>代码片段</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;deque&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;unordered_map&gt;</span><br><span class="line">#include &lt;unordered_set&gt;</span><br><span class="line">#define _fio ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);</span><br><span class="line">#define all(x) (x).begin(), (x).end()</span><br><span class="line">#define allr(x) (x).rbegin(), (x).rend()</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long LL ;</span><br><span class="line">typedef pair&lt;int,int&gt; PII;</span><br><span class="line">const char nl = &#x27;\n&#x27;;</span><br><span class="line">const int INF = 0x3f3f3f3f;</span><br><span class="line">const int N = 100005;</span><br><span class="line">LL tr[N];</span><br><span class="line">LL a[N],c[N],n,ans,idx;</span><br><span class="line">unordered_map&lt;int,int&gt; S;</span><br><span class="line">LL lowbit(int x)</span><br><span class="line">&#123;</span><br><span class="line">    return x &amp; -x;</span><br><span class="line">&#125;</span><br><span class="line">void add(int x,int v)</span><br><span class="line">&#123;</span><br><span class="line">    for(int i=x;i&lt;=n;i+=lowbit(i)) tr[i] += v;</span><br><span class="line">&#125;</span><br><span class="line">LL query(int x)</span><br><span class="line">&#123;</span><br><span class="line">    LL res = 0;</span><br><span class="line">    for(int i=x;i;i-=lowbit(i)) res += tr[i];</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line">LL get(int x)</span><br><span class="line">&#123;</span><br><span class="line">    if(S.count(x) == 0) S[x] = ++ idx;</span><br><span class="line">    return S[x];</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    for(int i=0;i&lt;n;++i) cin &gt;&gt; a[i];</span><br><span class="line">    memcpy(c,a,sizeof a);</span><br><span class="line">    sort(a,a+n);</span><br><span class="line">    for(int i=0;i&lt;n;++i) get(a[i]);</span><br><span class="line">    for(int i=n-1;i&gt;=0;--i)</span><br><span class="line">    &#123;</span><br><span class="line">        int y = get(c[i]);</span><br><span class="line">        ans += query(y-1);</span><br><span class="line">        add(y,1);</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; ans &lt;&lt; nl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="使用归并排序求逆序对"><a href="#使用归并排序求逆序对" class="headerlink" title="使用归并排序求逆序对"></a>使用归并排序求逆序对</h2><p>实际上数字的交换次数即为A的逆序对数量<br>我们分区间来看<br>一个区间的逆序对数量&#x3D;左边逆序对的数量+右边逆序对的数量+跨边界的逆序对数量。<br>和一般的归并排序不同的是<code>res+=mid-i+1</code>,<br>这里便是跨边界的逆序对的数量,其实就是在归并过程中，如果有的某一个数大于左边的一个数，就把左边遍历到的数字数量加上。因为左边是有序的，只要右边的数小于左边的一个数，就会小于左边那个数及前面所有的数。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N = 1e5+10;</span><br><span class="line">typedef long long ll;</span><br><span class="line">int a[N];</span><br><span class="line">int tmp[N];</span><br><span class="line">int n;</span><br><span class="line"></span><br><span class="line">ll merge_sort(int *q,int l,int r)</span><br><span class="line">&#123;</span><br><span class="line">	if(l&gt;=r) return 0;</span><br><span class="line">	int mid = l+r&gt;&gt;1;</span><br><span class="line">	ll res = merge_sort(q,l,mid)+merge_sort(q,mid+1,r);</span><br><span class="line">	int k=0,i=l,j=mid+1;</span><br><span class="line">	while(i&lt;=mid &amp;&amp; j&lt;=r)</span><br><span class="line">	&#123;</span><br><span class="line">		if(q[i]&lt;=q[j]) tmp[k++] = q[i++];</span><br><span class="line">		else &#123;tmp[k++] = q[j++];res+=mid-i+1;&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	while(i&lt;=mid) tmp[k++] = q[i++];</span><br><span class="line">	while(j&lt;=r) tmp[k++] = q[j++];</span><br><span class="line">	for(int i=l,j=0;i&lt;=r;++i,++j) q[i] = tmp[j];</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(int i=0;</span><br><span class="line">	i&lt;n;++i) cin&gt;&gt;a[i];</span><br><span class="line">	cout&lt;&lt;merge_sort(a,0,n-1);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>这两种算法求逆序对的时间复杂度理论都为(nlogn),但从代码角度考虑，我更为推荐树状数组解法。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
 </search>
