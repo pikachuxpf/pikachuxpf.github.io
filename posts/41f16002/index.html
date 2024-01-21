@@ -24,7 +24,7 @@
 <meta property="og:description" content="最大公约数（GCD）最大公约数，也称为最大公因数或最大公因子，是两个或多个整数共有的最大正整数。通常用符号 $\text{gcd}(a, b)$ 表示，其中 $a$ 和 $b$ 是整数。最大公约数有广泛的应用，例如简化分数、判断两个数的互质性等。 整除的定义：$a$ 能整除 $b$，记为 $a|b$。其中，$a$ 和 $b$ 为整数，且 $a \neq 0$，$b$ 是 $a$ 的倍数，$a$ 是">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-21T07:16:11.000Z">
-<meta property="article:modified_time" content="2024-01-21T07:58:41.731Z">
+<meta property="article:modified_time" content="2024-01-21T08:06:53.232Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="数论">
@@ -420,7 +420,7 @@
 </ul>
 <h3 id="欧几里得算法"><a href="#欧几里得算法" class="headerlink" title="欧几里得算法"></a>欧几里得算法</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>{<br>	<span class="hljs-keyword">return</span> b ? <span class="hljs-built_in">gcd</span>(b,a % b) : a;<br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>比如要求$a = 7和b = 42$的最大公约数<br>计算 $a \div b$ 的商和余数，即 $q = \lfloor \frac{7}{42} \rfloor = 0$，$r = a \mod b = 7$。<br>由于余数 $r$ 不为零，将 $b$ 赋值给 $a$，将 $r$ 赋值给 $b$，即 $a = b$，$b = r$。<br>再次计算新的 $a \div b$ 的商和余数，即 $q = \lfloor \frac{42}{7} \rfloor = 6$，$r = a \mod b = 0$。<br>由于余数 $r$ 为零，辗转相除法结束。最终的最大公约数为当前的 $b$，即 $\text{gcd}(7, 42) = 7$。<br>通过辗转相除法，我们得到了数 7 和 42 的最大公约数为 7。<br>这个过程一直重复直到余数为零。每一步都将两个数的位置互换，然后进行除法运算，直到余数为零为止。</p>
-<h2 id="LCM"><a href="#LCM" class="headerlink" title="LCM"></a>LCM</h2><p>$a和b的最小公倍数表示为lcm(a,b)其中 $\text{lcm}(a, b) = \frac{a \cdot b}{\text{gcd}(a, b)}$。</p>
+<h2 id="LCM"><a href="#LCM" class="headerlink" title="LCM"></a>LCM</h2><p>$a和b的最小公倍数表示为lcm(a,b)$其中 $\text{lcm}(a, b) = \frac{a \cdot b}{\text{gcd}(a, b)}$。</p>
 <h3 id="算术基本定理"><a href="#算术基本定理" class="headerlink" title="算术基本定理"></a><strong>算术基本定理</strong></h3><p>又称唯一分解定理。<br>任何大于 1 的正整数 $n$ 都可以唯一分解为有限个素数的乘积，即</p>
 <p>$$n = p_1^{e_1} \cdot p_2^{e_2} \cdot \ldots \cdot p_k^{e_k}$$</p>
 <p>其中 $p_1, p_2, \ldots, p_k$ 为素数，而 $e_1, e_2, \ldots, e_k$ 为对应素数的指数。这个分解是唯一的，即不存在其他方式将 $n$ 表示成素数的乘积。</p>
