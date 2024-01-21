@@ -16,19 +16,17 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="前缀和前缀和是指某序列的前n项和，可以把它理解为数学上的数列的前n项和。 假定$a_1,a_2,a_3,a_4…..a_n$为我们的原数组。给定m个$l,r$，要求求出$l$到$r$的区间和。 直接枚举一遍$l,r$进行求解的时间复杂度是$O(n*m)$，对于时间复杂度较严格的题，这样的做法是不可取的。 现在，假定有一个数组$p_1,p_2,p_3…p_n$，其中：  $p_1 &#x3D; a_1$ $p">
+    <meta name="description" content="暂无,之后再撰写">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前缀和与差分">
-<meta property="og:url" content="http://pikachuxpf.github.io/posts/37060/index.html">
+<meta property="og:title" content="算法模板">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/2cc2fa98/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="前缀和前缀和是指某序列的前n项和，可以把它理解为数学上的数列的前n项和。 假定$a_1,a_2,a_3,a_4…..a_n$为我们的原数组。给定m个$l,r$，要求求出$l$到$r$的区间和。 直接枚举一遍$l,r$进行求解的时间复杂度是$O(n*m)$，对于时间复杂度较严格的题，这样的做法是不可取的。 现在，假定有一个数组$p_1,p_2,p_3…p_n$，其中：  $p_1 &#x3D; a_1$ $p">
+<meta property="og:description" content="暂无,之后再撰写">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-10T05:08:50.000Z">
-<meta property="article:modified_time" content="2024-01-20T01:51:06.914Z">
+<meta property="article:published_time" content="2024-01-21T13:27:26.000Z">
+<meta property="article:modified_time" content="2024-01-21T14:23:50.828Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="algorithm">
-<meta property="article:tag" content="前缀和">
-<meta property="article:tag" content="差分">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -37,7 +35,7 @@
   
      <!-- 一言 --> <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script> 
   
-  <title>前缀和与差分 - Pikachu_fpx|博客</title>
+  <title>算法模板 - Pikachu_fpx|博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -320,7 +318,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="前缀和与差分"></span>
+            <span id="subtitle" data-typed-text="算法模板"></span>
           
         </div>
 
@@ -331,8 +329,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-10 13:08" pubdate>
-          2024年1月10日 下午
+        <time datetime="2024-01-21 21:27" pubdate>
+          2024年1月21日 晚上
         </time>
       </span>
     
@@ -343,7 +341,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          7 字
         
       </span>
     
@@ -354,7 +352,7 @@
         
         
         
-          12 分钟
+          1 分钟
         
       </span>
     
@@ -400,61 +398,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">前缀和与差分</h1>
+            <h1 id="seo-header">算法模板</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>前缀和是指某序列的前n项和，可以把它理解为数学上的数列的前n项和。</p>
-<p>假定$a_1,a_2,a_3,a_4…..a_n$为我们的原数组。给定m个$l,r$，要求求出$l$到$r$的区间和。</p>
-<p>直接枚举一遍$l,r$进行求解的时间复杂度是$O(n*m)$，对于时间复杂度较严格的题，这样的做法是不可取的。</p>
-<p>现在，假定有一个数组$p_1,p_2,p_3…p_n$，其中：</p>
-<ul>
-<li>$p_1 = a_1$</li>
-<li>$p_2 = a_1 + a_2$</li>
-<li>$p_3 = a_1 + a_2 + a_3$</li>
-<li>$p_4 = a_1 + a_2 + a_3 + a_4$</li>
-<li>…</li>
-<li>$p_n = a_1 + a_2 + … + a_{n-1} + a_n$</li>
-</ul>
-<p>我们可以通过这个数组轻松得到$l$到$r$的区间和：<br>$$\text{sum}(l,r) = p[r] - p[l - 1]$$</p>
-<p>通过这个公式，我们可以快速算出一段区间的和，时间复杂度是$O(1)$。</p>
-<p>$p$数组的构建过程称之为<strong>预处理</strong>，需要的时间是$a$数组的长度$n$。因此，预处理的时间复杂度为$O(n)$。加上m次查询，总复杂度变为$O(n+m)$，大大提高了运行效率。</p>
-<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><p>差分是一种用于处理序列变化的技术，特别适用于需要频繁对区间进行修改的场景。</p>
-<p>考虑一个序列 $a_1, a_2, a_3, \ldots, a_n$。我们引入差分数组 $d_1, d_2, d_3, \ldots, d_n$，其中 $d_i = a_i - a_{i-1}$。</p>
-<ul>
-<li>$d_1 = a_1$</li>
-<li>$d_2 = a_2 - a_1$</li>
-<li>$d_3 = a_3 - a_2$</li>
-<li>…</li>
-<li>$d_n = a_n - a_{n-1}$</li>
-</ul>
-<p>接下来，通过对差分数组进行前缀和操作，得到原始数组 $a$。差分数组的前缀和恰好是原始数组：</p>
-<ul>
-<li>$a_1 = d_1$ </li>
-<li>$a_2 = d_1 + d_2$ </li>
-<li>$a_3 = d_1 + d_2 + d_3$</li>
-</ul>
-<p>通过差分数组，可以快速进行区间修改和查询。对于区间 $[l, r]$ 的增量操作（假设增量值为 $c$），我们可以将差分数组进行如下修改：<br>$$<br>\begin{aligned}<br>d_l += c ,\<br>d_{r+1} -= c \<br>\end{aligned}<br>$$</p>
-<p>因为差分做前缀和是原数组，所以我们对$d_i$进行操作的话，在原数组当中，其实就是对$a_i$到$a_n$进行了一次操作。</p>
-<p>要想实现区间操作$[l,r] + c$就在$l$的位置加上$c$,之后在$r + 1$的位置减去c，这样差分数组在做前缀和操作之后，即把原数组的$[l,r]$进行了一个$+c$的操作。</p>
-<p>通过差分数组 $d$，可以高效进行区间的增减操作。差分数组的构建和操作过程是一种预处理，其时间复杂度为 $O(n)$。随后对 $m$ 个查询操作的时间复杂度为 $O(m)$。总体而言，差分技巧能够在降低时间复杂度的同时，高效地处理区间操作。</p>
-<p>值得注意的是，前缀和和差分这两种操作都是离线操作，也就是说不能边修改原数组的值，边进行前缀和和差分。</p>
-<h2 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h2><h3 id="构建思路"><a href="#构建思路" class="headerlink" title="构建思路"></a>构建思路</h3><p>假设有一个二维数组 $a_{i,j}$，表示矩阵中的元素。我们想要在矩阵中快速计算某个子区域的和。为了实现这一目标，我们引入了二维前缀和数组 $p_{i,j}$。</p>
-<h3 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h3><p>构建过程的关键在于理解 $p_{i,j}$ 如何由原始数组 $a_{i,j}$ 推导而来。我们使用以下公式：</p>
-<p>$$<br>p_{i,j} = a_{i,j} + p_{i-1,j} + p_{i,j-1} - p_{i-1,j-1}<br>$$</p>
-<p>这个公式直观地描述了 $p_{i,j}$ 是由当前元素 $a_{i,j}$ 加上其上方、左方的前缀和，再减去左上角的前缀和得到的。</p>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>通过构建二维前缀和数组，我们可以在 $O(1)$ 的时间内计算任意矩阵子区域的和。这种预处理大大提高了区域和的计算效率。</p>
-<h2 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h2><h3 id="构建思路-1"><a href="#构建思路-1" class="headerlink" title="构建思路"></a>构建思路</h3><p>二维差分用于处理对二维数组中区域进行频繁修改的情况。我们引入了二维差分数组 $d_{i,j}$。</p>
-<h3 id="公式推导-1"><a href="#公式推导-1" class="headerlink" title="公式推导"></a>公式推导</h3><p>构建过程的关键在于理解 $d_{i,j}$ 如何由原始数组 $a_{i,j}$ 推导而来。我们使用以下公式：</p>
-<p>$$<br>d_{i,j} = a_{i,j} - a_{i-1,j} - a_{i,j-1} + a_{i-1,j-1}<br>$$</p>
-<p>这个公式描述了 $d_{i,j}$ 是当前元素 $a_{i,j}$ 与其上方、左方以及左上角元素之间的变化量。</p>
-<h3 id="区域增减操作"><a href="#区域增减操作" class="headerlink" title="区域增减操作"></a>区域增减操作</h3><p>通过修改二维差分数组，我们可以在 $O(1)$ 的时间内进行矩阵子区域的增减操作。对于矩阵子区域 $[x_1, y_1, x_2, y_2]$ 的增量操作（假设增量值为 $c$），我们可以将二维差分数组进行如下修改：</p>
-<p>$$<br>\begin{aligned}<br>d_{x_1, y_1} += c ,\<br>d_{x_2+1, y_1} -= c ,\<br>d_{x_1, y_2+1} -= c ,\<br>d_{x_2+1, y_2+1} += c ,\<br>\end{aligned}<br>$$</p>
-<h3 id="差分数组的还原"><a href="#差分数组的还原" class="headerlink" title="差分数组的还原"></a>差分数组的还原</h3><p>通过对二维差分数组进行前缀和操作，得到原始数组 $a$。差分数组的前缀和即为原始数组：</p>
-<p>$$<br>\begin{aligned}<br>a_{i,j} &amp;= d_{i,j} + a_{i-1,j} + a_{i,j-1} - a_{i-1,j-1}<br>\end{aligned}<br>$$</p>
-<p>通过结合二维前缀和和二维差分，我们可以高效地处理二维矩阵区域的计算和修改。</p>
-<h5 id="tips"><a href="#tips" class="headerlink" title="tips:"></a>tips:</h5><p>当然还有三维，不过一般一维就够了，二维的题也不多,除了上面这些方法，还可以使用树状数组和线段树来求前缀和和差分。</p>
+                <p>暂无,之后再撰写</p>
 
                 
               </div>
@@ -490,10 +439,6 @@
       
         <a href="/tags/algorithm/" class="print-no-link">#algorithm</a>
       
-        <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" class="print-no-link">#前缀和</a>
-      
-        <a href="/tags/%E5%B7%AE%E5%88%86/" class="print-no-link">#差分</a>
-      
     </div>
   
 </div>
@@ -504,8 +449,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>前缀和与差分</div>
-      <div>http://pikachuxpf.github.io/posts/37060/</div>
+      <div>算法模板</div>
+      <div>http://pikachuxpf.github.io/posts/2cc2fa98/</div>
     </div>
     <div class="license-meta">
       
@@ -517,7 +462,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月10日</div>
+          <div>2024年1月21日</div>
         </div>
       
       
@@ -549,18 +494,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3510/" title="二分法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二分法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/41139/" title="求逆序对的数量">
-                        <span class="hidden-mobile">求逆序对的数量</span>
+                      <a href="/posts/755d7fda/" title="算法总览">
+                        <span class="hidden-mobile">算法总览</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
