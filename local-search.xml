@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>LCA最近公共祖先</title>
+    <link href="/posts/7cc481cf/"/>
+    <url>/posts/7cc481cf/</url>
+    
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>LCA（Lowest Common Ancestor，最近公共祖先）是树结构中常用的一个问题，指的是树中两个节点的最低共同祖先节点。<strong>LCA树链抛分法</strong>和<strong>倍增法</strong>，我们这里讲述倍增法，倍增法是一种高效解决LCA问题的算法之一，通过预处理和动态规划的方式，可以在较快的时间内回答多次LCA查询。</p><h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol><li><p><strong>预处理：</strong> 算法首先对树进行预处理，计算每个节点的深度和其与2的幂次方祖先的关系。</p></li><li><p><strong>构建倍增表：</strong> 通过构建一个称为倍增表的数据结构，记录每个节点跳跃2^k步后的祖先节点。这样，我们就能够在O(log N)的时间内找到一个节点的第k个祖先。</p></li><li><p><strong>查询：</strong> 对于给定的两个节点u和v，首先确定它们的深度，然后将深度较大的节点跳跃到与深度较小的节点相同深度。接着，同时向上跳跃两个节点，直到找到它们的最近公共祖先。在跳跃的过程中，通过倍增表的信息加速查询。</p></li></ol><h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>LCA倍增法的时间复杂度是O(N log N)的预处理时间加上O(log N)的查询时间，其中N是树中节点的数量。这种方法在多次查询LCA的情况下非常高效，因为预处理的成本被分摊到了多个查询中。</p><p>这个算法在解决树上的LCA问题时，提供了一种有效的方法，尤其适用于需要频繁查询LCA的情况，例如在树上进行大量的图论算法或树算法时。</p><h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>对于预处理，我们的递推公式为$$f[i][j] = f[f[i][j-1]][j-1]$$ $f[i][j]$代表从i开始，走$2^j$步到达的点。所以我们要想求出来，可以把$2^j$分为两个$2^{j-1}$的部分。</p><p>代入进树：<br>$$f[x][i] = f[f[x][i-1]][i-1]$$<br>从节点x往上跳$2^i$的点。</p><h3 id="查询结果"><a href="#查询结果" class="headerlink" title="查询结果"></a>查询结果</h3><p>对于lca,普遍情况我们查询到的结果并不是他们的最近公共祖先，而是最近公祖先的下一层，为什么不能直接查询到lca的公共祖先，因为在倍增当中，我们可能会出现查询到了公共祖先，但是不是最近的，所以我们转换思路，我们如果查询到同一个点，就代表不成立，缩短重新进行查询，这样就可以避免我们查询到非最近的公共祖先。</p><h2 id="封装模板"><a href="#封装模板" class="headerlink" title="封装模板"></a>封装模板</h2><p>基础封装，无权图,注意点只能是$1 - n$ ，如果不是则需要离散化。 </p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">LCA</span> {<br>&nbsp; &nbsp; <span class="hljs-type">int</span> n;<br>&nbsp; &nbsp; vector&lt;vector&lt;<span class="hljs-type">int</span>&gt; &gt; h,f;<span class="hljs-comment">//存图，从i开始向上走2^j步到的点</span><br>&nbsp; &nbsp; vector&lt;<span class="hljs-type">int</span>&gt; dep,lg;<br>&nbsp; &nbsp; <span class="hljs-built_in">LCA</span>(<span class="hljs-type">int</span> n) {<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">this</span>-&gt;n = n;<br>&nbsp; &nbsp; &nbsp; &nbsp; h.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; &nbsp; &nbsp; f.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">30</span>));<br>&nbsp; &nbsp; &nbsp; &nbsp; dep.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; &nbsp; &nbsp; lg.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lg[i] = lg[i<span class="hljs-number">-1</span>] + (<span class="hljs-number">1</span> &lt;&lt; lg[i<span class="hljs-number">-1</span>] == i);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <span class="hljs-comment">// 建立双向边</span><br>&nbsp; &nbsp; &nbsp; &nbsp; h[x].<span class="hljs-built_in">push_back</span>(y);<br>&nbsp; &nbsp; &nbsp; &nbsp; h[y].<span class="hljs-built_in">push_back</span>(x);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; f[x][<span class="hljs-number">0</span>] = fa; <span class="hljs-comment">// 储存 x 的父节点</span><br>&nbsp; &nbsp; &nbsp; &nbsp; dep[x] = dep[fa] + <span class="hljs-number">1</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= lg[dep[x]]; i++) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; f[x][i] = f[f[x][i - <span class="hljs-number">1</span>]][i - <span class="hljs-number">1</span>];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> y : h[x]) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (y == fa) <span class="hljs-keyword">continue</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-built_in">dfs</span>(y, x);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lca</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (dep[x] &lt; dep[y]) <span class="hljs-built_in">swap</span>(x, y);<span class="hljs-comment">//保证x更深</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">while</span> (dep[x] &gt; dep[y]) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x = f[x][lg[dep[x] - dep[y]] - <span class="hljs-number">1</span>];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (x == y) <span class="hljs-keyword">return</span> x;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = lg[dep[x]] - <span class="hljs-number">1</span>; k &gt;= <span class="hljs-number">0</span>; k--) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (f[x][k] == f[y][k]) <span class="hljs-keyword">continue</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x = f[x][k];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y = f[y][k];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> f[x][<span class="hljs-number">0</span>];<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">clac</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <span class="hljs-comment">// 倍增查询两点间距离</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> dep[x] + dep[y] - <span class="hljs-number">2</span> * dep[<span class="hljs-built_in">lca</span>(x, y)];<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">work</span><span class="hljs-params">(<span class="hljs-type">int</span> root = <span class="hljs-number">1</span>)</span> </span>{ <span class="hljs-comment">// 在此初始化</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-built_in">dfs</span>(root, <span class="hljs-number">0</span>);<br>&nbsp; &nbsp; }<br>};<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>algorithm</tag>
+      
+      <tag>lca</tag>
+      
+      <tag>图论</tag>
+      
+      <tag>倍增</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>筛质数</title>
     <link href="/posts/996e4f07/"/>
     <url>/posts/996e4f07/</url>
@@ -118,7 +149,7 @@
     <link href="/posts/755d7fda/"/>
     <url>/posts/755d7fda/</url>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本站算法总览，不是超链接的即为还未更新。</p><h2 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h2><ul><li><a href="/posts/37060/" title="前缀和与差分">前缀和与差分</a></li><li><a href="/posts/3510/" title="二分法">二分法</a></li></ul><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ul><li><a href="/posts/c517589e/" title="并查集">并查集</a></li><li><a href="/posts/dbe7e802/" title="带权并查集">带权并查集</a></li><li><a href="/posts/b6627a60/" title="拓展域并查集">拓展域并查集</a></li><li>树状数组</li><li>线段树</li></ul><h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><ul><li><a href="/posts/eadfe50d/" title="图论基础">图论基础</a></li><li><a href="/posts/c4fedc02/" title="Dijkstra算法">Dijkstra算法</a></li><li><a href="/posts/c856449e/" title="SPFA算法">SPFA算法</a></li><li><a href="/posts/d7becff4/" title="Floyd算法">Floyd算法</a></li><li><a href="/posts/8708cb74/" title="Kruskal算法">Kruskal算法</a></li><li>LCA最近公共祖先</li></ul><h2 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h2><ul><li><a href="/posts/41f16002/" title="GCD与LCM">GCD与LCM</a></li><li><a href="/posts/20c47d09/" title="快速幂">快速幂</a></li><li><a href="/posts/9aab0fcd/" title="组合计数">组合计数</a></li><li><a href="/posts/996e4f07/" title="筛质数">筛质数</a></li><li>欧拉函数</li><li>拓展欧几里得算法</li></ul><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul><li>背包</li><li>线性DP</li><li>区间DP</li><li>状压DP</li><li>状态机DP</li></ul><h2 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h2><ul><li>Nim游戏</li></ul><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul><li>字符串哈希</li><li>KMP算法</li><li>Manacher算法</li></ul><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul><li>STL容器</li><li><a href="/posts/a072cd53/" title="普通莫队">普通莫队</a></li><li><a href="/posts/84c587e8/" title="带修莫队">带修莫队</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本站算法总览，不是超链接的即为还未更新。</p><h2 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h2><ul><li><a href="/posts/37060/" title="前缀和与差分">前缀和与差分</a></li><li><a href="/posts/3510/" title="二分法">二分法</a></li></ul><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ul><li><a href="/posts/c517589e/" title="并查集">并查集</a></li><li><a href="/posts/dbe7e802/" title="带权并查集">带权并查集</a></li><li><a href="/posts/b6627a60/" title="拓展域并查集">拓展域并查集</a></li><li>树状数组</li><li>线段树</li></ul><h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><ul><li><a href="/posts/eadfe50d/" title="图论基础">图论基础</a></li><li><a href="/posts/c4fedc02/" title="Dijkstra算法">Dijkstra算法</a></li><li><a href="/posts/c856449e/" title="SPFA算法">SPFA算法</a></li><li><a href="/posts/d7becff4/" title="Floyd算法">Floyd算法</a></li><li><a href="/posts/8708cb74/" title="Kruskal算法">Kruskal算法</a></li><li><a href="/posts/7cc481cf/" title="LCA最近公共祖先">LCA最近公共祖先</a></li></ul><h2 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h2><ul><li><a href="/posts/41f16002/" title="GCD与LCM">GCD与LCM</a></li><li><a href="/posts/20c47d09/" title="快速幂">快速幂</a></li><li><a href="/posts/9aab0fcd/" title="组合计数">组合计数</a></li><li><a href="/posts/996e4f07/" title="筛质数">筛质数</a></li><li>欧拉函数</li><li>拓展欧几里得算法</li></ul><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul><li>背包</li><li>线性DP</li><li>区间DP</li><li>状压DP</li><li>状态机DP</li></ul><h2 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h2><ul><li>Nim游戏</li></ul><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul><li>字符串哈希</li><li>KMP算法</li><li>Manacher算法</li></ul><h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul><li>STL容器</li><li><a href="/posts/a072cd53/" title="普通莫队">普通莫队</a></li><li><a href="/posts/84c587e8/" title="带修莫队">带修莫队</a></li></ul>]]></content>
     
     
     <categories>
@@ -391,9 +422,9 @@
       
       <tag>algorithm</tag>
       
-      <tag>并查集</tag>
-      
       <tag>图论</tag>
+      
+      <tag>并查集</tag>
       
       <tag>数据结构</tag>
       
@@ -451,9 +482,9 @@
       
       <tag>algorithm</tag>
       
-      <tag>并查集</tag>
-      
       <tag>图论</tag>
+      
+      <tag>并查集</tag>
       
       <tag>数据结构</tag>
       
@@ -482,9 +513,9 @@
       
       <tag>algorithm</tag>
       
-      <tag>并查集</tag>
-      
       <tag>图论</tag>
+      
+      <tag>并查集</tag>
       
       <tag>数据结构</tag>
       
