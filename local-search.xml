@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>简单配置VScodeC or Cpp环境</title>
+    <link href="/posts/e139af66/"/>
+    <url>/posts/e139af66/</url>
+    
+    <content type="html"><![CDATA[<h2 id="下载VScode"><a href="#下载VScode" class="headerlink" title="下载VScode"></a>下载VScode</h2><p>下载链接<a href="https://code.visualstudio.com/">Visual Studio Code - Code Editing. Redefined</a></p><p>![img][<a href="https://pic.imgdb.cn/item/65e6ab2a9f345e8d03900119.png]">https://pic.imgdb.cn/item/65e6ab2a9f345e8d03900119.png]</a></p><p>注意一下最后一项，必须是勾 - <strong>添加到PATH</strong></p><h2 id="安装mingw64"><a href="#安装mingw64" class="headerlink" title="安装mingw64"></a>安装mingw64</h2><p>到mingw64官网<a href="https://www.mingw-w64.org/downloads/">MinGW-w64</a><br>![img][<a href="https://pic.imgdb.cn/item/65e6ac179f345e8d03922f8d.png]">https://pic.imgdb.cn/item/65e6ac179f345e8d03922f8d.png]</a><br>点进SourceForge,进去下载对应版本就行。<br>保存到本地一个不会忘记的地方。</p><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>win + Q 搜索环境变量<br>![img][<a href="https://pic.imgdb.cn/item/65e6ac909f345e8d03934322.png]">https://pic.imgdb.cn/item/65e6ac909f345e8d03934322.png]</a></p><p>点击环境变量<br>![img][<a href="https://pic.imgdb.cn/item/65e6acc49f345e8d0393c132.png]">https://pic.imgdb.cn/item/65e6acc49f345e8d0393c132.png]</a><br>进入编辑Path<br>![img][<a href="https://pic.imgdb.cn/item/65e6ad139f345e8d0394764e.png]">https://pic.imgdb.cn/item/65e6ad139f345e8d0394764e.png]</a><br>新建一个，路径就填写刚刚下载下来的mingw64的bin目录,如果你电脑上有dev可以直接填写dev的自带环境的路径。</p><h2 id="配置VScode"><a href="#配置VScode" class="headerlink" title="配置VScode"></a>配置VScode</h2><p>点击拓展，下载 Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code 进行汉化。<br>之后下载 C/C++ Compile Run拓展。</p><p>![img][<a href="https://pic.imgdb.cn/item/65e6ae209f345e8d0396f7e5.png]">https://pic.imgdb.cn/item/65e6ae209f345e8d0396f7e5.png]</a><br>![img][<a href="https://pic.imgdb.cn/item/65e6ae599f345e8d0397815e.png]">https://pic.imgdb.cn/item/65e6ae599f345e8d0397815e.png]</a></p><p>创建一个cpp文件，写上对应代码即可。</p><p>如果喜欢黑窗口，可以进入Compile Run 的拓展设置里面，更改<br>![img][<a href="https://pic.imgdb.cn/item/65e6ae999f345e8d03981b6e.png]">https://pic.imgdb.cn/item/65e6ae999f345e8d03981b6e.png]</a><br>即可。</p><h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>本文并没有使用C/C++ 拓展传统的几件套，因为配置.vscode文件夹里面的那三个文件较为麻烦，效果也不是很理想。而且那是专门用来写项目的时候才安装的，对于算法竞赛，轻量级即可。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>vscode</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>vscode</tag>
+      
+      <tag>cpp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>LCA最近公共祖先</title>
     <link href="/posts/7cc481cf/"/>
     <url>/posts/7cc481cf/</url>
