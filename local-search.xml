@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>日期处理</title>
+    <link href="/posts/3381e20e/"/>
+    <url>/posts/3381e20e/</url>
+    
+    <content type="html"><![CDATA[<h3 id="日期数组"><a href="#日期数组" class="headerlink" title="日期数组"></a>日期数组</h3><p>方便查询每个月的天数</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> days[<span class="hljs-number">13</span>] = {<span class="hljs-number">0</span>, <span class="hljs-number">31</span>, <span class="hljs-number">28</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>, <span class="hljs-number">30</span>, <span class="hljs-number">31</span>};<br></code></pre></td></tr></tbody></table></figure><h3 id="判断闰年"><a href="#判断闰年" class="headerlink" title="判断闰年"></a>判断闰年</h3><p>被400整除 或者 被4整除的同时不被100整除</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">is_leap</span><span class="hljs-params">(<span class="hljs-type">int</span> year)</span></span><br><span class="hljs-function"></span>{<br>&nbsp; &nbsp; <span class="hljs-keyword">if</span> (year % <span class="hljs-number">4</span> == <span class="hljs-number">0</span> &amp;&amp; year % <span class="hljs-number">100</span> || year % <span class="hljs-number">400</span> == <span class="hljs-number">0</span>)<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&nbsp; &nbsp; <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure><h3 id="每个月的天数"><a href="#每个月的天数" class="headerlink" title="每个月的天数"></a>每个月的天数</h3><p>主要是需要判断闰年和月份的情况</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get_month_day</span><span class="hljs-params">(<span class="hljs-type">int</span> year, <span class="hljs-type">int</span> month)</span></span><br><span class="hljs-function"></span>{<br>&nbsp; &nbsp; <span class="hljs-type">int</span> res = days[month];<br>&nbsp; &nbsp; <span class="hljs-keyword">if</span> (month == <span class="hljs-number">2</span> &amp;&amp; <span class="hljs-built_in">is_leap</span>(year)) res += <span class="hljs-number">1</span>;<br>&nbsp; &nbsp; <span class="hljs-keyword">return</span> res;<br>}<br></code></pre></td></tr></tbody></table></figure><h3 id="每年的天数"><a href="#每年的天数" class="headerlink" title="每年的天数"></a>每年的天数</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get_year_day</span><span class="hljs-params">(<span class="hljs-type">int</span> year)</span></span><br><span class="hljs-function"></span>{<br>&nbsp; &nbsp; <span class="hljs-type">int</span> res = <span class="hljs-number">365</span>;<br>&nbsp; &nbsp; <span class="hljs-keyword">if</span> (<span class="hljs-built_in">is_leap</span>(year)) res += <span class="hljs-number">1</span>;<br>&nbsp; &nbsp; <span class="hljs-keyword">return</span> res;<br>}<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>基础知识</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日期</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>简单配置VScodeC or Cpp环境</title>
     <link href="/posts/e139af66/"/>
     <url>/posts/e139af66/</url>
