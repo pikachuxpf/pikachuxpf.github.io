@@ -16,12 +16,12 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="树状数组前置知识前缀和前缀和与差分 lowbitlowbit函数会求出一个二进制数字的最低位代表的那个数字 这是20的二进制 :$0010100$而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到$$\begin{align*}&amp;0010100 \&amp;1101100 \&amp;—- \&amp;0000100 \\end{al">
+    <meta name="description" content="树状数组前置知识前缀和前缀和与差分 lowbitlowbit函数会求出一个二进制数字的最低位代表的那个数字 这是20的二进制 :$0010100$而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到$0010100 &amp;  1101100 &#x3D;0000100$因为在计算机中有补码的存在所以取反加1其实就是对应的负数，所以lowbit函数的写">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树状数组">
 <meta property="og:url" content="http://pikachuxpf.github.io/posts/59a0de58/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="树状数组前置知识前缀和前缀和与差分 lowbitlowbit函数会求出一个二进制数字的最低位代表的那个数字 这是20的二进制 :$0010100$而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到$$\begin{align*}&amp;0010100 \&amp;1101100 \&amp;—- \&amp;0000100 \\end{al">
+<meta property="og:description" content="树状数组前置知识前缀和前缀和与差分 lowbitlowbit函数会求出一个二进制数字的最低位代表的那个数字 这是20的二进制 :$0010100$而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到$0010100 &amp;  1101100 &#x3D;0000100$因为在计算机中有补码的存在所以取反加1其实就是对应的负数，所以lowbit函数的写">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic.imgdb.cn/item/65f304cc9f345e8d03ec5fb1.png">
 <meta property="og:image" content="https://pic.imgdb.cn/item/65f305a49f345e8d03f27999.png">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://pic.imgdb.cn/item/65f3084d9f345e8d03047aac.png">
 <meta property="og:image" content="https://pic.imgdb.cn/item/65f309899f345e8d030c4103.png">
 <meta property="article:published_time" content="2024-03-14T13:25:13.000Z">
-<meta property="article:modified_time" content="2024-03-14T14:41:33.600Z">
+<meta property="article:modified_time" content="2024-03-14T14:46:59.589Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="树状数组">
@@ -411,7 +411,7 @@
                 
                 <h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><h4 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h4><a href="/posts/37060/" title="前缀和与差分">前缀和与差分</a>
 <h4 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h4><p>lowbit函数会求出一个二进制数字的最低位代表的那个数字</p>
-<p>这是20的二进制 :$0010100$<br>而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到<br>$$<br>\begin{align*}<br>&amp;0010100 \<br>&amp;1101100 \<br>&amp;—- \<br>&amp;0000100 \<br>\end{align*}<br>$$<br>因为在计算机中有补码的存在所以取反加1其实就是对应的负数，所以lowbit函数的写法即为:</p>
+<p>这是20的二进制 :$0010100$<br>而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到<br>$0010100 &amp;  1101100 =0000100$<br>因为在计算机中有补码的存在所以取反加1其实就是对应的负数，所以lowbit函数的写法即为:</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>{<br>	<span class="hljs-keyword">return</span> x &amp; -x;<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <h3 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h3><p>给出一个长度为n的数组，完成以下两种操作</p>
