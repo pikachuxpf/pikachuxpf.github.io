@@ -16,24 +16,26 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="前言本站算法总览，不是超链接的即为还未更新。 基础算法 前缀和与差分 二分法  数据结构 并查集 带权并查集 拓展域并查集 树状数组 线段树  图论 图论基础 Dijkstra算法 SPFA算法 Floyd算法 Kruskal算法 拓扑排序 LCA最近公共祖先  数论 GCD与LCM 快速幂 组合计数 筛质数 欧拉函数 拓展欧几里得  动态规划 背包 线性DP 区间DP 状压DP 状态机DP  博">
+    <meta name="description" content="前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：  $(a+b)%p &#x3D; (a%p+b%p)%p$ $(a-b)%p &#x3D; (a%p-b%p)%p$ $(ab)%p &#x3D; (a%pb%p)%p$ $(a^b)%p &#x3D; ((a%p)^b)%p$为什么没有除法，是因为除法在这里比较特别。  同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法总览">
-<meta property="og:url" content="http://pikachuxpf.github.io/posts/755d7fda/index.html">
+<meta property="og:title" content="拓展欧几里得">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/68bc28a9/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="前言本站算法总览，不是超链接的即为还未更新。 基础算法 前缀和与差分 二分法  数据结构 并查集 带权并查集 拓展域并查集 树状数组 线段树  图论 图论基础 Dijkstra算法 SPFA算法 Floyd算法 Kruskal算法 拓扑排序 LCA最近公共祖先  数论 GCD与LCM 快速幂 组合计数 筛质数 欧拉函数 拓展欧几里得  动态规划 背包 线性DP 区间DP 状压DP 状态机DP  博">
+<meta property="og:description" content="前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：  $(a+b)%p &#x3D; (a%p+b%p)%p$ $(a-b)%p &#x3D; (a%p-b%p)%p$ $(ab)%p &#x3D; (a%pb%p)%p$ $(a^b)%p &#x3D; ((a%p)^b)%p$为什么没有除法，是因为除法在这里比较特别。  同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-21T13:26:51.000Z">
-<meta property="article:modified_time" content="2024-05-13T12:50:58.515Z">
+<meta property="article:published_time" content="2024-05-13T12:42:23.000Z">
+<meta property="article:modified_time" content="2024-05-13T15:23:22.890Z">
 <meta property="article:author" content="Pikachu_fpx">
-<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="gcd">
+<meta property="article:tag" content="数论">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>算法总览 - Pikachu_fpx|博客</title>
+  <title>拓展欧几里得 - Pikachu_fpx|博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -316,7 +318,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法总览"></span>
+            <span id="subtitle" data-typed-text="拓展欧几里得"></span>
           
         </div>
 
@@ -327,8 +329,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-21 21:26" pubdate>
-          2024年1月21日 晚上
+        <time datetime="2024-05-13 20:42" pubdate>
+          2024年5月13日 晚上
         </time>
       </span>
     
@@ -339,7 +341,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          150 字
+          2.3k 字
         
       </span>
     
@@ -350,7 +352,7 @@
         
         
         
-          2 分钟
+          19 分钟
         
       </span>
     
@@ -396,60 +398,112 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">算法总览</h1>
+            <h1 id="seo-header">拓展欧几里得</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本站算法总览，不是超链接的即为还未更新。</p>
-<h2 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h2><ul>
-<li><a href="/posts/37060/" title="前缀和与差分">前缀和与差分</a></li>
-<li><a href="/posts/3510/" title="二分法">二分法</a></li>
+                <h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><h3 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h3><a href="/posts/41f16002/" title="GCD与LCM">GCD与LCM</a>
+<h3 id="模运算"><a href="#模运算" class="headerlink" title="模运算"></a>模运算</h3><p>模运算的基本规则与四则运算基本一致：</p>
+<ul>
+<li>$(a+b)%p = (a%p+b%p)%p$</li>
+<li>$(a-b)%p = (a%p-b%p)%p$</li>
+<li>$(a<em>b)%p = (a%p</em>b%p)%p$</li>
+<li>$(a^b)%p = ((a%p)^b)%p$<br>为什么没有除法，是因为除法在这里比较特别。</li>
 </ul>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><ul>
-<li><a href="/posts/c517589e/" title="并查集">并查集</a></li>
-<li><a href="/posts/dbe7e802/" title="带权并查集">带权并查集</a></li>
-<li><a href="/posts/b6627a60/" title="拓展域并查集">拓展域并查集</a></li>
-<li><a href="/posts/59a0de58/" title="树状数组">树状数组</a></li>
-<li>线段树</li>
-</ul>
-<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><ul>
-<li><a href="/posts/eadfe50d/" title="图论基础">图论基础</a></li>
-<li><a href="/posts/c4fedc02/" title="Dijkstra算法">Dijkstra算法</a></li>
-<li><a href="/posts/c856449e/" title="SPFA算法">SPFA算法</a></li>
-<li><a href="/posts/d7becff4/" title="Floyd算法">Floyd算法</a></li>
-<li><a href="/posts/8708cb74/" title="Kruskal算法">Kruskal算法</a></li>
-<li><a href="/posts/fb40efc5/" title="拓扑排序">拓扑排序</a></li>
-<li><a href="/posts/7cc481cf/" title="LCA最近公共祖先">LCA最近公共祖先</a></li>
-</ul>
-<h2 id="数论"><a href="#数论" class="headerlink" title="数论"></a>数论</h2><ul>
-<li><a href="/posts/41f16002/" title="GCD与LCM">GCD与LCM</a></li>
-<li><a href="/posts/20c47d09/" title="快速幂">快速幂</a></li>
-<li><a href="/posts/9aab0fcd/" title="组合计数">组合计数</a></li>
-<li><a href="/posts/996e4f07/" title="筛质数">筛质数</a></li>
-<li>欧拉函数</li>
-<li><a href="/posts/undefined/" title="拓展欧几里得">拓展欧几里得</a></li>
-</ul>
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
-<li>背包</li>
-<li>线性DP</li>
-<li>区间DP</li>
-<li>状压DP</li>
-<li>状态机DP</li>
-</ul>
-<h2 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h2><ul>
-<li>Nim游戏</li>
-</ul>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
-<li>字符串哈希</li>
-<li>KMP算法</li>
-<li>Manacher算法</li>
-</ul>
-<h2 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h2><ul>
-<li>STL容器</li>
-<li><a href="/posts/a072cd53/" title="普通莫队">普通莫队</a></li>
-<li><a href="/posts/84c587e8/" title="带修莫队">带修莫队</a></li>
-</ul>
+<h3 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关于模 $c$ 同余，记作 $a \equiv b \pmod{c}$。 &gt; 如果 $a$ 和 $b$ 的差能够被 $m$ 整除，那么就说 $a$ 和 $b$ 关于 $m$ 同余。 </p>
+<h4 id="同余关系是一种等价关系"><a href="#同余关系是一种等价关系" class="headerlink" title="同余关系是一种等价关系"></a>同余关系是一种等价关系</h4><ol>
+<li>自反性：一个数永远和本身同余 </li>
+<li><ol start="2">
+<li>对称性：$a$ 和 $b$ 同余，$b$ 和 $a$ 也同余</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>传递性：$a$ 和 $b$ 同余，$b$ 和 $c$ 也同余，即可推出 $a$ 和 $c$ 也同余</li>
+</ol>
+</li>
+</ol>
+<h4 id="线性同余方程"><a href="#线性同余方程" class="headerlink" title="线性同余方程"></a>线性同余方程</h4><p>给定整数 $a$、$b$ 和 $m$，线性同余方程 $ax \equiv b \pmod{m}$ 的解是一个整数 $x$，使得 $ax$ 和 $b$ 对 $m$ 取模后的结果相同。 要解决线性同余方程，可以使用<strong>拓展欧几里得算法</strong>来找到解。如果 $\text{gcd}(a, m)$ 能够整除 $b$，那么方程 $ax \equiv b \pmod{m}$ 有解，否则无解。<br><strong>解法：</strong> </p>
+<ol>
+<li>使用拓展欧几里得算法找到整数 $x’$ 和 $y’$，使得 $ax’ + my’ = \text{gcd}(a, m)$。</li>
+<li>如果 $\text{gcd}(a, m)$ 能够整除 $b$，那么方程 $ax \equiv b \pmod{m}$ 有解，且一组解为：$x = x’ \times \frac{b}{\text{gcd}(a, m)}$。</li>
+</ol>
+<h3 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h3><p>裴蜀定理（Bézout’s Lemma）是说，对于任意给定的两个整数 $a$ 和 $b$，存在整数 $x$ 和 $y$，使得它们满足以下等式： $$ ax + by = \text{gcd}(a, b) $$ 这个定理是拓展欧几里得算法的基础，通过这个定理，我们可以求解线性同余方程 $ax + by = c$ 的整数解。</p>
+<p><strong>裴蜀定理证明：</strong></p>
+<p><strong>基本情况：</strong> 当 $b=0$ 时，我们有 $\text{gcd}(a, 0) = a$。此时，等式 $ax + 0 = a$ 显然成立，其中 $x=1$。</p>
+<p><strong>归纳假设：</strong> 假设对于某些整数 $k$，当 $b &lt; k$ 时，裴蜀定理成立，即存在整数 $x$ 和 $y$，使得 $ax + by = \text{gcd}(a, b)$。</p>
+<p><strong>归纳步骤：</strong> 现在考虑 $b=k$ 的情况。我们使用带余除法，将 $a$ 除以 $k$ 得到余数 $r$。根据带余除法，我们有：</p>
+<p>$$<br>a = qk + r<br>$$</p>
+<p>其中，$q$ 是商，$r$ 是余数，$0 \leq r &lt; k$。</p>
+<p>因为 $r = a - qk$，所以 $r$ 是 $a$ 和 $k$ 的线性组合。根据归纳假设，我们知道存在整数 $x’$ 和 $y’$，使得：</p>
+<p>$$<br>kx’ + ry’ = \text{gcd}(k, r)<br>$$</p>
+<p>将 $r$ 代入，我们有：</p>
+<p>$$<br>kx’ + (a - qk)y’ = \text{gcd}(k, a)<br>$$</p>
+<p>$$<br>ay’ + k(x’ - qy’) = \text{gcd}(k, a)<br>$$</p>
+<p>这表明 $\text{gcd}(a, k) = \text{gcd}(k, r)$。</p>
+<p>因此，通过归纳法，我们证明了对于任意的整数 $a$ 和 $b$，存在整数 $x$ 和 $y$，使得它们满足裴蜀定理。</p>
+<p>这就完成了裴蜀定理的证明。</p>
+<h3 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h3><p>费马小定理是数论中的一条重要定理，由法国数学家皮埃尔·德·费马在17世纪提出。它的表述如下：</p>
+<p><strong>定理：</strong> 如果 $p$ 是一个素数，$a$ 是任意整数且不是 $p$ 的倍数，那么以下等式成立：</p>
+<p>$$<br>a^{p-1} \equiv 1 \pmod{p}<br>$$</p>
+<p>其中，$\equiv$ 表示模同余。</p>
+<p>这个定理的一个直接推论是：如果 $p$ 是一个素数，$a$ 是任意整数，那么 $a^p \equiv a \pmod{p}$。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>费马小定理在密码学、编程竞赛中的算法设计等领域有着重要应用。</p>
+<ol>
+<li><p><strong>模幂运算：</strong> 费马小定理提供了一种快速计算模幂的方法。在计算 $a^b \pmod{p}$ 时，可以先使用费马小定理将指数化简，然后再进行模幂运算，大大提高了计算效率。</p>
+</li>
+<li><p><strong>模反元素：</strong> 如果需要求解模方程 $ax \equiv 1 \pmod{p}$，即求解关于 $x$ 的同余方程的解，其中 $p$ 是素数，那么根据费马小定理，$x \equiv a^{p-2} \pmod{p}$ 就是方程的解。这提供了一种高效的方法来求解模反元素。</p>
+</li>
+<li><p><strong>素性检测：</strong> 费马小定理可以作为素性检测算法的一部分。在 Miller-Rabin 素性检测算法中，利用费马小定理判断一个数是否为素数。</p>
+</li>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>在应用费马小定理时，需要注意选择合适的素数 $p$，以及确保 $a$ 不是 $p$ 的倍数，否则定理可能不成立。</p>
+<h3 id="推论"><a href="#推论" class="headerlink" title="推论"></a><strong>推论</strong></h3><p>费马小定理的一个重要推论是，对于任意整数 $a$、$b$ 和素数 $p$，如果 $\text{gcd}(a, p) = 1$，那么以下等式成立：</p>
+<p>$$<br>a^{p-1} \equiv 1 \pmod{p}<br>$$</p>
+<p>将 $a^{p-1}$ 写成 $a \times a^{p-2}$，并将等式两边同时乘以 $b^{p-2}$，得到：</p>
+<p>$$<br>a^{p-1} \times b^{p-2} \equiv b^{p-2} \pmod{p}<br>$$</p>
+<p>再将 $a^{p-1}$ 和 $b^{p-2}$ 替换成它们的原式，得到：</p>
+<p>$$<br>ab^{p-1} \equiv b^{p-1} \pmod{p}<br>$$</p>
+<p>由于 $b^{p-1} \equiv 1 \pmod{p}$（根据费马小定理），所以：</p>
+<p>$$<br>ab^{p-1} \equiv b^{p-1} \equiv 1 \pmod{p}<br>$$</p>
+<p>即，</p>
+<p>$$<br>ab^{p-1} - 1 \equiv 0 \pmod{p}<br>$$</p>
+<p>现在我们有一个形式为 $ax - 1 \equiv 0 \pmod{p}$ 的方程，其中 $x = b^{p-1}$。如果我们令 $y = p-1$，那么我们得到的方程就是 $ax - py = 1$，这与裴蜀定理的形式完全相同。因此，我们可以利用费马小定理来求解形如 $ax + by = \text{gcd}(a, b)$ 的线性同余方程。</p>
+<h3 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h3><h4 id="什么是逆元"><a href="#什么是逆元" class="headerlink" title="什么是逆元"></a>什么是逆元</h4><p>在模运算中，对于整数 $a$ 和模数 $m$，如果存在整数 $a^{-1}$，使得 $a \times x \equiv 1 \pmod{m}$，那么 $x$ 就是 $a$ 在模 $m$ 意义下的逆元。逆元通常用符号 $a^{-1}$ 表示。</p>
+<h4 id="快速幂算法"><a href="#快速幂算法" class="headerlink" title="快速幂算法"></a>快速幂算法</h4><a href="/posts/20c47d09/" title="快速幂">快速幂</a>
+
+<p>快速幂算法是一种高效计算幂的方法，它可以在对数时间复杂度内计算出 $a^b \mod m$ 的值。在计算逆元时，我们可以利用费马小定理：</p>
+<p>如果 $p$ 是一个素数，$a$ 是一个整数，且 $a$ 不是 $p$ 的倍数，那么<br>$a^{p-1} \equiv 1 \pmod{p}$<br>$a^{p-2} \equiv a^{-1} \pmod{p}$</p>
+<p>所以，$a$ 的逆元 $a^{-1}$ 就是 $a^{p-2} \mod p$。</p>
+<h4 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h4><p>拓展欧几里得算法用于解决形如 $ax + by = \text{gcd}(a, b)$ 的等式。当 $a$ 和 $b$ 互质时，这个算法可以用来计算 $a$ 的模 $b$ 的逆元。</p>
+<p>假设我们要计算 $a^{-1} \pmod{m}$，其中 $\text{gcd}(a, m) = 1$，则可以通过拓展欧几里得算法找到一对整数 $x$ 和 $y$，使得：<br>$ax + my = 1$<br>对两边同时取模 $m$，我们得到：<br>$ax \equiv 1 \pmod{m}$</p>
+<h2 id="拓展欧几里得算法-1"><a href="#拓展欧几里得算法-1" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h2><p>拓展欧几里得算法是用于求解一元线性同余方程 <code>ax ≡ b (mod m)</code> 的一种有效方法。与普通的欧几里得算法相比，拓展欧几里得算法不仅可以找到方程 <code>ax + my = gcd(a,m)</code> 的整数解 <code>x</code> 和 <code>y</code>，还可以根据这个解得到同余方程 <code>ax ≡ b (mod m)</code> 的解。</p>
+<p>拓展欧几里得算法的步骤如下：</p>
+<ol>
+<li>使用普通的欧几里得算法计算 <code>gcd(a, m)</code>。</li>
+<li>在递归求解过程中，维护两个额外的变量 <code>x1</code> 和 <code>y1</code>，它们满足 <code>ax1 + my1 = gcd(a, m)</code>。</li>
+<li>根据递归的基本情况 <code>ax1 + my1 = gcd(a, m)</code> 和 <code>mx2 + ny2 = gcd(m, n)</code>，使用迭代的方式计算 <code>x</code> 和 <code>y</code>，使得 <code>ax + my = gcd(a, m)</code>。</li>
+<li>根据 <code>x1</code> 和 <code>y1</code> 计算出 <code>x</code> 的值，进而求解同余方程 <code>ax ≡ b (mod m)</code> 的解。</li>
+</ol>
+<p>拓展欧几里得算法的关键在于利用递归和迭代的方法，通过倒推的方式求解方程 <code>ax + my = gcd(a, m)</code>，并利用这个解求解同余方程 <code>ax ≡ b (mod m)</code>。这个算法在密码学和编程竞赛中经常被使用，特别是在求解模逆元和解决一些与模运算相关的问题时。</p>
+<h3 id="人话版"><a href="#人话版" class="headerlink" title="人话版"></a>人话版</h3><p>拓展欧几里得算法就是可以在求解最大公约数的同时，求解出<code>ax + by = gcd(a,b)</code>的$(x,y)$。</p>
+<blockquote>
+<p>注意变量名的变化，可能看着有点乱。</p>
+</blockquote>
+<p>例如 $gcd(6,14) = 2$ 而 $2 = (-2)<em>6 + 1</em>14$</p>
+<p>有两个基本的应用</p>
+<ol>
+<li>解不定方程$[ax + by = gcd(a,b)]$</li>
+<li>求乘法逆元$[ ax \equiv 1 \pmod{b} ]$<br>并且在求解同余方程的时候<br>如果 $\text{gcd}(a, m)$ 能够整除 $b$，那么方程 $ax \equiv b \pmod{m}$ 有解，且一组解为：$x = x’ \times \frac{b}{\text{gcd}(a, m)}$</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">exgcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b,<span class="hljs-type">int</span> &amp;x,<span class="hljs-type">int</span> &amp;y)</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">if</span>(!b)<br>    {<br>        x = <span class="hljs-number">1</span>,y = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> a;<br>    }<br>    <span class="hljs-type">int</span> d = <span class="hljs-built_in">exgcd</span>(b,a%b,y,x);<br>    y -= a / b * x;<span class="hljs-comment">//公式</span><br>    <span class="hljs-keyword">return</span> d;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h4><p>当 ( b = 0 ) 时<br>$$ ax + by = a $$<br>故而 ( x = 1, y = 0 )</p>
+<p>当 $( b \neq 0 )$ 时  </p>
+<p>因为<br>$$ \text{gcd}(a,b) = \text{gcd}(b,a%b) $$  </p>
+<p>而<br>$$ bx’ + (a%b)y’ = \text{gcd}(b,a%b) $$<br>$$ bx’ + (a - \lfloor a/b \rfloor \ast b)y’ = \text{gcd}(b,a%b) $$<br>$$ ay’ + b(x’ - \lfloor a/b \rfloor \ast y’) = \text{gcd}(b,a%b) = \text{gcd}(a,b) $$  </p>
+<p>故而<br>$$ x = y’, \quad y = x’ - \lfloor a/b \rfloor \ast y’ $$  </p>
+<p>因此可以采取递归算法 先求出下一层的 ( x’ ) 和 ( y’ ) 再利用上述公式回代即可</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/879/">扩展欧几里得算法</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1082">P1082 [NOIP2012 提高组] 同余方程</a><br><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/880/">线性同余方程</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2613">P2613 【模板】有理数取余</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3811">P3811 【模板】模意义下的乘法逆元</a></p>
 
                 
               </div>
@@ -468,7 +522,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E6%95%B0%E5%AD%A6/" class="category-chain-item">数学</a>
   
   
 
@@ -483,7 +537,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/algorithm/" class="print-no-link">#algorithm</a>
+        <a href="/tags/cpp/" class="print-no-link">#cpp</a>
+      
+        <a href="/tags/gcd/" class="print-no-link">#gcd</a>
+      
+        <a href="/tags/%E6%95%B0%E8%AE%BA/" class="print-no-link">#数论</a>
       
     </div>
   
@@ -495,8 +553,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法总览</div>
-      <div>http://pikachuxpf.github.io/posts/755d7fda/</div>
+      <div>拓展欧几里得</div>
+      <div>http://pikachuxpf.github.io/posts/68bc28a9/</div>
     </div>
     <div class="license-meta">
       
@@ -508,7 +566,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月21日</div>
+          <div>2024年5月13日</div>
         </div>
       
       
@@ -540,18 +598,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/20c47d09/" title="快速幂">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">快速幂</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/41f16002/" title="GCD与LCM">
-                        <span class="hidden-mobile">GCD与LCM</span>
+                      <a href="/posts/fb40efc5/" title="拓扑排序">
+                        <span class="hidden-mobile">拓扑排序</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -347,6 +347,71 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/posts/68bc28a9/" target="_self">
+          拓展欧几里得
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/68bc28a9/" target="_self">
+        <div>
+          前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：  $(a+b)%p = (a%p+b%p)%p$ $(a-b)%p = (a%p-b%p)%p$ $(ab)%p = (a%pb%p)%p$ $(a^b)%p = ((a%p)^b)%p$为什么没有除法，是因为除法在这里比较特别。  同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-13 20:42" pubdate>
+              2024-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E5%AD%A6/" class="category-chain-item">数学</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/cpp/">#cpp</a>
+            
+              <a href="/tags/gcd/">#gcd</a>
+            
+              <a href="/tags/%E6%95%B0%E8%AE%BA/">#数论</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/posts/fb40efc5/" target="_self">
           拓扑排序
         </a>
@@ -420,7 +485,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/posts/2cc2fa98/" target="_self">
         <div>
-          总览 [[算法模板#前缀和与差分]] [[算法模板#二分]] [[算法模板#并查集]] [[算法模板#最小生成树]] [[算法模板#全源最短路]]  基础算法前缀和与差分12345678910111213141516171819202122int a[],p[],d[]//前缀和p[i] = p[i-1] + a[i] //构造sum(l,r) = p[r] - p[l - 1] //查询p[x]
+          总览 [[#基础算法]]  [[#前缀和与差分]] [[#二分]]   [[#数据结构]]  [[#并查集]] [[#普通并查集]] [[#带权并查集]] [[#拓展域并查集]]   [[#树状数组]]   [[#图论]]  [[#最小生成树]] [[#Kruskal算法]]   [[#全源最短路]] [[#Djkstra堆优化(正权稀疏图)]] [[#Djkstra(正权稠密图)]] [[#Be
         </div>
       </a>
 
@@ -520,9 +585,9 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
-            
               <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">#树状数组</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
             
           </div>
         
@@ -865,7 +930,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/posts/20c47d09/" target="_self">
         <div>
-          概念快速幂算法是一种用于高效计算幂运算的算法。它通过将指数进行二进制拆分，并利用幂运算的性质，以减少计算的次数，从而提高运算速度。 算法原理给定底数 a 和指数 n，要计算 a^n，快速幂算法的基本思想是将指数 n 二进制表示，并通过不断平方的方式来减少乘法的次数。例如，若要计算 a^13，可以按照以下步骤进行：  将指数 13 转化为二进制：1101。 根据二进制表示，计算 a^1，a^2，a^
+          引入如何求解$a^{13}$怎么算，这个问题可能看着很简单，直接$aaa*…*a$就能算出来，但是如果这个指数如果变得非常大，比如$a^{10000000}$ 这样写出来的代码运行起来就很慢,我们需要考虑优化。 先考虑$a^{2的幂}$如果要求解$a^{64}$，我们可以发现$a*a$得到$a^2$再使用$a^2 * a^2$得到$a^4$，以此类推，我们可以花费很少的次数得到$a^{64}$。
         </div>
       </a>
 
@@ -928,7 +993,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/posts/755d7fda/" target="_self">
         <div>
-          前言本站算法总览，不是超链接的即为还未更新。 基础算法 前缀和与差分 二分法  数据结构 并查集 带权并查集 拓展域并查集 树状数组 线段树  图论 图论基础 Dijkstra算法 SPFA算法 Floyd算法 Kruskal算法 拓扑排序 LCA最近公共祖先  数论 GCD与LCM 快速幂 组合计数 筛质数 欧拉函数 拓展欧几里得算法  动态规划 背包 线性DP 区间DP 状压DP 状态机DP
+          前言本站算法总览，不是超链接的即为还未更新。 基础算法 前缀和与差分 二分法  数据结构 并查集 带权并查集 拓展域并查集 树状数组 线段树  图论 图论基础 Dijkstra算法 SPFA算法 Floyd算法 Kruskal算法 拓扑排序 LCA最近公共祖先  数论 GCD与LCM 快速幂 组合计数 筛质数 欧拉函数 拓展欧几里得  动态规划 背包 线性DP 区间DP 状压DP 状态机DP  博
         </div>
       </a>
 
@@ -1030,74 +1095,11 @@
             
               <a href="/tags/algorithm/">#algorithm</a>
             
-              <a href="/tags/%E6%95%B0%E8%AE%BA/">#数论</a>
-            
               <a href="/tags/gcd/">#gcd</a>
             
+              <a href="/tags/%E6%95%B0%E8%AE%BA/">#数论</a>
+            
               <a href="/tags/lcm/">#lcm</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/84c587e8/" target="_self">
-          带修莫队
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/84c587e8/" target="_self">
-        <div>
-          简述在学习带修莫队之前，请务必学会普通莫队。 带修莫队即为： 普通莫队是不能修改的，我们可以强行让它可以修改，加上一维时间维,表示这次操作的时间。 时间维表示经历的修改次数。 即把询问$[l,r]$变成$[l,r,time]$,那么因为多了一维，我们对应的操作也会增加  $[l-1,r,time]$ $[l+1,r,time]$ $[l,r-1,time]$ $[l,r+1,time]$ $[l,
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-01-20 14:54" pubdate>
-              2024-01-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/algorithm/">#algorithm</a>
-            
-              <a href="/tags/%E6%9D%82%E9%A1%B9/">#杂项</a>
             
           </div>
         

@@ -16,15 +16,15 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="概念快速幂算法是一种用于高效计算幂运算的算法。它通过将指数进行二进制拆分，并利用幂运算的性质，以减少计算的次数，从而提高运算速度。 算法原理给定底数 a 和指数 n，要计算 a^n，快速幂算法的基本思想是将指数 n 二进制表示，并通过不断平方的方式来减少乘法的次数。例如，若要计算 a^13，可以按照以下步骤进行：  将指数 13 转化为二进制：1101。 根据二进制表示，计算 a^1，a^2，a^">
+    <meta name="description" content="引入如何求解$a^{13}$怎么算，这个问题可能看着很简单，直接$aaa*…*a$就能算出来，但是如果这个指数如果变得非常大，比如$a^{10000000}$ 这样写出来的代码运行起来就很慢,我们需要考虑优化。 先考虑$a^{2的幂}$如果要求解$a^{64}$，我们可以发现$a*a$得到$a^2$再使用$a^2 * a^2$得到$a^4$，以此类推，我们可以花费很少的次数得到$a^{64}$。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="快速幂">
 <meta property="og:url" content="http://pikachuxpf.github.io/posts/20c47d09/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="概念快速幂算法是一种用于高效计算幂运算的算法。它通过将指数进行二进制拆分，并利用幂运算的性质，以减少计算的次数，从而提高运算速度。 算法原理给定底数 a 和指数 n，要计算 a^n，快速幂算法的基本思想是将指数 n 二进制表示，并通过不断平方的方式来减少乘法的次数。例如，若要计算 a^13，可以按照以下步骤进行：  将指数 13 转化为二进制：1101。 根据二进制表示，计算 a^1，a^2，a^">
+<meta property="og:description" content="引入如何求解$a^{13}$怎么算，这个问题可能看着很简单，直接$aaa*…*a$就能算出来，但是如果这个指数如果变得非常大，比如$a^{10000000}$ 这样写出来的代码运行起来就很慢,我们需要考虑优化。 先考虑$a^{2的幂}$如果要求解$a^{64}$，我们可以发现$a*a$得到$a^2$再使用$a^2 * a^2$得到$a^4$，以此类推，我们可以花费很少的次数得到$a^{64}$。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-22T11:52:19.000Z">
-<meta property="article:modified_time" content="2024-01-22T11:57:32.142Z">
+<meta property="article:modified_time" content="2024-05-13T12:28:44.421Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="数论">
@@ -340,7 +340,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          442 字
+          718 字
         
       </span>
     
@@ -351,7 +351,7 @@
         
         
         
-          4 分钟
+          6 分钟
         
       </span>
     
@@ -402,7 +402,11 @@
             
               <div class="markdown-body">
                 
-                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>快速幂算法是一种用于高效计算幂运算的算法。它通过将指数进行二进制拆分，并利用幂运算的性质，以减少计算的次数，从而提高运算速度。</p>
+                <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><h3 id="如何求解"><a href="#如何求解" class="headerlink" title="如何求解"></a>如何求解</h3><p>$a^{13}$怎么算，这个问题可能看着很简单，直接$a<em>a</em>a*…*a$就能算出来，但是如果这个指数如果变得非常大，比如$a^{10000000}$ 这样写出来的代码运行起来就很慢,我们需要考虑优化。</p>
+<h4 id="先考虑-a-2的幂"><a href="#先考虑-a-2的幂" class="headerlink" title="先考虑$a^{2的幂}$"></a>先考虑$a^{2的幂}$</h4><p>如果要求解$a^{64}$，我们可以发现$a*a$得到$a^2$再使用$a^2 * a^2$得到$a^4$，以此类推，我们可以花费很少的次数得到$a^{64}$。</p>
+<h4 id="推广"><a href="#推广" class="headerlink" title="推广"></a>推广</h4><p>推广到正常数字，例如105。$a^{105}$,我们怎么去计算，我们可以知道$105 = 64 + 32 + 8 + 1$<br>于是我们可以得出$a^{105} = a^{64} * a^{32} * a^{8} * a^1$ ,再观察一下，发现每一个拆分出来的指数都是2的幂次，并且我们可以联想到二进制，$b(105) = 0110 1001$可以发现是对应的，也就是说我们可以把次数进行优化，并且从最低位到最高位依次累乘。</p>
+<p>这边是快速幂的思想。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>快速幂算法是一种用于高效计算幂运算的算法。它通过将指数进行二进制拆分，并利用幂运算的性质，以减少计算的次数，从而提高运算速度。</p>
 <h2 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h2><p>给定底数 <code>a</code> 和指数 <code>n</code>，要计算 <code>a^n</code>，快速幂算法的基本思想是将指数 <code>n</code> 二进制表示，并通过不断平方的方式来减少乘法的次数。例如，若要计算 <code>a^13</code>，可以按照以下步骤进行：</p>
 <ol>
 <li>将指数 <code>13</code> 转化为二进制：<code>1101</code>。</li>
@@ -410,6 +414,7 @@
 <li>通过组合上述结果，得到 <code>a^13 = a^8 * a^4 * a^1</code>。</li>
 </ol>
 <p>这样，只需进行四次乘法运算，而不是直接进行 <code>a^13</code> 次乘法运算，大大减少了计算的时间复杂度。</p>
+<p>时间复杂度是$O(logn)$，也很好理解。</p>
 <h2 id="应用方式"><a href="#应用方式" class="headerlink" title="应用方式"></a>应用方式</h2><h3 id="1-求幂运算"><a href="#1-求幂运算" class="headerlink" title="1. 求幂运算"></a>1. 求幂运算</h3><p>快速幂算法广泛应用于需要大量幂运算的场景，如密码学中的加密算法、图论中的邻接矩阵乘法等。</p>
 <h3 id="2-模幂运算"><a href="#2-模幂运算" class="headerlink" title="2. 模幂运算"></a>2. 模幂运算</h3><p>在密码学领域，快速幂算法常被用于模幂运算，即 <code>(a^b) mod m</code> 的计算。这在很多加密算法中都是一个基本的步骤。</p>
 <h2 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h2><ol>
