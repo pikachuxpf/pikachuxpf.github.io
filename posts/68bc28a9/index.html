@@ -16,20 +16,23 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：-$(a+b)%p &#x3D; (a%p+b%p)%p$-$(a-b)%p &#x3D; (a%p-b%p)%p$-$(a \times b)%p &#x3D; (a%p \times b%p)%p$-$(a^b)%p &#x3D; ((a%p)^b)%p$为什么没有除法，是因为除法在这里比较特别。 同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，">
+    <meta name="description" content="前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：为什么没有除法，是因为除法在这里比较特别。 同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关于模 $c$ 同余，记作 $a \equiv b \pmod{c}$。 &gt; 如果 $a$ 和 $b$ 的差能够被 $m$ 整除，那么就说 $a$ 和 $b$ 关于 $m$ 同余。  同余">
 <meta property="og:type" content="article">
 <meta property="og:title" content="拓展欧几里得">
 <meta property="og:url" content="http://pikachuxpf.github.io/posts/68bc28a9/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：-$(a+b)%p &#x3D; (a%p+b%p)%p$-$(a-b)%p &#x3D; (a%p-b%p)%p$-$(a \times b)%p &#x3D; (a%p \times b%p)%p$-$(a^b)%p &#x3D; ((a%p)^b)%p$为什么没有除法，是因为除法在这里比较特别。 同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，">
+<meta property="og:description" content="前置知识最大公约数GCD与LCM 模运算模运算的基本规则与四则运算基本一致：为什么没有除法，是因为除法在这里比较特别。 同余概念如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关于模 $c$ 同余，记作 $a \equiv b \pmod{c}$。 &gt; 如果 $a$ 和 $b$ 的差能够被 $m$ 整除，那么就说 $a$ 和 $b$ 关于 $m$ 同余。  同余">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/664236120ea9cb1403670b1f.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/664236320ea9cb14036731d9.png">
 <meta property="article:published_time" content="2024-05-13T12:42:23.000Z">
-<meta property="article:modified_time" content="2024-05-13T15:43:24.621Z">
+<meta property="article:modified_time" content="2024-05-13T15:47:11.894Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="cpp">
 <meta property="article:tag" content="数论">
 <meta property="article:tag" content="gcd">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/664236120ea9cb1403670b1f.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -341,7 +344,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.2k 字
         
       </span>
     
@@ -352,7 +355,7 @@
         
         
         
-          19 分钟
+          18 分钟
         
       </span>
     
@@ -404,7 +407,7 @@
               <div class="markdown-body">
                 
                 <h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><h3 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h3><a href="/posts/41f16002/" title="GCD与LCM">GCD与LCM</a>
-<h3 id="模运算"><a href="#模运算" class="headerlink" title="模运算"></a>模运算</h3><p>模运算的基本规则与四则运算基本一致：<br>-$(a+b)%p = (a%p+b%p)%p$<br>-$(a-b)%p = (a%p-b%p)%p$<br>-$(a \times b)%p = (a%p \times b%p)%p$<br>-$(a^b)%p = ((a%p)^b)%p$<br>为什么没有除法，是因为除法在这里比较特别。</p>
+<h3 id="模运算"><a href="#模运算" class="headerlink" title="模运算"></a>模运算</h3><p>模运算的基本规则与四则运算基本一致：<br><img src="https://pic.imgdb.cn/item/664236120ea9cb1403670b1f.png" srcset="/img/loading.gif" lazyload alt="img"><br>为什么没有除法，是因为除法在这里比较特别。</p>
 <h3 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>如果 $a$ 和 $b$ 除以 $c$ 的余数相同，就说 $a$ 和 $b$ 关于模 $c$ 同余，记作 $a \equiv b \pmod{c}$。 &gt; 如果 $a$ 和 $b$ 的差能够被 $m$ 整除，那么就说 $a$ 和 $b$ 关于 $m$ 同余。 </p>
 <h4 id="同余关系是一种等价关系"><a href="#同余关系是一种等价关系" class="headerlink" title="同余关系是一种等价关系"></a>同余关系是一种等价关系</h4><ol>
 <li>自反性：一个数永远和本身同余 </li>
@@ -485,9 +488,7 @@
 <li>求乘法逆元$[ ax \equiv 1 \pmod{b} ]$<br>并且在求解同余方程的时候<br>如果 $\text{gcd}(a, m)$ 能够整除 $b$，那么方程 $ax \equiv b \pmod{m}$ 有解，且一组解为：$x = x’ \times \frac{b}{\text{gcd}(a, m)}$</li>
 </ol>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">exgcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b,<span class="hljs-type">int</span> &amp;x,<span class="hljs-type">int</span> &amp;y)</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">if</span>(!b)<br>    {<br>        x = <span class="hljs-number">1</span>,y = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> a;<br>    }<br>    <span class="hljs-type">int</span> d = <span class="hljs-built_in">exgcd</span>(b,a%b,y,x);<br>    y -= a / b * x;<span class="hljs-comment">//公式</span><br>    <span class="hljs-keyword">return</span> d;<br>}<br></code></pre></td></tr></tbody></table></figure>
-<h4 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h4><p>当 ( b = 0 ) 时  : $ax + by = a$ 故而 ( x = 1, y = 0 )</p>
-<p>当 $( b \neq 0 )$ 时  :<br>因为  :<br>${gcd}(a,b) = {gcd}(b,a%b)$<br>而  $bx’ + (a%b)y’ = {gcd}(b,a%b)$<br>-&gt; $bx’ + (a - \lfloor a/b \rfloor \ast b)y’ = {gcd}(b,a%b)$<br>-&gt; $ay’ + b(x’ - \lfloor a/b \rfloor \ast y’) = {gcd}(b,a%b) = {gcd}(a,b)$</p>
-<p>故而  :<br>$x = y’, \quad y = x’ - \lfloor a/b \rfloor \ast y’$</p>
+<h4 id="代码解释"><a href="#代码解释" class="headerlink" title="代码解释"></a>代码解释</h4><p><img src="https://pic.imgdb.cn/item/664236320ea9cb14036731d9.png" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>因此可以采取递归算法 先求出下一层的 ( x’ ) 和 ( y’ ) 再利用上述公式回代即可</p>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/879/">扩展欧几里得算法</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1082">P1082 [NOIP2012 提高组] 同余方程</a><br><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/880/">线性同余方程</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2613">P2613 【模板】有理数取余</a><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3811">P3811 【模板】模意义下的乘法逆元</a></p>
 
