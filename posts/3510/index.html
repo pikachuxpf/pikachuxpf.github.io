@@ -24,7 +24,7 @@
 <meta property="og:description" content="二分法的概念二分法(Bisection method)，即一分为二的的方法。对于在区间$[a,b]$上连续不断且满足$f(a)*f(b)&lt;0$的函数$y&#x3D;f(x)$,通过不断地把函数$f(x)$的零点所在区间二等分，使区间两个端点逐步逼近零点，进而得到零点的近似值的方法。简单来说就是一般用于求解一个具有单调性的函数的分界点。 二分实际上也是一种枚举，只不过是使用的数学方法大大减少了无意义的枚">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-10T10:46:54.000Z">
-<meta property="article:modified_time" content="2024-01-14T16:12:11.553Z">
+<meta property="article:modified_time" content="2024-07-08T15:00:04.990Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="algorithm">
 <meta property="article:tag" content="二分">
@@ -340,7 +340,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.7k 字
         
       </span>
     
@@ -405,22 +405,18 @@
                 <h2 id="二分法的概念"><a href="#二分法的概念" class="headerlink" title="二分法的概念"></a>二分法的概念</h2><p>二分法(Bisection method)，即一分为二的的方法。对于在区间$[a,b]$上连续不断且满足$f(a)*f(b)&lt;0$的函数$y=f(x)$,通过不断地把函数$f(x)$的零点所在区间二等分，使区间两个端点逐步逼近零点，进而得到零点的近似值的方法。<br>简单来说就是<br>一般用于求解一个具有单调性的函数的分界点。</p>
 <p>二分实际上也是一种枚举，只不过是使用的数学方法大大减少了无意义的枚举次数,时间复杂度也优化成$O(logn)$。</p>
 <p>我们一般所说的二分是二分查找法，本文就用二分简说。</p>
+<p>简单来说二分搜索法可以用来查找满足某种条件的最大（最小）的值。</p>
 <h3 id="单调性"><a href="#单调性" class="headerlink" title="单调性"></a>单调性</h3><p>在二分前，我们需要研究问题的单调性。<br>比如我们要求在正整数定义域内函数满足：<br>$$f(x) = x^2 ≥ k$$<br>的一个最小的x，其中k一般是一个定值。<br>我们很容易发现$x^2$的函数在正整数定义域内是单调递增的。</p>
 <p>当然二分不止用在这么简单的场景，其他场景需要你自行分析。</p>
 <h3 id="二段性"><a href="#二段性" class="headerlink" title="二段性"></a>二段性</h3><p>集合中的元素有存在分界线，给定条件可以将集合中元素分为两部分，一部分满足条件，一部分不满足条件。<br>例如当我们要查找一个数组中小于$14$的最大的一个数：</p>
 <p>$$1 ,3 ,8 ,13 ,15 ,20 ,23$$</p>
 <p>这时可以发现从13和15中间就有一条分界线，左边是满足我们的条件的，右边是不满足的。</p>
-<p>这样也就可以拓展到两个概念</p>
-<ol>
-<li>分界线之前的第一个元素，也就是最后一个满足条件的值，我们称为ML(Meeting Condition Last)</li>
-<li>分界线之后的第一个元素，也就是第一个不满足该条件的值，我们称为 NB(Not Meeting Condition Begining)</li>
-</ol>
-<p>我们就可以确定二分的方式，以及代码编写的选择，当然，如果是实数二分就不存在这样的区别。</p>
+<p>于是就可以通过这个将整个区间分为两个区间。具体分为哪段到哪段就看你的写法。<br>所以我们就可以确定二分的方式，以及代码编写的选择，当然，如果是实数二分就不存在这样的区别。</p>
 <h3 id="枚举区间"><a href="#枚举区间" class="headerlink" title="枚举区间"></a>枚举区间</h3><p>当我们使用二分的时候，还需要考虑的一点是，枚举的一个区间$[l,r]$。<br>这个区间一定是包含我们的最终答案的。</p>
 <h3 id="判断函数"><a href="#判断函数" class="headerlink" title="判断函数"></a>判断函数</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{<span class="hljs-comment">/* ... */</span>} <span class="hljs-comment">// 检查x是否满足某种性质</span><br></code></pre></td></tr></tbody></table></figure>
 <p>就刚刚的例子而言，我们的判断函数$check()$即为$mid^2 ≥ k$ (mid即为二分时的中间点)<br>判断函数的编写也是二分的重中之重，稍微一步写错就有可能造成找不到答案或者死循环的情况。</p>
 <h3 id="确定答案"><a href="#确定答案" class="headerlink" title="确定答案"></a>确定答案</h3><p>和题意结合，输出对应的答案，这一步尤其要注意，要理解清楚题目的意思，比如第一个大于等于的，最后一个小于的，最后一个小于等于的等等等等。需要自己多加小心（通常这些字眼就暗示了这一道题需要用二分来优化）</p>
-<h3 id="找-NB-和-ML"><a href="#找-NB-和-ML" class="headerlink" title="找 NB 和 ML"></a>找 NB 和 ML</h3><p>对应上文的分界线前后的元素，是属于整数二分的内容。</p>
+<h3 id="分区间"><a href="#分区间" class="headerlink" title="分区间"></a>分区间</h3><p>对应上文的分界线前后的元素，是属于整数二分的内容。</p>
 <figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs excel">// 区间[l, r]被划分成[l, <span class="hljs-built_in">mid</span>]和[<span class="hljs-built_in">mid</span> + <span class="hljs-number">1</span>, r]时使用：<br><span class="hljs-built_in">int</span> binsearch(<span class="hljs-built_in">int</span> l, <span class="hljs-built_in">int</span> r)<br>{<br>    while (l &lt; r)<br>    {<br>        <span class="hljs-built_in">int</span> <span class="hljs-built_in">mid</span> = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">if</span> (check(<span class="hljs-built_in">mid</span>)) r = <span class="hljs-built_in">mid</span>;    // check()判断<span class="hljs-built_in">mid</span>是否满足性质<br>        else l = <span class="hljs-built_in">mid</span> + <span class="hljs-number">1</span>;<br>    }<br>    return l;<br>}<br></code></pre></td></tr></tbody></table></figure>
 
 <figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs excel">// 区间[l, r]被划分成[l, <span class="hljs-built_in">mid</span> - <span class="hljs-number">1</span>]和[<span class="hljs-built_in">mid</span>, r]时使用：<br><span class="hljs-built_in">int</span> binsearch(<span class="hljs-built_in">int</span> l, <span class="hljs-built_in">int</span> r)<br>{<br>    while (l &lt; r)<br>    {<br>        <span class="hljs-built_in">int</span> <span class="hljs-built_in">mid</span> = l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">if</span> (check(<span class="hljs-built_in">mid</span>)) l = <span class="hljs-built_in">mid</span>;<br>        else r = <span class="hljs-built_in">mid</span> - <span class="hljs-number">1</span>;<br>    }<br>    return l;<br>}<br></code></pre></td></tr></tbody></table></figure>
@@ -448,6 +444,13 @@
 <h4 id="凸"><a href="#凸" class="headerlink" title="凸"></a>凸</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">double</span> l, r;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span>; i++) {<br>    <span class="hljs-type">double</span> lmid = l + (r - l) / <span class="hljs-number">3</span>;<br>    <span class="hljs-type">double</span> rmid = r - (r - l) / <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">calc</span>(lmid) &lt;= <span class="hljs-built_in">calc</span>(rmid))	l = lmid;<br>    <span class="hljs-keyword">else</span> 	r = rmid;<br>}<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.6f\n"</span>, <span class="hljs-built_in">calc</span>(l));<br></code></pre></td></tr></tbody></table></figure>
 
 <h4 id="凹"><a href="#凹" class="headerlink" title="凹"></a>凹</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">double</span> l, r;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">300</span>; i++) {<br>    <span class="hljs-type">double</span> lmid = l + (r - l) / <span class="hljs-number">3</span>;<br>    <span class="hljs-type">double</span> rmid = r - (r - l) / <span class="hljs-number">3</span>;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">calc</span>(rmid) &gt;= <span class="hljs-built_in">calc</span>(lmid))	r = rmid;<br>    <span class="hljs-keyword">else</span> 	l = lmid;<br>}<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%.6f\n"</span>, <span class="hljs-built_in">calc</span>(l));<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="题目练习"><a href="#题目练习" class="headerlink" title="题目练习"></a>题目练习</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1873">P1873 [COCI 2011/2012 #5] EKO / 砍树 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2678">P2678 [NOIP2015 提高组] 跳石头 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3382">P3382 三分 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+
                 
               </div>
             
