@@ -4,6 +4,64 @@
   
   
   <entry>
+    <title>树形DP</title>
+    <link href="/posts/9ba26914/"/>
+    <url>/posts/9ba26914/</url>
+    
+    <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>树形DP，顾名思义是在树上的DP,应用于树形结构的动态规划。</p><p>其核心思想是在树的节点间传递和合并状态信息，逐步计算出所需的最优解。</p><p>因为树的递归性质，树形动态规划一般都是递归求解的。</p><blockquote><p>本文参考<a href="https://oi-wiki.org/dp/tree/">树形 DP - OI Wiki (oi-wiki.org)</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+      <tag>树形DP</tag>
+      
+      <tag>DP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>区间DP</title>
+    <link href="/posts/628fb573/"/>
+    <url>/posts/628fb573/</url>
+    
+    <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>区间类动态规划是线性动态规划的扩展，它在分阶段地划分问题时，与阶段中元素出现的顺序和由前一阶段的哪些元素合并而来有很大的关系。</p><p>令状态$f(l,r)$表示$l到r$ 的区间的元素合并能获得到的价值最大（最小），为此$f(l,r) = max{f(l,k)+f(k+1,r) + W}$,$W$为这两个区间合并起来的价值。</p><p>该问题的求解主要是通过合并小区间的最优解进而得出整个大区间的最优解。</p><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>区间 DP 有以下特点：</p><p><strong>合并</strong>：即将两个或多个部分进行整合，当然也可以反过来；</p><p><strong>特征</strong>：能将问题分解为能两两合并的形式；</p><p><strong>求解</strong>：对整个问题设最优值，枚举合并点，将问题分解为左右两个部分，最后合并两个部分的最优值得到原问题的最优值。</p><h3 id="一般解法"><a href="#一般解法" class="headerlink" title="一般解法"></a>一般解法</h3><ul><li>一般第一层是枚举 $len$ 长度</li><li>第二层是枚举 $l$ 也就是左端点，然后 $r$ 可以通过 $l + len - 1$ 计算出来</li><li>第三层是枚举断点 $k$ 从 $l$ 到 $r$</li></ul><h2 id="经典题目"><a href="#经典题目" class="headerlink" title="经典题目"></a>经典题目</h2><h3 id="石子合并"><a href="#石子合并" class="headerlink" title="石子合并"></a>石子合并</h3><p>经典思想: 拆环成链,通过复制数组的手段达到将一个环拆成链式的结构，方便求解。</p><h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>例如这个样例</p><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">4</span><br><span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span><br><br><span class="hljs-number">19</span> <span class="hljs-number">26</span><br></code></pre></td></tr></tbody></table></figure><p><img src="https://pic.imgdb.cn/item/669ba841d9c307b7e980e185.png"><br>我们可以发现最后合成出来的贡献就是区间和，也就是说每次我们将两个区间合并的时候，带来的贡献即为两堆的区间之和，所以这里可以用前缀和来优化一下。<br>对于我们第三个$3$我们其实可以让 $3$ 和后面的 $4$ 来合并，所以就会有很多种情况，对于每一个子问题，我们需要枚举一个 $k$ 点，来计算我们当前子问题区间的答案。</p><p>所以我们的状态转移方程以及单点处理即为以下。</p><p>当$l == r$ 单个位置得分为0：$f_{len,l,r} = 0$<br>当 $l \neq r$</p><ul><li>计算最大值的转移：$f_{len,l,r}=max(f_{k−l+1,l,k}+f_{len−(k−l+1),k+1,r}+cost_{l,r})$ $(l \leq k \lt r)$ </li><li>计算最小值的转移：$f_{len,l,r}=min(f_{k−l+1,l,k}+f_{len−(k−l+1),k+1,r}+cost_{l,r})$ $(l \leq k \lt r)$</li></ul><p><a href="https://www.luogu.com.cn/problem/P1880">P1880 [NOI1995] 石子合并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p><blockquote><p>本文参考<a href="https://oi-wiki.org/dp/interval/">区间 DP - OI Wiki (oi-wiki.org)</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动态规划</tag>
+      
+      <tag>DP</tag>
+      
+      <tag>区间DP</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>拓展欧几里得</title>
     <link href="/posts/68bc28a9/"/>
     <url>/posts/68bc28a9/</url>
@@ -22,9 +80,9 @@
       
       <tag>cpp</tag>
       
-      <tag>gcd</tag>
-      
       <tag>数论</tag>
+      
+      <tag>gcd</tag>
       
     </tags>
     
@@ -325,9 +383,9 @@
       
       <tag>algorithm</tag>
       
-      <tag>gcd</tag>
-      
       <tag>数论</tag>
+      
+      <tag>gcd</tag>
       
       <tag>lcm</tag>
       
