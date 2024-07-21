@@ -25,11 +25,11 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic.imgdb.cn/item/669ba841d9c307b7e980e185.png">
 <meta property="article:published_time" content="2024-07-19T14:35:18.000Z">
-<meta property="article:modified_time" content="2024-07-20T12:23:02.861Z">
+<meta property="article:modified_time" content="2024-07-21T07:04:36.245Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="DP">
 <meta property="article:tag" content="区间DP">
+<meta property="article:tag" content="DP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic.imgdb.cn/item/669ba841d9c307b7e980e185.png">
   
@@ -343,7 +343,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          629 字
+          900 字
         
       </span>
     
@@ -354,7 +354,7 @@
         
         
         
-          6 分钟
+          8 分钟
         
       </span>
     
@@ -418,16 +418,21 @@
 <li>第三层是枚举断点 $k$ 从 $l$ 到 $r$</li>
 </ul>
 <h2 id="经典题目"><a href="#经典题目" class="headerlink" title="经典题目"></a>经典题目</h2><h3 id="石子合并"><a href="#石子合并" class="headerlink" title="石子合并"></a>石子合并</h3><p>经典思想: 拆环成链,通过复制数组的手段达到将一个环拆成链式的结构，方便求解。</p>
-<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>例如这个样例</p>
+<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>对于每一个区间 $(l,r)$ 我们可以通过 $k$ 将整个区间分为两块 $f(l,k),f(k+1,r)$ ，如果要求$(l,r)$ 这个区间的最大/最小值，对于任意两堆，我们可以直接把这两堆的和加上，作为一部分贡献W，但是可以发现，如果某一堆里面有多个数，我们不仅仅只加当前的值，还需要加上整个区间的区间和C。</p>
+<p>对于我们区间$(l,r)$来说，我们每次合并所产生的值就为 $W + C$ 因为 $(l,r)$ 区间是固定的，所以能够变换的只有 $W$ 所以我们怎样求 $W$ 的最大/最小 又成了一个子问题。我们对于每一个区间 $(l,r)$ 会有大量的这样的重叠子问题，所以我们才会按照 $k$ 来将我们的区间划分为两部分。<br>例如这个样例</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-number">4</span><br><span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span><br><br><span class="hljs-number">19</span> <span class="hljs-number">26</span><br></code></pre></td></tr></tbody></table></figure>
-<p><img src="https://pic.imgdb.cn/item/669ba841d9c307b7e980e185.png" srcset="/img/loading.gif" lazyload><br>我们可以发现最后合成出来的贡献就是区间和，也就是说每次我们将两个区间合并的时候，带来的贡献即为两堆的区间之和，所以这里可以用前缀和来优化一下。<br>对于我们第三个$3$我们其实可以让 $3$ 和后面的 $4$ 来合并，所以就会有很多种情况，对于每一个子问题，我们需要枚举一个 $k$ 点，来计算我们当前子问题区间的答案。</p>
-<p>所以我们的状态转移方程以及单点处理即为以下。</p>
-<p>当$l == r$ 单个位置得分为0：$f_{len,l,r} = 0$<br>当 $l \neq r$</p>
+<p><img src="https://pic.imgdb.cn/item/669ba841d9c307b7e980e185.png" srcset="/img/loading.gif" lazyload></p>
+<p>图中表示的是最小值的合并方式，对于区间$(1,3)$ 来说我们可能还会由 $f(1,1),f(2,3)$ 这里便出现了重叠子问题。</p>
+<p>最后：<br>当$l == r$ 单个位置得分为0：$f_{len,l,r} = 0$<br>当 $l \neq r$</p>
 <ul>
 <li>计算最大值的转移：$f_{len,l,r}=max(f_{k−l+1,l,k}+f_{len−(k−l+1),k+1,r}+cost_{l,r})$ $(l \leq k \lt r)$ </li>
 <li>计算最小值的转移：$f_{len,l,r}=min(f_{k−l+1,l,k}+f_{len−(k−l+1),k+1,r}+cost_{l,r})$ $(l \leq k \lt r)$</li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1880">P1880 [NOI1995] 石子合并 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<h2 id="平行四边形优化"><a href="#平行四边形优化" class="headerlink" title="平行四边形优化"></a>平行四边形优化</h2><p>因为我们普通的区间DP时间复杂度是 $O(n^3)$ 但是我们状态转移方程又设计好了，怎么去优化呢？</p>
+<h3 id="大概"><a href="#大概" class="headerlink" title="大概"></a>大概</h3><p>有方程：$f(i,j)=min(f(i,k)+f(k+1,j)+w(i,j)),s(i,j)$为最优点取到值。</p>
+<p>公式：如果有$f(i, j)+f(i′, j′)≤f(i′, j)+f(i, j′)$&nbsp;那么我们称函数 w 满足四边形不等式。&nbsp;就有$s(i, j)≤s(i, j + 1)≤s(i + 1, j + 1)$</p>
+<p>具体看别的大佬描述<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/noiau/article/details/72514812">四边形不等式优化讲解（详解）-CSDN博客</a></p>
 <blockquote>
 <p>本文参考<a target="_blank" rel="noopener" href="https://oi-wiki.org/dp/interval/">区间 DP - OI Wiki (oi-wiki.org)</a></p>
 </blockquote>
@@ -466,9 +471,9 @@
       
         <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="print-no-link">#动态规划</a>
       
-        <a href="/tags/DP/" class="print-no-link">#DP</a>
-      
         <a href="/tags/%E5%8C%BA%E9%97%B4DP/" class="print-no-link">#区间DP</a>
+      
+        <a href="/tags/DP/" class="print-no-link">#DP</a>
       
     </div>
   
