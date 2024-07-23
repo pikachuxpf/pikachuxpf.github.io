@@ -16,25 +16,25 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="定义记忆化搜索（Memoization）是一种优化技术，用于通过存储已经计算过的结果来避免重复计算。它是一种动态规划的实现方式，通常用于递归算法中。通过将中间结果存储在数据结构（如数组或字典）中，记忆化搜索可以显著提高算法的效率，特别是在解决具有重叠子问题的计算问题时。 简单来说就是当算法需要计算某个子问题的结果时，它首先检查是否已经计算过该问题。如果已经计算过，则直接返回已经存储的结果；否则，计">
+    <meta name="description" content="概念STL（标准模板库）中的 vector 是 C++ 中一个非常常用的容器类。它是一个动态数组，可以自动调整大小，并提供了类似于数组的随机访问功能。 主要特点 动态大小：vector 会根据需要自动调整其大小，允许在运行时增加或减少元素。 连续存储：vector 的元素在内存中是连续存储的，这意味着可以通过偏移量进行高效的随机访问。 自动管理内存：vector 会自动管理其所需的内存，因此无需手">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记忆化搜索">
-<meta property="og:url" content="http://pikachuxpf.github.io/posts/cb5e0eb8/index.html">
+<meta property="og:title" content="vector">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/1b6e485b/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="定义记忆化搜索（Memoization）是一种优化技术，用于通过存储已经计算过的结果来避免重复计算。它是一种动态规划的实现方式，通常用于递归算法中。通过将中间结果存储在数据结构（如数组或字典）中，记忆化搜索可以显著提高算法的效率，特别是在解决具有重叠子问题的计算问题时。 简单来说就是当算法需要计算某个子问题的结果时，它首先检查是否已经计算过该问题。如果已经计算过，则直接返回已经存储的结果；否则，计">
+<meta property="og:description" content="概念STL（标准模板库）中的 vector 是 C++ 中一个非常常用的容器类。它是一个动态数组，可以自动调整大小，并提供了类似于数组的随机访问功能。 主要特点 动态大小：vector 会根据需要自动调整其大小，允许在运行时增加或减少元素。 连续存储：vector 的元素在内存中是连续存储的，这意味着可以通过偏移量进行高效的随机访问。 自动管理内存：vector 会自动管理其所需的内存，因此无需手">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-20T12:23:54.000Z">
-<meta property="article:modified_time" content="2024-07-23T08:34:12.405Z">
+<meta property="article:published_time" content="2024-07-23T09:14:25.000Z">
+<meta property="article:modified_time" content="2024-07-23T09:21:55.624Z">
 <meta property="article:author" content="Pikachu_fpx">
-<meta property="article:tag" content="动态规划">
-<meta property="article:tag" content="记忆化搜索">
+<meta property="article:tag" content="STL">
+<meta property="article:tag" content="vector">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>记忆化搜索 - Pikachu_fpx|博客</title>
+  <title>vector - Pikachu_fpx|博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -317,7 +317,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="记忆化搜索"></span>
+            <span id="subtitle" data-typed-text="vector"></span>
           
         </div>
 
@@ -328,8 +328,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-20 20:23" pubdate>
-          2024年7月20日 晚上
+        <time datetime="2024-07-23 17:14" pubdate>
+          2024年7月23日 下午
         </time>
       </span>
     
@@ -340,7 +340,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          601 字
+          744 字
         
       </span>
     
@@ -351,7 +351,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -397,30 +397,51 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">记忆化搜索</h1>
+            <h1 id="seo-header">vector</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>记忆化搜索（Memoization）是一种优化技术，用于通过存储已经计算过的结果来避免重复计算。它是一种动态规划的实现方式，通常用于递归算法中。通过将中间结果存储在数据结构（如数组或字典）中，记忆化搜索可以显著提高算法的效率，特别是在解决具有重叠子问题的计算问题时。</p>
-<p>简单来说就是当算法需要计算某个子问题的结果时，它首先检查是否已经计算过该问题。如果已经计算过，则直接返回已经存储的结果；否则，计算该问题，并将结果存储下来以备将来使用。</p>
-<h2 id="记忆化搜索与递推区别"><a href="#记忆化搜索与递推区别" class="headerlink" title="记忆化搜索与递推区别"></a>记忆化搜索与递推区别</h2><h4 id="记忆化搜索："><a href="#记忆化搜索：" class="headerlink" title="记忆化搜索："></a>记忆化搜索：</h4><p>「自顶向下」的解决问题，采用自然的递归方式编写过程，在过程中会保存每个子问题的解（通常保存在一个数组或哈希表中）来避免重复计算。</p>
-<p>优点：代码清晰易懂，可以有效的处理一些复杂的状态转移方程。有些状态转移方程是非常复杂的，使用记忆化搜索可以将复杂的状态转移方程拆分成多个子问题，通过递归调用来解决。</p>
-<p>缺点：可能会因为递归深度过大而导致栈溢出问题。</p>
-<h4 id="递推："><a href="#递推：" class="headerlink" title="递推："></a>递推：</h4><p>「自底向上」的解决问题，采用循环的方式编写过程，在过程中通过保存每个子问题的解（通常保存在一个数组或哈希表中）来避免重复计算。</p>
-<p>优点：避免了深度过大问题，不存在栈溢出问题。计算顺序比较明确，易于实现。</p>
-<p>缺点：无法处理一些复杂的状态转移方程。有些状态转移方程非常复杂，如果使用递推方法来计算，就会导致代码实现变得非常困难。</p>
-<h2 id="如何写记忆化搜索"><a href="#如何写记忆化搜索" class="headerlink" title="如何写记忆化搜索"></a>如何写记忆化搜索</h2><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><ol>
-<li>把这道题的 dp 状态和方程写出来</li>
-<li>根据它们写出 dfs 函数</li>
-<li>添加记忆化数组</li>
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>STL（标准模板库）中的 <code>vector</code> 是 C++ 中一个非常常用的容器类。它是一个动态数组，可以自动调整大小，并提供了类似于数组的随机访问功能。</p>
+<h2 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h2><ol>
+<li><strong>动态大小</strong>：<code>vector</code> 会根据需要自动调整其大小，允许在运行时增加或减少元素。</li>
+<li><strong>连续存储</strong>：<code>vector</code> 的元素在内存中是连续存储的，这意味着可以通过偏移量进行高效的随机访问。</li>
+<li><strong>自动管理内存</strong>：<code>vector</code> 会自动管理其所需的内存，因此无需手动分配或释放内存。</li>
+<li><strong>丰富的接口</strong>：<code>vector</code> 提供了一组丰富的成员函数，用于插入、删除、访问和修改元素。</li>
 </ol>
-<h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><ol>
-<li>写出这道题的暴搜程序（最好是dfs）</li>
-<li>将这个 dfs 改成「无需外部变量」的 dfs</li>
-<li>添加记忆化数组</li>
-</ol>
-<h2 id="简单题目"><a href="#简单题目" class="headerlink" title="简单题目"></a>简单题目</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1464">P1464 Function - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a>启蒙题</p>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="1-创建和初始化"><a href="#1-创建和初始化" class="headerlink" title="1. 创建和初始化"></a>1. 创建和初始化</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    vector&lt;<span class="hljs-type">int</span>&gt; v1; <span class="hljs-comment">// 创建一个空的 vector</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v2</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>; <span class="hljs-comment">// 创建一个包含 10 个默认值（0）的 vector</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">v3</span><span class="hljs-params">(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>)</span></span>; <span class="hljs-comment">// 创建一个包含 10 个值为 5 的元素的 vector</span><br>    vector&lt;<span class="hljs-type">int</span>&gt; v4 = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>}; <span class="hljs-comment">// 使用初始化列表进行初始化</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="2-元素访问"><a href="#2-元素访问" class="headerlink" title="2. 元素访问"></a>2. 元素访问</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};<br><br>    <span class="hljs-comment">// 通过下标访问元素</span><br>    cout &lt;&lt; v[<span class="hljs-number">0</span>] &lt;&lt; endl; <span class="hljs-comment">// 输出第一个元素</span><br>    cout &lt;&lt; v.<span class="hljs-built_in">at</span>(<span class="hljs-number">1</span>) &lt;&lt; endl; <span class="hljs-comment">// 输出第二个元素（带边界检查）</span><br><br>    <span class="hljs-comment">// 访问第一个和最后一个元素</span><br>    cout &lt;&lt; v.<span class="hljs-built_in">front</span>() &lt;&lt; endl; <span class="hljs-comment">// 第一个元素</span><br>    cout &lt;&lt; v.<span class="hljs-built_in">back</span>() &lt;&lt; endl; <span class="hljs-comment">// 最后一个元素</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-插入和删除元素"><a href="#3-插入和删除元素" class="headerlink" title="3. 插入和删除元素"></a>3. 插入和删除元素</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    vector&lt;<span class="hljs-type">int</span>&gt; v;<br><br>    <span class="hljs-comment">// 插入元素</span><br>    v.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 在末尾插入 1</span><br>    v.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// 在末尾插入 2</span><br><br>    <span class="hljs-comment">// 删除元素</span><br>    v.<span class="hljs-built_in">pop_back</span>(); <span class="hljs-comment">// 删除最后一个元素</span><br><br>    <span class="hljs-comment">// 插入到指定位置</span><br>    v.<span class="hljs-built_in">insert</span>(v.<span class="hljs-built_in">begin</span>(), <span class="hljs-number">0</span>); <span class="hljs-comment">// 在开头插入 0</span><br><br>    <span class="hljs-comment">// 删除指定位置的元素</span><br>    v.<span class="hljs-built_in">erase</span>(v.<span class="hljs-built_in">begin</span>()); <span class="hljs-comment">// 删除开头的元素</span><br><br>    <span class="hljs-comment">// 清空 vector</span><br>    v.<span class="hljs-built_in">clear</span>(); <span class="hljs-comment">// 移除所有元素</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    vector&lt;<span class="hljs-type">int</span>&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};<br><br>    <span class="hljs-comment">// 使用迭代器遍历</span><br>    <span class="hljs-keyword">for</span> (vector&lt;<span class="hljs-type">int</span>&gt;::iterator it = v.<span class="hljs-built_in">begin</span>(); it != v.<span class="hljs-built_in">end</span>(); ++it) {<br>        cout &lt;&lt; *it &lt;&lt; <span class="hljs-string">" "</span>;<br>    }<br>    cout &lt;&lt; endl;<br><br>    <span class="hljs-comment">// 使用范围 for 循环遍历</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> n : v) {<br>        cout &lt;&lt; n &lt;&lt; <span class="hljs-string">" "</span>;<br>    }<br>    cout &lt;&lt; endl;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+
+
+<h3 id="常用成员函数"><a href="#常用成员函数" class="headerlink" title="常用成员函数"></a>常用成员函数</h3><ul>
+<li><strong>容量管理</strong>：<ul>
+<li><code>size()</code>：返回当前元素数量。</li>
+<li><code>capacity()</code>：返回当前分配的存储空间的容量。</li>
+<li><code>reserve(size_type n)</code>：请求至少能容纳 <code>n</code> 个元素的存储空间。</li>
+<li><code>shrink_to_fit()</code>：减少容量以适应当前大小。</li>
+</ul>
+</li>
+<li><strong>元素访问</strong>：<ul>
+<li><code>operator[]</code>：无边界检查的元素访问。</li>
+<li><code>at(size_type n)</code>：带边界检查的元素访问。</li>
+<li><code>front()</code>：返回第一个元素的引用。</li>
+<li><code>back()</code>：返回最后一个元素的引用。</li>
+</ul>
+</li>
+<li><strong>修改容器</strong>：<ul>
+<li><code>push_back(const T&amp; value)</code>：在末尾插入元素。</li>
+<li><code>pop_back()</code>：删除末尾的元素。</li>
+<li><code>insert(iterator pos, const T&amp; value)</code>：在指定位置插入元素。</li>
+<li><code>erase(iterator pos)</code>：删除指定位置的元素。</li>
+<li><code>clear()</code>：清空容器。</li>
+</ul>
+</li>
+</ul>
 
                 
               </div>
@@ -439,7 +460,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="category-chain-item">动态规划</a>
+  <a href="/categories/vector/" class="category-chain-item">vector</a>
   
   
 
@@ -454,9 +475,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="print-no-link">#动态规划</a>
+        <a href="/tags/STL/" class="print-no-link">#STL</a>
       
-        <a href="/tags/%E8%AE%B0%E5%BF%86%E5%8C%96%E6%90%9C%E7%B4%A2/" class="print-no-link">#记忆化搜索</a>
+        <a href="/tags/vector/" class="print-no-link">#vector</a>
       
     </div>
   
@@ -468,8 +489,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>记忆化搜索</div>
-      <div>http://pikachuxpf.github.io/posts/cb5e0eb8/</div>
+      <div>vector</div>
+      <div>http://pikachuxpf.github.io/posts/1b6e485b/</div>
     </div>
     <div class="license-meta">
       
@@ -481,7 +502,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月20日</div>
+          <div>2024年7月23日</div>
         </div>
       
       
@@ -513,18 +534,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/3006dc10/" title="STL">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">STL</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/9ba26914/" title="树形DP">
-                        <span class="hidden-mobile">树形DP</span>
+                      <a href="/posts/3006dc10/" title="STL">
+                        <span class="hidden-mobile">STL</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
