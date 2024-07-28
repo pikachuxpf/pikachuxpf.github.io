@@ -16,27 +16,26 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="概念STL（标准模板库）中的 queue 是 C++ 中的队列容器。实现了队列的基本功能 $FIFO$。 主要特点 **先进先出 (FIFO)**：queue 是一种先进先出（FIFO）数据结构，元素的插入在队尾进行，元素的移除在队首进行。 底层实现：queue 通常使用双端队列（deque）或链表作为底层实现。 限制操作：只能访问队首元素（front()）、队尾元素（back()），以及执行入队">
+    <meta name="description" content="概念bitset存储二进制数位。 bitset就像一个bool类型的数组一样，但是有空间优化——bitset中的一个元素一般只占1 bit，相当于一个char元素所占空间的八分之一。 主要特点 固定大小：bitset 是一个固定大小的位集合，大小在编译时确定，无法在运行时改变。 位操作：bitset 提供了一组操作符和成员函数，用于高效地进行位操作。 内存紧凑：bitset 使用一个或多个整数来存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="queue">
-<meta property="og:url" content="http://pikachuxpf.github.io/posts/7ffd7f63/index.html">
+<meta property="og:title" content="bitset">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/9dd4d1cb/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="概念STL（标准模板库）中的 queue 是 C++ 中的队列容器。实现了队列的基本功能 $FIFO$。 主要特点 **先进先出 (FIFO)**：queue 是一种先进先出（FIFO）数据结构，元素的插入在队尾进行，元素的移除在队首进行。 底层实现：queue 通常使用双端队列（deque）或链表作为底层实现。 限制操作：只能访问队首元素（front()）、队尾元素（back()），以及执行入队">
+<meta property="og:description" content="概念bitset存储二进制数位。 bitset就像一个bool类型的数组一样，但是有空间优化——bitset中的一个元素一般只占1 bit，相当于一个char元素所占空间的八分之一。 主要特点 固定大小：bitset 是一个固定大小的位集合，大小在编译时确定，无法在运行时改变。 位操作：bitset 提供了一组操作符和成员函数，用于高效地进行位操作。 内存紧凑：bitset 使用一个或多个整数来存">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-23T11:04:51.000Z">
-<meta property="article:modified_time" content="2024-07-23T12:28:03.856Z">
+<meta property="article:published_time" content="2024-07-23T12:27:41.000Z">
+<meta property="article:modified_time" content="2024-07-23T12:31:27.683Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="STL">
-<meta property="article:tag" content="queue">
-<meta property="article:tag" content="队列">
-<meta property="article:tag" content="FIFO">
+<meta property="article:tag" content="bitset">
+<meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>queue - Pikachu_fpx|博客</title>
+  <title>bitset - Pikachu_fpx|博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -319,7 +318,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="queue"></span>
+            <span id="subtitle" data-typed-text="bitset"></span>
           
         </div>
 
@@ -330,7 +329,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-23 19:04" pubdate>
+        <time datetime="2024-07-23 20:27" pubdate>
           2024年7月23日 晚上
         </time>
       </span>
@@ -342,7 +341,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          460 字
+          691 字
         
       </span>
     
@@ -353,7 +352,7 @@
         
         
         
-          4 分钟
+          6 分钟
         
       </span>
     
@@ -399,37 +398,48 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">queue</h1>
+            <h1 id="seo-header">bitset</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>STL（标准模板库）中的 <code>queue</code> 是 C++ 中的队列容器。实现了队列的基本功能 $FIFO$。</p>
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>bitset存储二进制数位。</p>
+<p>bitset就像一个bool类型的数组一样，但是有空间优化——bitset中的一个元素一般只占1 bit，相当于一个char元素所占空间的八分之一。</p>
 <h3 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h3><ol>
-<li>**先进先出 (FIFO)**：<code>queue</code> 是一种先进先出（FIFO）数据结构，元素的插入在队尾进行，元素的移除在队首进行。</li>
-<li><strong>底层实现</strong>：<code>queue</code> 通常使用双端队列（<code>deque</code>）或链表作为底层实现。</li>
-<li><strong>限制操作</strong>：只能访问队首元素（<code>front()</code>）、队尾元素（<code>back()</code>），以及执行入队（<code>push()</code>）和出队（<code>pop()</code>）操作。</li>
+<li><strong>固定大小</strong>：<code>bitset</code> 是一个固定大小的位集合，大小在编译时确定，无法在运行时改变。</li>
+<li><strong>位操作</strong>：<code>bitset</code> 提供了一组操作符和成员函数，用于高效地进行位操作。</li>
+<li><strong>内存紧凑</strong>：<code>bitset</code> 使用一个或多个整数来存储位，因此在内存中非常紧凑。</li>
+<li><strong>位设置</strong>：<code>bitset</code> 允许设置、重置和测试单个位的状态。</li>
 </ol>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="1-创建和初始化"><a href="#1-创建和初始化" class="headerlink" title="1. 创建和初始化"></a>1. 创建和初始化</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    queue&lt;<span class="hljs-type">int</span>&gt; q; <span class="hljs-comment">// 创建一个空的 queue</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="1-创建和初始化"><a href="#1-创建和初始化" class="headerlink" title="1. 创建和初始化"></a>1. 创建和初始化</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bitset&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    bitset&lt;8&gt; b1; <span class="hljs-comment">// 创建一个大小为 8 的 bitset，所有位初始为 0</span><br>    <span class="hljs-function">bitset&lt;8&gt; <span class="hljs-title">b2</span><span class="hljs-params">(<span class="hljs-number">0b10101010</span>)</span></span>; <span class="hljs-comment">// 使用二进制字面值初始化</span><br><br>    cout &lt;&lt; b1 &lt;&lt; endl; <span class="hljs-comment">// 输出: 00000000</span><br>    cout &lt;&lt; b2 &lt;&lt; endl; <span class="hljs-comment">// 输出: 10101010</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="2-位操作"><a href="#2-位操作" class="headerlink" title="2.位操作"></a>2.位操作</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bitset&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-function">bitset&lt;8&gt; <span class="hljs-title">b</span><span class="hljs-params">(<span class="hljs-number">0b10101010</span>)</span></span>;<br><br>    <span class="hljs-comment">// 设置位</span><br>    b.<span class="hljs-built_in">set</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 设置第 1 位为 1</span><br>    b.<span class="hljs-built_in">set</span>(<span class="hljs-number">4</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// 设置第 4 位为 0</span><br><br>    <span class="hljs-comment">// 重置位</span><br>    b.<span class="hljs-built_in">reset</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 将第 1 位重置为 0</span><br><br>    <span class="hljs-comment">// 切换位</span><br>    b.<span class="hljs-built_in">flip</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// 切换第 2 位</span><br><br>    <span class="hljs-comment">// 访问位</span><br>    cout &lt;&lt; <span class="hljs-string">"Bit 2: "</span> &lt;&lt; b[<span class="hljs-number">2</span>] &lt;&lt; endl; <span class="hljs-comment">// 输出: 1</span><br>    cout &lt;&lt; <span class="hljs-string">"Bit 4: "</span> &lt;&lt; b.<span class="hljs-built_in">test</span>(<span class="hljs-number">4</span>) &lt;&lt; endl; <span class="hljs-comment">// 输出: 0</span><br><br>    <span class="hljs-comment">// 输出 bitset</span><br>    cout &lt;&lt; b &lt;&lt; endl; <span class="hljs-comment">// 输出: 10100000</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
 
-<h3 id="2-元素操作"><a href="#2-元素操作" class="headerlink" title="2. 元素操作"></a>2. 元素操作</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br><br>    <span class="hljs-comment">// 入队</span><br>    q.<span class="hljs-built_in">push</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 在队尾插入 1</span><br>    q.<span class="hljs-built_in">push</span>(<span class="hljs-number">2</span>); <span class="hljs-comment">// 在队尾插入 2</span><br>    q.<span class="hljs-built_in">push</span>(<span class="hljs-number">3</span>); <span class="hljs-comment">// 在队尾插入 3</span><br><br>    <span class="hljs-comment">// 访问队首和队尾元素</span><br>    cout &lt;&lt; <span class="hljs-string">"Front: "</span> &lt;&lt; q.<span class="hljs-built_in">front</span>() &lt;&lt; endl; <span class="hljs-comment">// 输出队首元素 1</span><br>    cout &lt;&lt; <span class="hljs-string">"Back: "</span> &lt;&lt; q.<span class="hljs-built_in">back</span>() &lt;&lt; endl;   <span class="hljs-comment">// 输出队尾元素 3</span><br><br>    <span class="hljs-comment">// 出队</span><br>    q.<span class="hljs-built_in">pop</span>(); <span class="hljs-comment">// 删除队首元素 1</span><br><br>    <span class="hljs-comment">// 访问修改后的队首和队尾元素</span><br>    cout &lt;&lt; <span class="hljs-string">"Front: "</span> &lt;&lt; q.<span class="hljs-built_in">front</span>() &lt;&lt; endl; <span class="hljs-comment">// 输出新的队首元素 2</span><br>    cout &lt;&lt; <span class="hljs-string">"Back: "</span> &lt;&lt; q.<span class="hljs-built_in">back</span>() &lt;&lt; endl;   <span class="hljs-comment">// 输出队尾元素 3</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="3-队列状态"><a href="#3-队列状态" class="headerlink" title="3. 队列状态"></a>3. 队列状态</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    queue&lt;<span class="hljs-type">int</span>&gt; q;<br><br>    <span class="hljs-comment">// 检查队列是否为空</span><br>    <span class="hljs-keyword">if</span> (q.<span class="hljs-built_in">empty</span>()) {<br>        cout &lt;&lt; <span class="hljs-string">"Queue is empty."</span> &lt;&lt; endl;<br>    }<br><br>    <span class="hljs-comment">// 入队</span><br>    q.<span class="hljs-built_in">push</span>(<span class="hljs-number">1</span>);<br><br>    <span class="hljs-comment">// 检查队列大小</span><br>    cout &lt;&lt; <span class="hljs-string">"Size: "</span> &lt;&lt; q.<span class="hljs-built_in">size</span>() &lt;&lt; endl; <span class="hljs-comment">// 输出队列的大小</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="3-其他操作"><a href="#3-其他操作" class="headerlink" title="3. 其他操作"></a>3. 其他操作</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bitset&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-function">bitset&lt;8&gt; <span class="hljs-title">b1</span><span class="hljs-params">(<span class="hljs-number">0b10101010</span>)</span></span>;<br>    <span class="hljs-function">bitset&lt;8&gt; <span class="hljs-title">b2</span><span class="hljs-params">(<span class="hljs-number">0b11001100</span>)</span></span>;<br><br>    <span class="hljs-comment">// 位与运算</span><br>    bitset&lt;8&gt; b3 = b1 &amp; b2; <span class="hljs-comment">// 位与</span><br>    cout &lt;&lt; <span class="hljs-string">"b1 &amp; b2: "</span> &lt;&lt; b3 &lt;&lt; endl; <span class="hljs-comment">// 输出: 10001000</span><br><br>    <span class="hljs-comment">// 位或运算</span><br>    bitset&lt;8&gt; b4 = b1 | b2; <span class="hljs-comment">// 位或</span><br>    cout &lt;&lt; <span class="hljs-string">"b1 | b2: "</span> &lt;&lt; b4 &lt;&lt; endl; <span class="hljs-comment">// 输出: 11101110</span><br><br>    <span class="hljs-comment">// 位异或运算</span><br>    bitset&lt;8&gt; b5 = b1 ^ b2; <span class="hljs-comment">// 位异或</span><br>    cout &lt;&lt; <span class="hljs-string">"b1 ^ b2: "</span> &lt;&lt; b5 &lt;&lt; endl; <span class="hljs-comment">// 输出: 01100110</span><br><br>    <span class="hljs-comment">// 位非运算</span><br>    bitset&lt;8&gt; b6 = ~b1; <span class="hljs-comment">// 位非</span><br>    cout &lt;&lt; <span class="hljs-string">"~b1: "</span> &lt;&lt; b6 &lt;&lt; endl; <span class="hljs-comment">// 输出: 01010101</span><br><br>    <span class="hljs-comment">// 计数位</span><br>    cout &lt;&lt; <span class="hljs-string">"Number of 1s in b1: "</span> &lt;&lt; b1.<span class="hljs-built_in">count</span>() &lt;&lt; endl; <span class="hljs-comment">// 输出: 4</span><br><br>    <span class="hljs-comment">// 转换为字符串</span><br>    string str = b1.<span class="hljs-built_in">to_string</span>();<br>    cout &lt;&lt; <span class="hljs-string">"b1 as string: "</span> &lt;&lt; str &lt;&lt; endl; <span class="hljs-comment">// 输出: 10101010</span><br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br><br></code></pre></td></tr></tbody></table></figure>
 
 
 <h3 id="常用成员函数"><a href="#常用成员函数" class="headerlink" title="常用成员函数"></a>常用成员函数</h3><ul>
-<li><p><strong>元素操作</strong>：</p>
+<li><p><strong>位操作</strong>：</p>
 <ul>
-<li><code>push(const T&amp; value)</code>：在队尾插入一个元素。</li>
-<li><code>pop()</code>：移除队首元素。</li>
-<li><code>front()</code>：返回队首元素的引用。</li>
-<li><code>back()</code>：返回队尾元素的引用。</li>
+<li><code>set(size_t pos, bool value = true)</code>：设置指定位置的位为 <code>value</code>（默认 <code>true</code>）。</li>
+<li><code>reset(size_t pos)</code>：将指定位置的位重置为 <code>0</code>。</li>
+<li><code>flip(size_t pos)</code>：切换指定位置的位（<code>0</code> 变为 <code>1</code>，<code>1</code> 变为 <code>0</code>）。</li>
+<li><code>test(size_t pos)</code>：测试指定位置的位，返回 <code>true</code> 如果该位为 <code>1</code>，否则返回 <code>false</code>。</li>
 </ul>
 </li>
-<li><p><strong>状态检查</strong>：</p>
+<li><p><strong>访问和查询</strong>：</p>
 <ul>
-<li><code>empty()</code>：检查队列是否为空，返回布尔值。</li>
-<li><code>size()</code>：返回队列中元素的数量。</li>
+<li><code>operator[]</code>：访问指定位置的位（返回 <code>bool</code>）。</li>
+<li><code>count()</code>：返回 <code>1</code> 的数量，即设置为 <code>1</code> 的位的数量。</li>
+<li><code>size()</code>：返回 <code>bitset</code> 的大小（位的总数）。</li>
+<li><code>to_string()</code>：返回 <code>bitset</code> 的字符串表示形式。</li>
+</ul>
+</li>
+<li><p><strong>位运算</strong>：</p>
+<ul>
+<li><code>operator&amp;</code>：位与运算。</li>
+<li><code>operator|</code>：位或运算。</li>
+<li><code>operator^</code>：位异或运算。</li>
+<li><code>operator~</code>：位非运算。</li>
 </ul>
 </li>
 </ul>
@@ -468,11 +478,9 @@
       
         <a href="/tags/STL/" class="print-no-link">#STL</a>
       
-        <a href="/tags/queue/" class="print-no-link">#queue</a>
+        <a href="/tags/bitset/" class="print-no-link">#bitset</a>
       
-        <a href="/tags/%E9%98%9F%E5%88%97/" class="print-no-link">#队列</a>
-      
-        <a href="/tags/FIFO/" class="print-no-link">#FIFO</a>
+        <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" class="print-no-link">#二进制</a>
       
     </div>
   
@@ -484,8 +492,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>queue</div>
-      <div>http://pikachuxpf.github.io/posts/7ffd7f63/</div>
+      <div>bitset</div>
+      <div>http://pikachuxpf.github.io/posts/9dd4d1cb/</div>
     </div>
     <div class="license-meta">
       
@@ -529,9 +537,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/41a87b6a/" title="stack">
+                      <a href="/posts/8893d943/" title="线段树">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">stack</span>
+                        <span class="hidden-mobile">线段树</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -539,8 +547,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/1b6e485b/" title="vector">
-                        <span class="hidden-mobile">vector</span>
+                      <a href="/posts/9ebeb2a9/" title="string">
+                        <span class="hidden-mobile">string</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
