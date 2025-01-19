@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pikachu_fpx">
+  <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
+  
+    <meta name="description" content="树状数组说明普通树状数组维护的信息及运算要满足&nbsp;结合律&nbsp;且&nbsp;可差分，如加法（和）、乘法（积）、异或等。需要注意的是:  模意义下的乘法若要可差分，需保证每个数都存在逆元（模数为质数时一定存在）； 例如$gcd,max$ 这些信息不可差分，所以不能用普通树状数组处理,但是 使用两个树状数组可以用于处理区间最值,详情见volume9.pdf (te.lv) 对于不可差分的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树状数组">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/59a0de58/index.html">
+<meta property="og:site_name" content="Pikachu_fpx|博客">
+<meta property="og:description" content="树状数组说明普通树状数组维护的信息及运算要满足&nbsp;结合律&nbsp;且&nbsp;可差分，如加法（和）、乘法（积）、异或等。需要注意的是:  模意义下的乘法若要可差分，需保证每个数都存在逆元（模数为质数时一定存在）； 例如$gcd,max$ 这些信息不可差分，所以不能用普通树状数组处理,但是 使用两个树状数组可以用于处理区间最值,详情见volume9.pdf (te.lv) 对于不可差分的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f304cc9f345e8d03ec5fb1.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f305a49f345e8d03f27999.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f305d29f345e8d03f3ebf0.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f307c29f345e8d03008863.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f3084d9f345e8d03047aac.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f309899f345e8d030c4103.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65f7d7c99f345e8d038289bb.png">
+<meta property="article:published_time" content="2024-03-14T13:25:13.000Z">
+<meta property="article:modified_time" content="2024-07-29T08:44:58.633Z">
+<meta property="article:author" content="Pikachu_fpx">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="树状数组">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/65f304cc9f345e8d03ec5fb1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>树状数组 - Pikachu_fpx|博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pikachuxpf.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pikachu_fpx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-brush"></i>
+                <span>文章</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/" target="_self">
+                    <i class="iconfont icon-archive-fill"></i>
+                    <span>归档</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/" target="_self">
+                    <i class="iconfont icon-category-fill"></i>
+                    <span>分类</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/" target="_self">
+                    <i class="iconfont icon-tags-fill"></i>
+                    <span>标签</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/navigate/" target="_self">
+                    <i class="iconfont icon-books"></i>
+                    <span>导航</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/about/" target="_self">
+                    <i class="iconfont icon-addrcard"></i>
+                    <span>站长</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/contact/" target="_self">
+                    <i class="iconfont icon-comment"></i>
+                    <span>留言板</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-switch-fill"></i>
+                <span>游戏</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mf" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>魔方</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/sl" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>扫雷</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/2048" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>2048</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/wzq" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>五子棋</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/txz" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>推箱子</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="树状数组"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-14 21:25" pubdate>
+          2024年3月14日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">树状数组</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h2><h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>普通树状数组维护的信息及运算要满足&nbsp;<strong>结合律</strong>&nbsp;且&nbsp;<strong>可差分</strong>，如加法（和）、乘法（积）、异或等。<br>需要注意的是:</p>
+<ul>
+<li>模意义下的乘法若要可差分，需保证每个数都存在逆元（模数为质数时一定存在）；</li>
+<li>例如$gcd,max$ 这些信息不可差分，所以不能用普通树状数组处理,但是<ul>
+<li>使用两个树状数组可以用于处理区间最值,详情见<a target="_blank" rel="noopener" href="https://ioi.te.lv/oi/files/volume9.pdf#page=41">volume9.pdf (te.lv)</a></li>
+<li>对于不可差分的信息查询，有一种$Olog(^2n)$的拓展树状数组</li>
+</ul>
+</li>
+</ul>
+<p>事实上，树状数组能解决的问题是线段树能解决的问题的子集：树状数组能做的，线段树一定能做；线段树能做的，树状数组不一定可以。然而，树状数组的代码要远比线段树短，时间效率常数也更小，因此仍有学习价值。</p>
+<h3 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h3><h4 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h4><a href="/posts/37060/" title="前缀和与差分">前缀和与差分</a>
+<h4 id="lowbit"><a href="#lowbit" class="headerlink" title="lowbit"></a>lowbit</h4><p>lowbit函数会求出一个二进制数字的最低位代表的那个数字</p>
+<p>这是20的二进制 :$0010100$<br>而要获取最低的 $0000100$ 可以取反再加一变成 $1101100$ 之后再 进行按位与操作即可得到0010100 &amp;  1101100 = 0000100<br>因为在计算机中有补码的存在所以取反加1其实就是对应的负数，所以lowbit函数的写法即为:</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lowbit</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>{<br>	<span class="hljs-keyword">return</span> x &amp; -x;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h3><p>给出一个长度为n的数组，完成以下两种操作</p>
+<ul>
+<li>将第x个数加上k</li>
+<li>输出区间<code>[l,r]</code>内每个数的和</li>
+</ul>
+<h4 id="朴素做法"><a href="#朴素做法" class="headerlink" title="朴素做法"></a>朴素做法</h4><p>朴素做法单点修改的时间复杂度是 $O(1)$ ,但是查询区间和的时间复杂度是 $O(n)$ 所以如果有 $n$ 次询问的话，时间复杂度为 $O(n^2)$ 。</p>
+<h4 id="前缀和做法"><a href="#前缀和做法" class="headerlink" title="前缀和做法"></a>前缀和做法</h4><p>前缀和做法在查询区间和的时间复杂度是 $O(1)$ ,但是因为需要单点修改，导致修改一次就需要重新预处理一次，时间复杂度为 $O(n)$ 所以如果有n次修改，同样时间复杂度为 $O(n^2)$</p>
+<h4 id="树状数组介绍"><a href="#树状数组介绍" class="headerlink" title="树状数组介绍"></a>树状数组介绍</h4><p>而树状数组这一数据结构，可以很好解决这个问题，它在修改和查询上时间复杂度都为 $O(logn)$ 所以n次询问也仅仅只有 $O(nlogn)$ 。一般在 $10^6$的数据规模下使用。</p>
+<h3 id="推导过程"><a href="#推导过程" class="headerlink" title="推导过程"></a>推导过程</h3><p>假如数组目前是为当前这个状态:<br><img src="https://pic.imgdb.cn/item/65f304cc9f345e8d03ec5fb1.png" srcset="/img/loading.gif" lazyload alt="img"><br>如果朴素做法是很慢的，我们可能会想到一个优化，即为让它们两两求和，保存起来，这样在求和的时候可以节约一半的时间，修改数据的时候也只是会多修改一个数字而已:<br><img src="https://pic.imgdb.cn/item/65f305a49f345e8d03f27999.png" srcset="/img/loading.gif" lazyload alt="img"><br>以此类推，我们可以得到这样的一张图:<br><img src="https://pic.imgdb.cn/item/65f305d29f345e8d03f3ebf0.png" srcset="/img/loading.gif" lazyload alt="img"><br>这样我们在求前缀和的时候可以很简单的利用这些额外的速度快速的求出来，也是所谓的空间换时间了，但是通过观察我们可以发现表当中有一些数据是没有用的，或者说不是必须的。比如第二行的第一个5，我们在计算 $[3,4]$的区间和的时候，可以用 $19 - 14$ 来计算。所有层的第偶数个数字都是没用的，即使去掉也不影响:<br><img src="https://pic.imgdb.cn/item/65f307c29f345e8d03008863.png" srcset="/img/loading.gif" lazyload alt="img"><br>然后观察剩下的数，可以发现正好有 $n$ 个，所以我们可以把这些数按照最靠右的位置放进一个数组,称为b数组:</p>
+<p><img src="https://pic.imgdb.cn/item/65f3084d9f345e8d03047aac.png" srcset="/img/loading.gif" lazyload alt="img"><br>所以在求前缀和时，我们只需要找到对应的几个区间，把这些区间相加即可找到答案。<br>修改某个数据时，我们也只需要向上找到包含它的区间进行修改即可。</p>
+<p>我们把每行的区间长度列出来，并观察其下标的$lowbit$ 可以发现是相同的:<br><img src="https://pic.imgdb.cn/item/65f309899f345e8d030c4103.png" srcset="/img/loading.gif" lazyload alt="img"><br>例如 <code>b[12]</code>，长度正好为lowbit(12) -&gt; bin(1100)</p>
+<p>如果我们要计算前14个元素的和，可以得到lowbit(14) = 12,所以就可以通过计算前12个的和，然后再加上<code>b[14]</code>就好了。</p>
+<p>还有一个性质即为 序列<code>b[i]</code> 正上方的序列，正好就是 <code>b[i + lowbit(i) ]</code>,所以我们在修改某一个位置的时候，就可以通过这个性质找到上方的序列，并进行修改。</p>
+<p>这样我们便能很简单的写出查询和修改的代码:</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span><span class="hljs-comment">//查询x的前缀和</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x; x -= <span class="hljs-built_in">lowbit</span>(x))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ans += b[x];<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> ans;<br>&nbsp; &nbsp; }<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{ <span class="hljs-comment">// 区间查询</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> <span class="hljs-built_in">ask</span>(y) - <span class="hljs-built_in">ask</span>(x - <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; }<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> k)</span><span class="hljs-comment">//在x位置上加上k</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x &lt;= n; x += <span class="hljs-built_in">lowbit</span>(x))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; b[x] += k;<br>&nbsp; &nbsp; }<br><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><h4 id="区间修改-单点查询"><a href="#区间修改-单点查询" class="headerlink" title="区间修改|单点查询"></a>区间修改|单点查询</h4><p>普通的树状数组可以实现</p>
+<ul>
+<li>区间查询</li>
+<li>单点修改<br>但是想要可以区间修改和单点查询该怎么办，我们可以利用差分来做，因为差分是前缀和的逆运算。<br>所以我们要是维护的是一个差分数组，这样对单点修改就等同于对区间修改，同样的查询前缀和的时候也等同于查单点的原数据。</li>
+</ul>
+<h5 id="单点查询"><a href="#单点查询" class="headerlink" title="单点查询"></a>单点查询</h5><p>设原数组为<code>a[i]</code>,设的<code>d[i] = a[i] - a[i-1] (a[0] = 0)</code> ，则$a[i] = \sum_{j = 1}^{i}d[j]$ ,可以通过<code>d[i]</code>的前缀和查询。</p>
+<h5 id="区间修改"><a href="#区间修改" class="headerlink" title="区间修改"></a>区间修改</h5><p>当给区间<code>[l,r]</code>加上<code>x</code>的时候，<code>a[l]</code>与前一个元素<code>a[l-1]</code>增加了 $x$ ,<code>a[r + 1]</code> 与 <code>a[r]</code>的差减少了$x$。根据<code>d[i]</code>数组的定义，只需要给<code>d[l]</code>加上$x$，给<code>d[r+1]</code>减去$x$,即可。</p>
+<p>所以便有了单点查询和区间修改:</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x &lt;= n; x += x &amp; -x)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w[x] += k;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>{ <span class="hljs-comment">// 区间修改</span><br>&nbsp; &nbsp; <span class="hljs-built_in">add</span>(x, k), <span class="hljs-built_in">add</span>(y, -k);<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>{<br>&nbsp; &nbsp; <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>&nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x; x -= x &amp; -x)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp;ans += w[x];<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-keyword">return</span> ans;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h4 id="区间修改-区间查询"><a href="#区间修改-区间查询" class="headerlink" title="区间修改|区间查询"></a>区间修改|区间查询</h4><p>这是最常见的部分，也是线段树写着最麻烦的部分，但是我们可以用树状数组实现。<br>我们基于上面差分的思路，考虑一下如何构建前缀和。</p>
+<ul>
+<li>$a_1 = d_1$</li>
+<li>$a_2 = d_1 + d_2$</li>
+<li>$a_3 = d_1 + d_2 + d_3$</li>
+<li>$a_4 = d_1 + d_2 + d_3 + d_4$</li>
+<li>$a_n = d_1 + d_2 + … + d_{n-1} +d_n$<br>观察原数组$a$而言，单点查询就是$d$数组的前缀和。<br>我们可以把这个表补全变成<br><img src="https://pic.imgdb.cn/item/65f7d7c99f345e8d038289bb.png" srcset="/img/loading.gif" lazyload alt="img"><br>设$s_n$为$a_n$的前缀和:$$s_n = \sum_{i = 1}^{n}d_i * (n + 1) - \sum_{i=1}^{n}i*d_i$$<br>所以我们需要额外维护一个树状数组$i * d_i$ 这样使用两个树状数组就可以实现区间查询了，区间修改的话，就和使用差分的思路的时候是一样的。<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">i64 <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(tr1, x) * (x + <span class="hljs-number">1</span>) - <span class="hljs-built_in">sum</span>(tr2, x);<br>&nbsp; &nbsp; }<br></code></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="二维树状数组"><a href="#二维树状数组" class="headerlink" title="二维树状数组"></a>二维树状数组</h3><p> 二维树状数组，也被称作树状数组套树状数组，用来维护二维数组上的单点修改和前缀信息问题。<br> 这里暂时只给出封装模板<br> 
+    </p><div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-05eef982" role="button" aria-expanded="false" aria-controls="collapse-05eef982">
+        <div class="fold-arrow">▶</div>代码
+      </div>
+      <div class="fold-collapse collapse" id="collapse-05eef982">
+        <div class="fold-content">
+          <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><code class="hljs c++"> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BIT_2D</span> {<br>    <span class="hljs-type">int</span> n, m;<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; b1, b2, b3, b4;<br>    <br>    <span class="hljs-built_in">BIT_2D</span>(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> m) : <span class="hljs-built_in">n</span>(n), <span class="hljs-built_in">m</span>(m) {<br>        b1.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(m + <span class="hljs-number">1</span>));<br>        b2.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(m + <span class="hljs-number">1</span>));<br>        b3.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(m + <span class="hljs-number">1</span>));<br>        b4.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(m + <span class="hljs-number">1</span>));<br>    }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">auto</span> &amp;w, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span> </span>{ <span class="hljs-comment">// 单点修改</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = x; i &lt;= n; i += i &amp; -i) {<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = y; j &lt;= m; j += j &amp; -j) {<br>                w[i][j] += k;<br>            }<br>        }<br>    }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span> </span>{ <br>        <span class="hljs-built_in">add</span>(b1, x, y, k);<br>        <span class="hljs-built_in">add</span>(b2, x, y, k * (x - <span class="hljs-number">1</span>));<br>        <span class="hljs-built_in">add</span>(b3, x, y, k * (y - <span class="hljs-number">1</span>));<br>        <span class="hljs-built_in">add</span>(b4, x, y, k * (x - <span class="hljs-number">1</span>) * (y - <span class="hljs-number">1</span>));<br>    }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> X, <span class="hljs-type">int</span> Y, <span class="hljs-type">int</span> k)</span> </span>{ <span class="hljs-comment">// 区块修改：二维差分</span><br>        X++, Y++;<br>        <span class="hljs-built_in">add</span>(x, y, k), <span class="hljs-built_in">add</span>(X, y, -k);<br>        <span class="hljs-built_in">add</span>(X, Y, k), <span class="hljs-built_in">add</span>(x, Y, -k);<br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-keyword">auto</span> &amp;w, <span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <span class="hljs-comment">// 单点查询</span><br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = x; i; i -= i &amp; -i) {<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = y; j; j -= j &amp; -j) {<br>                ans += w[i][j];<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> ans;<br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <br>        <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>        ans += x * y * <span class="hljs-built_in">ask</span>(b1, x, y);<br>        ans -= y * <span class="hljs-built_in">ask</span>(b2, x, y);<br>        ans -= x * <span class="hljs-built_in">ask</span>(b3, x, y);<br>        ans += <span class="hljs-built_in">ask</span>(b4, x, y);<br>        <span class="hljs-keyword">return</span> ans;<br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> X, <span class="hljs-type">int</span> Y)</span> </span>{ <span class="hljs-comment">// 区块查询：二维前缀和</span><br>        x--, y--;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">ask</span>(X, Y) - <span class="hljs-built_in">ask</span>(x, Y) - <span class="hljs-built_in">ask</span>(X, y) + <span class="hljs-built_in">ask</span>(x, y);<br>    }<br>};<br><br></code></pre></td></tr></tbody></table></figure>
+        </div>
+      </div>
+    </div><p></p>
+<h3 id="封装代码"><a href="#封装代码" class="headerlink" title="封装代码"></a>封装代码</h3><h4 id="基础封装"><a href="#基础封装" class="headerlink" title="基础封装"></a>基础封装</h4>
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-90469042" role="button" aria-expanded="false" aria-controls="collapse-90469042">
+        <div class="fold-arrow">▶</div>代码
+      </div>
+      <div class="fold-collapse collapse" id="collapse-90469042">
+        <div class="fold-content">
+          <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">BIT</span><br>{<br>&nbsp; &nbsp; <span class="hljs-type">int</span> n;<br>&nbsp; &nbsp; vector&lt;<span class="hljs-type">int</span>&gt; w;<br>&nbsp; &nbsp; <span class="hljs-built_in">BIT</span>(<span class="hljs-type">int</span> n)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">this</span>-&gt;n = n; <span class="hljs-comment">// 这里必须写 n ，否则会RE</span><br>&nbsp; &nbsp; &nbsp; &nbsp; w.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x &lt;= n; x += x &amp; -x)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w[x] += k;<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br><br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{ <span class="hljs-comment">// 区间修改</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-built_in">add</span>(x, k), <span class="hljs-built_in">add</span>(y, -k);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x; x -= x &amp; -x)<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ans += w[x];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> ans;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{ <span class="hljs-comment">// 区间查询</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> <span class="hljs-built_in">ask</span>(y) - <span class="hljs-built_in">ask</span>(x - <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; }<br>};<br></code></pre></td></tr></tbody></table></figure>
+        </div>
+      </div>
+    </div>
+<h4 id="升级封装"><a href="#升级封装" class="headerlink" title="升级封装"></a>升级封装</h4><p>支持区间修改，区间求和，单点修改，单点查询。</p>
+
+    <div class="fold">
+      <div class="fold-title fold-default collapsed" data-toggle="collapse" href="#collapse-ee3b64fe" role="button" aria-expanded="false" aria-controls="collapse-ee3b64fe">
+        <div class="fold-arrow">▶</div>代码
+      </div>
+      <div class="fold-collapse collapse" id="collapse-ee3b64fe">
+        <div class="fold-content">
+          <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">S_BIT</span><br>{<br><span class="hljs-keyword">private</span>:<br>&nbsp; &nbsp; <span class="hljs-type">int</span> n;<br>&nbsp; &nbsp; vector&lt;i64&gt; tr1, tr2;<br>&nbsp; &nbsp; <span class="hljs-function">i64 <span class="hljs-title">lowbit</span><span class="hljs-params">(i64 x)</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> x &amp; -x;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-type">void</span> __add(vector&lt;i64&gt; &amp;tr, <span class="hljs-type">int</span> x, i64 k)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x &lt;= n; x += <span class="hljs-built_in">lowbit</span>(x))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tr[x] += k;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; i64 __ask(<span class="hljs-type">const</span> vector&lt;i64&gt; &amp;tr, <span class="hljs-type">int</span> x)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; i64 res = <span class="hljs-number">0</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (; x; x -= <span class="hljs-built_in">lowbit</span>(x))<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; res += tr[x];<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> res;<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; i64 __sum(<span class="hljs-type">int</span> x)<br>&nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> __ask(tr1, x) * (x + <span class="hljs-number">1</span>) - __ask(tr2, x);<br>&nbsp; &nbsp; }<br><span class="hljs-keyword">public</span>:<br>&nbsp; &nbsp; <span class="hljs-built_in">S_BIT</span>(<span class="hljs-type">int</span> size) : <span class="hljs-built_in">n</span>(size), <span class="hljs-built_in">tr1</span>(size + <span class="hljs-number">1</span>), <span class="hljs-built_in">tr2</span>(size + <span class="hljs-number">1</span>) {}<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; tr1.<span class="hljs-built_in">clear</span>();<br>&nbsp; &nbsp; &nbsp; &nbsp; tr2.<span class="hljs-built_in">clear</span>();<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function">i64 <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span><span class="hljs-comment">//区间查询</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> __sum(r) - __sum(l - <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function">i64 <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span><span class="hljs-comment">//单点查询</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> <span class="hljs-built_in">ask</span>(x, x);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y, i64 v)</span><span class="hljs-comment">//区间修改，注意差分</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; __add(tr1, x, v);<br>&nbsp; &nbsp; &nbsp; &nbsp; __add(tr1, y, -v);<br>&nbsp; &nbsp; &nbsp; &nbsp; __add(tr2, x, v * x);<br>&nbsp; &nbsp; &nbsp; &nbsp; __add(tr2, y, -v * y);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, i64 v)</span><span class="hljs-comment">//单点修改</span></span><br><span class="hljs-function">&nbsp; &nbsp; </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-built_in">add</span>(x, x+<span class="hljs-number">1</span>, v);<br>&nbsp; &nbsp; }<br>};<br></code></pre></td></tr></tbody></table></figure>
+        </div>
+      </div>
+    </div>
+
+<h3 id="练习题目"><a href="#练习题目" class="headerlink" title="练习题目"></a>练习题目</h3><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3374">P3374 【模板】树状数组 1 </a> 模板题<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3368">P3368 【模板】树状数组 2 </a> 区间修改，单点查询，维护差分模板题<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5057">P5057 [CQOI2006] 简单题</a>区间修改，单点查询，维护差分模板题<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2068">P2068 统计和</a>模板题，记得long long<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4939">P4939 Agent2</a>区间修改，单点查询，维护差分模板题<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2357">P2357 守墓人</a> 全操作<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1972">P1972 [SDOI2009] HH的项链</a>区间种类个数</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
+      
+        <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" class="print-no-link">#树状数组</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>树状数组</div>
+      <div>http://pikachuxpf.github.io/posts/59a0de58/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Pikachu_fpx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/2cc2fa98/" title="算法模板">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法模板</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/3381e20e/" title="日期处理">
+                        <span class="hidden-mobile">日期处理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Rjih7aBqv1ZW8JgZiFBsJzuk-gzGzoHsz","appKey":"F5fwt2lwKNyzapnxxRJAbqkO","path":"window.location.pathname","placeholder":"不放弃是成为冠军的第一步！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"master":"BA59504112EBCADA44D1FDAB43CB9214"},
+          {
+            el: "#valine",
+            path: window.location.pathname,
+            master: "BA59504112EBCADA44D1FDAB43CB9214",
+            tagMeta: ["博主","友人","访客"],
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/pikachuxpf" target="_blank" rel="nofollow noopener"><span>fpx</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Lines -->
+  <script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

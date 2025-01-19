@@ -1,0 +1,961 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pikachu_fpx">
+  <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
+  
+    <meta name="description" content="图的概念图论是离散数学的一个分支，致力于研究图（Graph）这一数学结构。图是用来模拟对象之间成对关系的工具，由节点或顶点（Vertex）以及连接这些顶点的边（Edge）组成。 下面这张图片就是一个图$G(V,E)$图可以被表示为 $G&#x3D;(V, E)，其中 V&#x3D;(v_1, … , v_N)，E&#x3D; (e_1, … , e_M)$。 其中$V$代表点集，$E$为边集。需要注意的是，图的顶点集合不能为空">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论基础">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/eadfe50d/index.html">
+<meta property="og:site_name" content="Pikachu_fpx|博客">
+<meta property="og:description" content="图的概念图论是离散数学的一个分支，致力于研究图（Graph）这一数学结构。图是用来模拟对象之间成对关系的工具，由节点或顶点（Vertex）以及连接这些顶点的边（Edge）组成。 下面这张图片就是一个图$G(V,E)$图可以被表示为 $G&#x3D;(V, E)，其中 V&#x3D;(v_1, … , v_N)，E&#x3D; (e_1, … , e_M)$。 其中$V$代表点集，$E$为边集。需要注意的是，图的顶点集合不能为空">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://pikachuxpf.github.io/img/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/2.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa6f45871b83018a18cca2.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa6f71871b83018a199c49.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa6f71871b83018a199c49.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa6f45871b83018a18cca2.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa6f87871b83018a1a051c.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa6fb0871b83018a1ac811.png">
+<meta property="article:published_time" content="2024-01-15T06:45:11.000Z">
+<meta property="article:modified_time" content="2024-01-19T12:48:52.673Z">
+<meta property="article:author" content="Pikachu_fpx">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="图论基础">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://pikachuxpf.github.io/img/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/2.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>图论基础 - Pikachu_fpx|博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pikachuxpf.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pikachu_fpx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-brush"></i>
+                <span>文章</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/" target="_self">
+                    <i class="iconfont icon-archive-fill"></i>
+                    <span>归档</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/" target="_self">
+                    <i class="iconfont icon-category-fill"></i>
+                    <span>分类</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/" target="_self">
+                    <i class="iconfont icon-tags-fill"></i>
+                    <span>标签</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/navigate/" target="_self">
+                    <i class="iconfont icon-books"></i>
+                    <span>导航</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/about/" target="_self">
+                    <i class="iconfont icon-addrcard"></i>
+                    <span>站长</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/contact/" target="_self">
+                    <i class="iconfont icon-comment"></i>
+                    <span>留言板</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-switch-fill"></i>
+                <span>游戏</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mf" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>魔方</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/sl" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>扫雷</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/2048" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>2048</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/wzq" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>五子棋</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/txz" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>推箱子</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="图论基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-15 14:45" pubdate>
+          2024年1月15日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">图论基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="图的概念"><a href="#图的概念" class="headerlink" title="图的概念"></a>图的概念</h2><p>图论是离散数学的一个分支，致力于研究图（Graph）这一数学结构。图是用来模拟对象之间成对关系的工具，由节点或顶点（Vertex）以及连接这些顶点的边（Edge）组成。</p>
+<p>下面这张图片就是一个图$G(V,E)$<br><img src="/img/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/2.png" srcset="/img/loading.gif" lazyload alt="img"><br>图可以被表示为 $G=(V, E)，其中 V=(v_1, … , v_N)，E= (e_1, … , e_M)$。</p>
+<p>其中$V$代表<strong>点集</strong>，$E$为<strong>边集</strong>。<br>需要注意的是，图的顶点集合不能为空，但边的集合可以为空。<br>我们常用$n$来代表顶点的数量,$m$代表边的数量。</p>
+<h2 id="图的分类"><a href="#图的分类" class="headerlink" title="图的分类"></a>图的分类</h2><h3 id="按点边数量分"><a href="#按点边数量分" class="headerlink" title="按点边数量分"></a>按点边数量分</h3><p>根据点和边的数量来分可以分为:</p>
+<ul>
+<li>稀疏图</li>
+<li>稠密图</li>
+<li>零图<br>一般$m &lt; nlogn$我们就认为这个图是稀疏图，否则是稠密图。简单来说就是 边少点多 即为稀疏图，反之则为稠密图。零图就是这张图的边集为空，即只有顶点的图。</li>
+</ul>
+<h3 id="边的分类"><a href="#边的分类" class="headerlink" title="边的分类"></a>边的分类</h3><p>边分为:</p>
+<ul>
+<li>无向边</li>
+<li>有向边<br>顾名思义，有向边就是带有方向的边，无向边就是不带有方向的边。</li>
+</ul>
+<p>无向边相当于两条在相同的两个节点之间，方向不同的边。也就是a -&gt; b &amp; b -&gt; a。</p>
+<h3 id="按边有无向分"><a href="#按边有无向分" class="headerlink" title="按边有无向分"></a>按边有无向分</h3><p>首先边有向的就是 有向图，无向即为无向图。</p>
+<ul>
+<li>有向图</li>
+<li>无向图<br><img src="https://pic.imgdb.cn/item/65aa6f45871b83018a18cca2.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="https://pic.imgdb.cn/item/65aa6f71871b83018a199c49.png" srcset="/img/loading.gif" lazyload alt="img"></li>
+</ul>
+<p>其中如果无向图任意一对顶点之间都有边连接，也就是有$<br>\frac{n \cdot (n - 1)}{2}<br>$<br>条不重复的边,称为<strong>完全图</strong>,类似的，有向图任意一对顶点$[u,v]$之间都有两条有向边$(u,v),(v,u)$连接,称为<strong>有向完全图</strong>。</p>
+<h2 id="度"><a href="#度" class="headerlink" title="度"></a>度</h2><h3 id="无向图的度"><a href="#无向图的度" class="headerlink" title="无向图的度"></a>无向图的度</h3><p>在无向图中,顶点的度是指某个顶点连出的边数。<br>例如下图，顶点4的度数为3,顶点1的度数为2。<br>在代码中度数一般用数组$d[i]$表示，表示顶点$i$的度数。<br><img src="https://pic.imgdb.cn/item/65aa6f71871b83018a199c49.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="有向图的度"><a href="#有向图的度" class="headerlink" title="有向图的度"></a>有向图的度</h3><p>在有向图中，度分为两种:</p>
+<ul>
+<li>入度</li>
+<li>出度<br>入度是指以该顶点为终点的有向边的数量,<br>出度是指以该顶点为起点的有向边的数量。<br>例如下图,顶点$4$的出度数量为$1$,入度为$2$。<br><img src="https://pic.imgdb.cn/item/65aa6f45871b83018a18cca2.png" srcset="/img/loading.gif" lazyload alt="img"></li>
+</ul>
+<h3 id="度的性质"><a href="#度的性质" class="headerlink" title="度的性质"></a>度的性质</h3><p>在有向图和无向图中，顶点的度数为边数的两倍。<br>在有向图中，入度数=出度数</p>
+<h2 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h2><h3 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h3><p>邻接矩阵是一种图的存储结构，它通过使用一维数组来表示每个顶点，并将边的信息存储在二维数组中，以矩阵的形式展现图中各顶点之间的邻接关系。简而言之，邻接矩阵以一种紧凑而清晰的方式描述了图的结构，其中每个顶点通过矩阵中的行和列相互关联。<br>对于有$n$个顶点的图 $G=(V,E)$ 来说，我们可以用一个 $n×n$ 的$01$矩阵 $g$ 来表示 $G$ 中各顶点的相邻关系。而$g_{ij} = 1$的时候代表$v_i$有一条连向$v_j$的边,0则没有。</p>
+<p><img src="https://pic.imgdb.cn/item/65aa6f87871b83018a1a051c.png" srcset="/img/loading.gif" lazyload alt="img"><br>这张无向图对应的01矩阵为:</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-number">0101</span><br><span class="hljs-number">1011</span><br><span class="hljs-number">0101</span><br><span class="hljs-number">1110</span><br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://pic.imgdb.cn/item/65aa6fb0871b83018a1ac811.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>这张有向图对应的01矩阵为:</p>
+<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-number">0101</span><br><span class="hljs-number">0001</span><br><span class="hljs-number">0100</span><br><span class="hljs-number">0010</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>仔细对比下即可领略。邻接矩阵在代码的体现就是一个二维数组$g[i][j]$。</p>
+<h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><p>邻接表的思想是，对于图中的每一个顶点，用一个数组来记录这个点和哪些点相连。由于相邻的点会动态的添加，所以对于每个点，我们需要用vector(或者其他方式，例如前向星等)来记录，本文采用vector方式。<br>对于上面那张有向图，书写成邻接表的形式即为：</p>
+<ul>
+<li>h </li>
+<li>1 2 4   </li>
+<li>2 4</li>
+<li>3 2</li>
+<li>4 3<br>$h$即为顶点，后面跟着的是对应顶点通过有向边能到达的点。这个结构也是二维的，不过没有记录过多的信息，所以我们可以用变长数组vector来实现,<code>vector&lt;T&gt; h[N];</code>要想让1到2有一条边，直接<code>h[1].push_back(2)</code>即可。</li>
+</ul>
+<h3 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h3><p>一般在点数在5000以内，我们选择使用邻接矩阵，否则使用邻接表。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" class="category-chain-item">图论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/algorithm/" class="print-no-link">#algorithm</a>
+      
+        <a href="/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/" class="print-no-link">#图论基础</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>图论基础</div>
+      <div>http://pikachuxpf.github.io/posts/eadfe50d/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Pikachu_fpx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/b6627a60/" title="拓展域并查集">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">拓展域并查集</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/dbe7e802/" title="带权并查集">
+                        <span class="hidden-mobile">带权并查集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Rjih7aBqv1ZW8JgZiFBsJzuk-gzGzoHsz","appKey":"F5fwt2lwKNyzapnxxRJAbqkO","path":"window.location.pathname","placeholder":"不放弃是成为冠军的第一步！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"master":"BA59504112EBCADA44D1FDAB43CB9214"},
+          {
+            el: "#valine",
+            path: window.location.pathname,
+            master: "BA59504112EBCADA44D1FDAB43CB9214",
+            tagMeta: ["博主","友人","访客"],
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/pikachuxpf" target="_blank" rel="nofollow noopener"><span>fpx</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Lines -->
+  <script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

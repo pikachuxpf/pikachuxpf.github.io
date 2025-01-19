@@ -1,0 +1,982 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pikachu_fpx">
+  <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
+  
+    <meta name="description" content="并查集的概念并查集是一种用于处理集合合并与查找问题的数据结构。它提供查找（Find）和合并（Merge）两个基本操作。通过维护树形结构，每个树代表一个集合，通过路径压缩和按秩合并等优化，提高查找和合并操作的效率。常用于解决图论、连通性和最小生成树等问题。 简单来说，并查集就是一种能够处理连通性问题的数据结构。 并查集的引入假如现在世界上有很多个人，现在设定一个规矩，两个人可以通过比试的输赢来建立一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并查集">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/c517589e/index.html">
+<meta property="og:site_name" content="Pikachu_fpx|博客">
+<meta property="og:description" content="并查集的概念并查集是一种用于处理集合合并与查找问题的数据结构。它提供查找（Find）和合并（Merge）两个基本操作。通过维护树形结构，每个树代表一个集合，通过路径压缩和按秩合并等优化，提高查找和合并操作的效率。常用于解决图论、连通性和最小生成树等问题。 简单来说，并查集就是一种能够处理连通性问题的数据结构。 并查集的引入假如现在世界上有很多个人，现在设定一个规矩，两个人可以通过比试的输赢来建立一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa7050871b83018a1db7bd.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa7063871b83018a1e1010.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa7072871b83018a1e56cd.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa7080871b83018a1e932c.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa7091871b83018a1edf66.png">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa70a3871b83018a1f3ac2.png">
+<meta property="article:published_time" content="2024-01-12T09:07:12.000Z">
+<meta property="article:modified_time" content="2024-01-20T01:42:21.608Z">
+<meta property="article:author" content="Pikachu_fpx">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="图论">
+<meta property="article:tag" content="并查集">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/65aa7050871b83018a1db7bd.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>并查集 - Pikachu_fpx|博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pikachuxpf.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pikachu_fpx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-brush"></i>
+                <span>文章</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/" target="_self">
+                    <i class="iconfont icon-archive-fill"></i>
+                    <span>归档</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/" target="_self">
+                    <i class="iconfont icon-category-fill"></i>
+                    <span>分类</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/" target="_self">
+                    <i class="iconfont icon-tags-fill"></i>
+                    <span>标签</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/navigate/" target="_self">
+                    <i class="iconfont icon-books"></i>
+                    <span>导航</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/about/" target="_self">
+                    <i class="iconfont icon-addrcard"></i>
+                    <span>站长</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/contact/" target="_self">
+                    <i class="iconfont icon-comment"></i>
+                    <span>留言板</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-switch-fill"></i>
+                <span>游戏</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mf" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>魔方</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/sl" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>扫雷</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/2048" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>2048</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/wzq" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>五子棋</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/txz" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>推箱子</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="并查集"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-12 17:07" pubdate>
+          2024年1月12日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">并查集</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="并查集的概念"><a href="#并查集的概念" class="headerlink" title="并查集的概念"></a>并查集的概念</h2><p>并查集是一种用于处理集合合并与查找问题的数据结构。它提供查找（Find）和合并（Merge）两个基本操作。通过维护树形结构，每个树代表一个集合，通过路径压缩和按秩合并等优化，提高查找和合并操作的效率。常用于解决图论、连通性和最小生成树等问题。</p>
+<p>简单来说，并查集就是一种能够处理连通性问题的数据结构。</p>
+<h2 id="并查集的引入"><a href="#并查集的引入" class="headerlink" title="并查集的引入"></a>并查集的引入</h2><p>假如现在世界上有很多个人，现在设定一个规矩，两个人可以通过比试的输赢来建立一个帮派，赢的就是帮主（如果一个人打败了一个帮派的帮主，那么他就是新帮主，如果只是打败小弟，则需要继续往上,打最早击败过小弟的人），长久如此，通过比试次数越多，帮派就会壮大起来。</p>
+<p>现在有 $8$ 个人，他们每一个人都有一个帮派，所以他们现在属于自己的帮派，帮主也是自己。</p>
+<p>然后我们假如一个数组 $p$ ,每一个 $p[i]$ 代表的就是打败第 $i$ 位的人，在树形结构里面就是第 $i$ 位人的父节点。</p>
+<p>一开始，每个人的$p[i]$ 都是自己，所以图中的边也是指向自己的。<br><img src="https://pic.imgdb.cn/item/65aa7050871b83018a1db7bd.png" srcset="/img/loading.gif" lazyload alt="img"><br>之后我们安排 $[1]$ 和 $[2]$ 比试， 然后 $[2]$ 获得胜利，所以这个时候 就变成了 $[1]$ 号的 $p[1] = 2$,关系图就变成 $[1]$ 的边会指向 $[2]$ :<br><img src="https://pic.imgdb.cn/item/65aa7063871b83018a1e1010.png" srcset="/img/loading.gif" lazyload alt="img"><br>之后我们分别安排</p>
+<ul>
+<li>$[4]$ 和 $[8]$ 比试，$[4]$ 获胜</li>
+<li>$[5]$ 和 $[6]$ 比试，$[5]$ 获胜</li>
+<li>$[5]$ 和 $[7]$ 比试，$[5]$ 获胜</li>
+<li>$[1]$ 和 $[3]$ 比试, $[3]$ 获胜,这个时候$[3]$还要和$[2]$比试，因为$[2]$是帮主,但是这个时候 $[3]$ 输给了 $[2]$<br><img src="https://pic.imgdb.cn/item/65aa7072871b83018a1e56cd.png" srcset="/img/loading.gif" lazyload alt="img"></li>
+</ul>
+<p>可以看到现在世界上已经有三个帮派(帮主首位)了，分别是:</p>
+<ul>
+<li>$[2,1,3]$</li>
+<li>$[4,8]$</li>
+<li>$[5,6,7]$<br>这时 $p$ 数组的值是</li>
+</ul>
+<ul>
+<li>$p[1] = 2$</li>
+<li>$p[2] = 2$</li>
+<li>$p[3] = 2$</li>
+<li>$p[4] = 4$</li>
+<li>$p[5] = 5$</li>
+<li>$p[6] = 5$</li>
+<li>$p[7] = 5$</li>
+<li>$p[8] = 4$</li>
+</ul>
+<p>现在如果给 $[7]$ 和 $[3]$ 安排一场比试，$[3]$ 赢了，但是还没结束, $[3]$ 还要和最早打败了 $[7]$ 的人比试，即为 $[5]$,之后 $[3]$ 输了,$[5]$ 自然要和$[2]$ 比试一场，之后 $[2]$ 获胜，$[5]$ 带着他帮派的所有人加入 $[2]$ 的麾下。<br><img src="https://pic.imgdb.cn/item/65aa7080871b83018a1e932c.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>然后就此世界上就只剩下两个帮派了。</p>
+<h2 id="并查集的两种操作"><a href="#并查集的两种操作" class="headerlink" title="并查集的两种操作"></a>并查集的两种操作</h2><p>首先我们把上面的故事抽象一下，可以发现有两步操作，分别是输了之后，找第一次打败自己的人来继续挑战，然后是比试。</p>
+<p>第一种我们可以看做是查找,找帮主，每一个节点都有一个父节点，也正对应了$p[k]$数组。<br>第二种我们可以看做是合并，两个集合之间的合并。</p>
+<h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><p>查找操作用于确定一个元素属于哪个集合，即找到该元素所在集合的代表元素（根节点）。<br>查找操作的目的是判断两个元素是否属于同一个集合，通过比较它们的根节点来实现。</p>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>合并操作用于将两个不相交的集合合并成一个新的集合。<br>具体操作通常是将其中一个集合的根节点连接到另一个集合的根节点上，从而形成一个新的集合。</p>
+<h2 id="朴素版"><a href="#朴素版" class="headerlink" title="朴素版"></a>朴素版</h2><p>对于代码的编写，有朴素版，不过我们一般不会采用这种方式，因为效率比较低 $O(n)$</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化主要是初始化 $p[k]$ 数组，初始化就是让每个人的父节点都为自己。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> p[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) p[i] = i;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="查找-1"><a href="#查找-1" class="headerlink" title="查找"></a>查找</h3><p>通过递归来找根节点</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> p[x] == x ? x : <span class="hljs-built_in">find</span>(p[x]);<br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="合并-1"><a href="#合并-1" class="headerlink" title="合并"></a>合并</h3><p>只要 $x$ 和 $y$ 不属于同一集合，就需要合并</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function"></span>{<br>    x = <span class="hljs-built_in">find</span>(x);<br>    y = <span class="hljs-built_in">find</span>(y);<br>    <span class="hljs-keyword">if</span>(x == y) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    p[y] = x;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>路径压缩的思想是在查找操作中，将查找路径上的每个节点都直接连接到根节点。这样，即使树的高度很大，任何一次查找操作都会使路径上的每个节点都直接指向根节点。这种操作会在实际查找的同时，通过修改树的结构，使得未来的查找操作变得更加高效。</p>
+<p>大概就是在$find$的过程中，改变这个节点否父节点，最终让所有节点直接指向根节点。<br>路径压缩前:<br><img src="https://pic.imgdb.cn/item/65aa7091871b83018a1edf66.png" srcset="/img/loading.gif" lazyload alt="img"><br>经过路径压缩后:<br><img src="https://pic.imgdb.cn/item/65aa70a3871b83018a1f3ac2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>其实就是改一下 $find$ 函数,写法不唯一。</p>
+<p>查询的时间复杂度近乎为$O(1)$</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> p[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i) p[i] = i;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span><span class="hljs-comment">//递归1版</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> (p[x] != x) ? (p[x] = <span class="hljs-built_in">find</span>(p[x])) : p[x];<br>    <br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span><span class="hljs-comment">//递归2版</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> p[x] = (p[x] == x ? x : <span class="hljs-built_in">find</span>(p[x]));<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span><span class="hljs-comment">//循环版</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">while</span>(p[x] != x) x = p[x] = p[p[x]];<br>    <span class="hljs-keyword">return</span> x;<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function"></span>{<br>    x = <span class="hljs-built_in">find</span>(x);<br>    y = <span class="hljs-built_in">find</span>(y);<br>    <span class="hljs-keyword">if</span>(x == y) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    p[y] = x;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="按秩合并"><a href="#按秩合并" class="headerlink" title="按秩合并"></a>按秩合并</h2><p>在朴素版本的并查集中，合并操作简单地将一个集合的根节点连接到另一个集合的根节点上。然而，这样的操作可能会导致一些集合的树深度增加，形成不平衡的树。这种情况下，查找操作可能会变得较慢，因为树的高度会增加。</p>
+<p>按秩合并的基本思想是在合并操作时，将深度（秩）较小的树合并到深度较大的树上。这样可以避免形成过深的树，保持树的平衡，进而提高查找和合并操作的效率。通常，每个节点都会维护一个秩的信息，表示以该节点为根的树的深度。</p>
+<p>所以我们引入一个新的数组 $rnk[i]$ 代表第 $i$ 节点的高度。</p>
+<p>这个优化只体现在merge操作上面</p>
+<p>查询的时间复杂度为$O(logn)$</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> p[N],rnk[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) p[i] = i;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> p[x] == x ? x : <span class="hljs-built_in">find</span>(p[x]);<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function"></span>{<br>    x = <span class="hljs-built_in">find</span>(x);<br>    y = <span class="hljs-built_in">find</span>(y);<br>    <span class="hljs-keyword">if</span> (x == y) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span> (rnk[y] &gt; rnk[x]) <span class="hljs-built_in">swap</span>(x, y);<span class="hljs-comment">//保证 x 的高度 &gt;= y</span><br>    <span class="hljs-keyword">if</span> (rnk[x] == rnk[y]) rnk[x]++;<br>    p[y] = x;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="启发式合并-通过大小"><a href="#启发式合并-通过大小" class="headerlink" title="启发式合并(通过大小)"></a>启发式合并(通过大小)</h2><p>通过大小的启发式合并是一种并查集优化策略，它基于集合大小（元素个数）来决定两个集合的合并方式。该启发式合并方法的核心思想是将元素较少的集合合并到元素较多的集合中，以保持树的平衡。</p>
+<p>通过这样的合并策略，较小的树被合并到较大的树中，从而避免了形成过深的树。这有助于降低查找操作的时间复杂度，使得树的高度保持在相对较小的范围内，提高了整个并查集的效率。</p>
+<p>所以我们引入一个新的数组 $siz[i]$ 代表第 $i$ 个集合的大小,注意的一点是,$siz[i]$ 只在根节点是有效的。</p>
+<p>这个优化只体现在merge操作上面</p>
+<p>查询的时间复杂度为$O(logn)$</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> p[N],siz[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) p[i] = i,siz[i] = <span class="hljs-number">1</span>;<span class="hljs-comment">//注意这里siz数组要初始化为1</span><br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">return</span> p[x] == x ? x : <span class="hljs-built_in">find</span>(p[x]);<br>}<br><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function"></span>{<br>    x = <span class="hljs-built_in">find</span>(x);<br>    y = <span class="hljs-built_in">find</span>(y);<br>    <span class="hljs-keyword">if</span> (x == y) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span> (siz[y] &gt; siz[x]) <span class="hljs-built_in">swap</span>(x, y);<span class="hljs-comment">//保证 x 的集合数量大小 &gt;= y</span><br>    p[y] = x;<br>    siz[x] += siz[y];<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>这三种优化都是我们平常经常写的优化方式，不过最常用的应该是路径压缩，毕竟代码更加简洁。但是在$Tarjan$的论文中，证明了只使用路径压缩的最坏复杂度为$O(mlogn)$，不过这种数据我们一般不会遇到，除非出题人水平很高，然后专门出数据卡并查集。所以三种方式都需要掌握，三种优化方式是可以混用的。</p>
+<h2 id="封装模板"><a href="#封装模板" class="headerlink" title="封装模板"></a>封装模板</h2><p>借鉴的是jls的板子，稍有改动。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">DSU</span><br>{<br>    std::vector&lt;<span class="hljs-type">int</span>&gt; p, siz;<br>    <span class="hljs-built_in">DSU</span>() {}<br>    <span class="hljs-built_in">DSU</span>(<span class="hljs-type">int</span> n) { <span class="hljs-built_in">init</span>(n); }<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function">    </span>{<br>        p.<span class="hljs-built_in">resize</span>(n);<br>        std::<span class="hljs-built_in">iota</span>(p.<span class="hljs-built_in">begin</span>(), p.<span class="hljs-built_in">end</span>(), <span class="hljs-number">0</span>);<br>        siz.<span class="hljs-built_in">assign</span>(n, <span class="hljs-number">1</span>);<br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">    </span>{<br>        <span class="hljs-keyword">while</span> (x != p[x])<br>        {<br>            x = p[x] = p[p[x]];<br>        }<br>        <span class="hljs-keyword">return</span> x;<br>    }<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">same</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">find</span>(x) == <span class="hljs-built_in">find</span>(y); }<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span></span><br><span class="hljs-function">    </span>{<br>        <span class="hljs-type">int</span> px = <span class="hljs-built_in">find</span>(x);<br>        <span class="hljs-type">int</span> py = <span class="hljs-built_in">find</span>(y);<br>        <span class="hljs-keyword">if</span> (px == py)<br>        {<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        }<br>        siz[px] += siz[py];<br>        p[py] = px;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">size</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{ <span class="hljs-keyword">return</span> siz[<span class="hljs-built_in">find</span>(x)]; }<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3367">P3367 【模板】并查集 - 洛谷 </a></p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><a href="/posts/dbe7e802/" title="带权并查集">带权并查集</a>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/algorithm/" class="print-no-link">#algorithm</a>
+      
+        <a href="/tags/%E5%9B%BE%E8%AE%BA/" class="print-no-link">#图论</a>
+      
+        <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" class="print-no-link">#并查集</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>并查集</div>
+      <div>http://pikachuxpf.github.io/posts/c517589e/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Pikachu_fpx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月12日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/dbe7e802/" title="带权并查集">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">带权并查集</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/3510/" title="二分法">
+                        <span class="hidden-mobile">二分法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Rjih7aBqv1ZW8JgZiFBsJzuk-gzGzoHsz","appKey":"F5fwt2lwKNyzapnxxRJAbqkO","path":"window.location.pathname","placeholder":"不放弃是成为冠军的第一步！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"master":"BA59504112EBCADA44D1FDAB43CB9214"},
+          {
+            el: "#valine",
+            path: window.location.pathname,
+            master: "BA59504112EBCADA44D1FDAB43CB9214",
+            tagMeta: ["博主","友人","访客"],
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/pikachuxpf" target="_blank" rel="nofollow noopener"><span>fpx</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Lines -->
+  <script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

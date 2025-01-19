@@ -1,0 +1,977 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pikachu_fpx">
+  <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
+  
+    <meta name="description" content="概念Dijkstra算法是一种解决单源最短路径问题的贪心算法。 朴素版Dijkstra算法思想：朴素版Dijkstra算法是一种贪心算法，通过维护每个节点的当前最短距离来逐步确定从起始节点到其他节点的最短路径。在每一步中，选择当前未被标记的节点中距离最短的节点进行标记，并更新其邻居节点的距离值。 概念：  距离值（distance）： 表示从起始节点到某个节点的当前已知最短路径长度。 标记集合（v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dijkstra算法">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/c4fedc02/index.html">
+<meta property="og:site_name" content="Pikachu_fpx|博客">
+<meta property="og:description" content="概念Dijkstra算法是一种解决单源最短路径问题的贪心算法。 朴素版Dijkstra算法思想：朴素版Dijkstra算法是一种贪心算法，通过维护每个节点的当前最短距离来逐步确定从起始节点到其他节点的最短路径。在每一步中，选择当前未被标记的节点中距离最短的节点进行标记，并更新其邻居节点的距离值。 概念：  距离值（distance）： 表示从起始节点到某个节点的当前已知最短路径长度。 标记集合（v">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/65aa70ec871b83018a209dca.png">
+<meta property="article:published_time" content="2024-01-18T01:22:37.000Z">
+<meta property="article:modified_time" content="2024-01-19T12:54:06.506Z">
+<meta property="article:author" content="Pikachu_fpx">
+<meta property="article:tag" content="algorithm">
+<meta property="article:tag" content="图论基础">
+<meta property="article:tag" content="最短路">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/65aa70ec871b83018a209dca.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Dijkstra算法 - Pikachu_fpx|博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pikachuxpf.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pikachu_fpx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-brush"></i>
+                <span>文章</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/" target="_self">
+                    <i class="iconfont icon-archive-fill"></i>
+                    <span>归档</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/" target="_self">
+                    <i class="iconfont icon-category-fill"></i>
+                    <span>分类</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/" target="_self">
+                    <i class="iconfont icon-tags-fill"></i>
+                    <span>标签</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/navigate/" target="_self">
+                    <i class="iconfont icon-books"></i>
+                    <span>导航</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/about/" target="_self">
+                    <i class="iconfont icon-addrcard"></i>
+                    <span>站长</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/contact/" target="_self">
+                    <i class="iconfont icon-comment"></i>
+                    <span>留言板</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-switch-fill"></i>
+                <span>游戏</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mf" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>魔方</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/sl" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>扫雷</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/2048" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>2048</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/wzq" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>五子棋</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/txz" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>推箱子</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Dijkstra算法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-01-18 09:22" pubdate>
+          2024年1月18日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Dijkstra算法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>Dijkstra算法是一种解决单源最短路径问题的贪心算法。</p>
+<h2 id="朴素版Dijkstra算法"><a href="#朴素版Dijkstra算法" class="headerlink" title="朴素版Dijkstra算法"></a>朴素版Dijkstra算法</h2><p><strong>思想：</strong><br>朴素版Dijkstra算法是一种贪心算法，通过维护每个节点的当前最短距离来逐步确定从起始节点到其他节点的最短路径。在每一步中，选择当前未被标记的节点中距离最短的节点进行标记，并更新其邻居节点的距离值。</p>
+<p><strong>概念：</strong></p>
+<ol>
+<li><em>距离值（distance）：</em> 表示从起始节点到某个节点的当前已知最短路径长度。</li>
+<li><em>标记集合（visited）：</em> 用于标记已确定最短路径的节点。</li>
+</ol>
+<p><strong>过程：</strong></p>
+<ol>
+<li><em>初始化：</em> 将起始节点的距离值设为0，其他节点的距离值设为无穷大（表示尚未确定最短路径），标记集合为空。</li>
+<li><em>选择最短路径节点：</em> 从未被标记的节点中选择距离值最小的节点，标记为已访问。</li>
+<li><em>更新邻居节点：</em> 对于已访问节点的每个相邻节点，计算通过当前节点到达该相邻节点的路径长度，并更新相邻节点的距离值。</li>
+<li><em>重复步骤2和3：</em> 重复选择最短路径节点和更新邻居节点的步骤，直到所有节点都被标记为已访问。</li>
+<li><em>最终结果：</em> 每个节点的距离值即为从起始节点到达该节点的最短路径长度。</li>
+</ol>
+<p><strong>注意：</strong> 朴素版Dijkstra算法的时间复杂度相对较高，特别是在稠密图中，因为在每一步中都需要线性搜索未被标记的节点。为了提高效率，引入优先队列的版本能够更快地选择最短路径节点。</p>
+<p><img src="https://pic.imgdb.cn/item/65aa70ec871b83018a209dca.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3010</span>;<br><span class="hljs-type">int</span> n,m,g[N][N];<span class="hljs-comment">//邻接矩阵</span><br><span class="hljs-type">int</span> d[N],st[N];<span class="hljs-comment">//距离数组，标记数组</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dji</span><span class="hljs-params">(<span class="hljs-type">int</span> s = <span class="hljs-number">1</span>)</span></span>{<br>	<span class="hljs-built_in">memset</span>(d,<span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span> d); d[s] = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<br>	{<br>		<span class="hljs-type">int</span> x = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j)<br>		{<br>			<span class="hljs-keyword">if</span>(st[j]) <span class="hljs-keyword">continue</span>;<br>			<span class="hljs-keyword">if</span>(x == <span class="hljs-number">0</span>|| d[j] &lt; d[x]) x = j;<br>		}<br>		st[x] = <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;++j) d[j] = <span class="hljs-built_in">min</span>(d[j],d[x] + g[x][j]);<br>	}<br>}<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>	cin &gt;&gt; n &gt;&gt; m;<br>	<span class="hljs-built_in">memset</span>(g,<span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span> g);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;++i)<br>	{<br>		<span class="hljs-type">int</span> x,y,w;cin &gt;&gt; x &gt;&gt; y &gt;&gt; w;<br>		g[x][y] = <span class="hljs-built_in">min</span>(g[x][y],w);<span class="hljs-comment">//考虑重边</span><br>		g[y][x] = <span class="hljs-built_in">min</span>(g[y][x],w);<span class="hljs-comment">//无向图</span><br>	}<br>	<span class="hljs-built_in">dji</span>();<br>	<span class="hljs-keyword">if</span>(d[n] == INF) cout &lt;&lt; <span class="hljs-number">-1</span> &lt;&lt; endl;<br>	<span class="hljs-keyword">else</span> cout &lt;&lt; d[n] &lt;&lt; endl;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Dijkstra算法堆优化"><a href="#Dijkstra算法堆优化" class="headerlink" title="Dijkstra算法堆优化"></a><strong>Dijkstra算法堆优化</strong></h2><p><strong>思想：</strong><br>Dijkstra算法的一种优化方式是引入堆（优先队列）数据结构，以提高在每一步中选择最短路径节点的效率。这种堆优化的Dijkstra算法能够更快地确定最短路径，特别在大规模图中表现更为出色。</p>
+<p><strong>概念：</strong></p>
+<ol>
+<li><em>距离值（distance）：</em> 表示从起始节点到某个节点的当前已知最短路径长度。</li>
+<li><em>标记集合（visited）：</em> 用于标记已确定最短路径的节点。</li>
+<li><em>优先队列（priority queue）：</em> 存储待处理节点，并按距离值大小排序，以便每次选择最短路径节点。</li>
+</ol>
+<p><strong>过程：</strong></p>
+<ol>
+<li><em>初始化：</em> 将起始节点的距离值设为0，其他节点的距离值设为无穷大（表示尚未确定最短路径），将所有节点加入优先队列。</li>
+<li><em>选择最短路径节点：</em> 从优先队列中选择距离值最小的节点，标记为已访问。</li>
+<li><em>更新邻居节点：</em> 对于已访问节点的每个相邻节点，计算通过当前节点到达该相邻节点的路径长度，并更新相邻节点的距离值。</li>
+<li><em>重复步骤2和3：</em> 重复选择最短路径节点和更新邻居节点的步骤，直到所有节点都被标记为已访问。</li>
+<li><em>最终结果：</em> 每个节点的距离值即为从起始节点到达该节点的最短路径长度。</li>
+</ol>
+<p><strong>注意:</strong> Dijkstra算法在正权重图（权重不能为负）上表现良好，但不适用于存在负权重边的图。如果图中存在负权重边，可以考虑使用Bellman-Ford算法。</p>
+<h3 id="代码部分-1"><a href="#代码部分-1" class="headerlink" title="代码部分"></a>代码部分</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dis</span><span class="hljs-params">(n + <span class="hljs-number">1</span>,<span class="hljs-number">0x3f3f3f3f</span>)</span></span>;<br><span class="hljs-keyword">auto</span> dijkstra = [&amp;](<span class="hljs-type">int</span> s = <span class="hljs-number">1</span>) -&gt;<span class="hljs-type">void</span><br>{<br>	<span class="hljs-type">int</span> y,w;<br>	<span class="hljs-keyword">using</span> PII = pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;;<br>	priority_queue&lt;PII,vector&lt;PII&gt;,greater&lt;PII&gt; &gt; q;<br>	q.<span class="hljs-built_in">emplace</span>(<span class="hljs-number">0</span>,s);<br>	dis[s] = <span class="hljs-number">0</span>;<br>	<span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">st</span><span class="hljs-params">(n + <span class="hljs-number">1</span>)</span></span>;<br>	<span class="hljs-keyword">while</span>(q.<span class="hljs-built_in">size</span>())<br>	{<br>		<span class="hljs-type">int</span> x = q.<span class="hljs-built_in">top</span>().second;<br>		q.<span class="hljs-built_in">pop</span>();<br>		<span class="hljs-keyword">if</span>(st[x]) <span class="hljs-keyword">continue</span>;<br>		st[x] = <span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> el : h[x])<br>		{<br>			<span class="hljs-built_in">tie</span>(y,w) = el;<br>			<span class="hljs-keyword">if</span>(dis[y] &gt; dis[x] + w)<br>			{<br>				dis[y] = dis[x] + w;<br>				q.<span class="hljs-built_in">emplace</span>(dis[y],y);<br>			}<br>		}<br>	}<br>};<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h2><p>为什么dijkstra算法这样的贪心策略是正确的？<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/57206374/answer/151995167">转载自</a></p>
+<p>首先，Dijkstra算法成立的前提条件是不存在负权的边。这意味着任何一条路径，从起点开始到路径中每个点的距离都是依次递增的。</p>
+<p>所以，按照递增的顺序来依次计算出最短路径，也就是Dijkstra算法了。</p>
+<p>为了简单起见，我们可以认为所有的边权都是正值。如果有边的权值为0，则这个边的两个顶点到源点的最短距离一定相等，可以把它们看成是同一个顶点，这样只要证明了边权值为正值的情况，也就能进一步推广到有边权值为0的情况。</p>
+<p>当我们计算最短路径的时候，源点到任意一个点的最短距离，要么是源点到它的某条边的长度，要么是源点到另一个点的最短距离距离，再加上另一个点到这个点的边的长度，写成公式就是：</p>
+<p>$$<br>d(i) = \min{D(s, i), \min_{j \ne i} d(j) + D(j, i)}<br>$$</p>
+<p>注意到我们有 $(D(j, i) &gt; 0)$，假如我们已经提前知道了各个 $d(i)$ 的大小顺序，那么比该顶点的最短路径距离更长的点就不用考虑了，改写成：</p>
+<p>$$<br>d(i) = \min{D(s, i), \min_{d(j) &lt; d(i)} d(j) + D(j, i)}<br>$$</p>
+<p>假想我们已经提前将 $d(i)$ 排好了序，除了源点以外，最近的是 $n_0$，然后是 $n_1$，然后是 $n_2$，也就是:</p>
+<p>$$<br>d(n_0) \leq d(n_1) \leq d(n_2) \leq … \leq d(n_m)<br>$$</p>
+<p>那么我们的公式即可变成:</p>
+<p>$$<br>d(n_k) = \min{D(s, n_k), \min_{j &lt; k} d(n_j) + D(n_j, n_k)}<br>$$</p>
+<p>假如说我们现在已经知道了最短距离最小的前 $k$ 个节点 ${n_0, n_1, …, n_{k−1}}$——特别的，$k = 0$ 的时候，这些节点的集合是个空集。当然它们的最短距离也根据上面的式子算了出来。我们希望接下来，通过这些信息找到 $n_k$，并且计算出 $d(n_k)$。</p>
+<p>我们回到最早的式子中：</p>
+<p>$$<br>d(i) = \min{D(s, i), \min_{j \ne i} d(j) + D(j,i)}<br>$$</p>
+<p>如果在求最小值的第二项中，去掉一些项，那么得到的结果有可能会比原表达式大，但不可能比原表达式小（因为是求最小值的运算）。也就是对于 $i \notin {n_0, n_1, …, n_{k-1}}$，有：</p>
+<p>$$<br>d(i) \le \min{D(s, i), \min_{j \in {n_0, n_1, …, n_{k-1}}} d(j) + D(j,i)}<br>$$</p>
+<p>同时有：</p>
+<p>$$<br>d(n_k) = \min{D(s, n_k), \min_{j \in {n_0, n_1, …, n_{k-1}}} d(j) + D(j,n_k)}<br>$$</p>
+<p>也就是说，对于最后的 $n_k$ 来说，前面的式子会取等号。我们又知道 $n_k$ 是剩下节点中最短距离最小的。</p>
+<p>也就是 :</p>
+<p>$$<br>n_k = \arg \min_i d(i) = \arg \min_i \min{D(s, i), \min_{j \in {n_0, n_1, …, n_{k-1}}} d(j) + D(j,i)}<br>$$</p>
+<p>第二个等号是因为我们将求最值表达式中不是最小的项替换成了比较大的项，而最小的项保持不变，因此最小值不变。这个最后的表达式就是Dijkstra算法。</p>
+<p>在实际使用的时候，注意到这个式子可以改写成：</p>
+<p>$$<br>\min{D(s,i), \min_{j \in {n_0, n_1, …, n_{k-1}}} d(j) + D(j,i)}<br>= \min{d(n_{k-1}) + D(n_{k-1},i), \min{D(s,i), \min_{j \in {n_0, n_1, …, n_{k-2}}} d(j) + D(j,i)}}<br>$$</p>
+<p>第二项在上一轮就已经算出来了，所以每一轮只需要用最新加入的节点放缩一次就可以了。</p>
+<p>直观来说，如果我们已经求出了k个离源点距离最近的点，以及它们各自的距离，那么到源点距离第k+1近的点，它到源点的最短路径只能经过这前k个点——如果经过了其他点，那么这个其他点显然离源点更近，那这个点一定不是第k+1近了。既然只经过这前k个点，那么只用这前k个点放缩就可以找到那个最短路径了。再加上前k-1个点上一轮已经放缩过，所以每一轮只需要用新加入的节点进行放缩就行了。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" class="category-chain-item">图论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/algorithm/" class="print-no-link">#algorithm</a>
+      
+        <a href="/tags/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/" class="print-no-link">#图论基础</a>
+      
+        <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" class="print-no-link">#最短路</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Dijkstra算法</div>
+      <div>http://pikachuxpf.github.io/posts/c4fedc02/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Pikachu_fpx</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年1月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/c856449e/" title="SPFA算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SPFA算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/8708cb74/" title="Kruskal算法">
+                        <span class="hidden-mobile">Kruskal算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Rjih7aBqv1ZW8JgZiFBsJzuk-gzGzoHsz","appKey":"F5fwt2lwKNyzapnxxRJAbqkO","path":"window.location.pathname","placeholder":"不放弃是成为冠军的第一步！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"master":"BA59504112EBCADA44D1FDAB43CB9214"},
+          {
+            el: "#valine",
+            path: window.location.pathname,
+            master: "BA59504112EBCADA44D1FDAB43CB9214",
+            tagMeta: ["博主","友人","访客"],
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/pikachuxpf" target="_blank" rel="nofollow noopener"><span>fpx</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Lines -->
+  <script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
