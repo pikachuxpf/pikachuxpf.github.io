@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Hexo食用手册</title>
+    <link href="/posts/36231/"/>
+    <url>/posts/36231/</url>
+    
+    <content type="html"><![CDATA[<h4 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h4><figure class="highlight haxe"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo g <span class="hljs-meta">#生成文件</span><br>hexo s <span class="hljs-meta">#本地服务器查看</span><br>hexo d <span class="hljs-meta">#部署到github上</span><br>hexo n <span class="hljs-string">"文章标题"</span><br>hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> <span class="hljs-string">"新页面"</span><br></code></pre></td></tr></tbody></table></figure><h4 id="文章可以拥有的属性"><a href="#文章可以拥有的属性" class="headerlink" title="文章可以拥有的属性"></a>文章可以拥有的属性</h4><table><thead><tr><th>-</th><th>Settings</th><th>Description</th><th>Default</th></tr></thead><tbody><tr><td>1</td><td>layout</td><td>Layout</td><td>post or page</td></tr><tr><td>2</td><td>title</td><td>标题</td><td></td></tr><tr><td>3</td><td>data</td><td>创建日期</td><td>文件的创建日期</td></tr><tr><td>4</td><td>updated</td><td>修改日期</td><td>文件的修改日期</td></tr><tr><td>5</td><td>comments</td><td>是否开启评论</td><td>true</td></tr><tr><td>6</td><td>tags</td><td>标签</td><td></td></tr><tr><td>7</td><td>categories</td><td>分类</td><td></td></tr><tr><td>8</td><td>permalink</td><td>url中的名字</td><td>文件名字</td></tr></tbody></table><h3 id="一篇文章的基本框架"><a href="#一篇文章的基本框架" class="headerlink" title="一篇文章的基本框架"></a>一篇文章的基本框架</h3><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">My</span> <span class="hljs-string">awesome</span> <span class="hljs-string">title</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2023-8</span><span class="hljs-number">-23</span> <span class="hljs-number">18</span><span class="hljs-string">:38:45</span><br><span class="hljs-attr">categories:</span> <br>    <span class="hljs-bullet">-</span> <span class="hljs-string">分类1</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">分类2</span><br><span class="hljs-attr">tags:</span> <br>    <span class="hljs-bullet">-</span> <span class="hljs-string">标签1</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">标签2</span><br><span class="hljs-attr">mp3:</span> <span class="hljs-string">http://domain.com/awesome.mp3</span><br><span class="hljs-attr">cover:</span> <span class="hljs-string">http://domain.com/awesome.jpg</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></tbody></table></figure><h4 id="可能遇见的bug"><a href="#可能遇见的bug" class="headerlink" title="可能遇见的bug"></a>可能遇见的bug</h4><ol><li>解决Hexo部署时报错：Error: Spawn failed</li></ol><p>打开博客主目录配置文件 __config.yml,修改deploy.repo<br>改为如下格式</p><figure class="highlight scss"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss">git<span class="hljs-keyword">@github</span>.<span class="hljs-attribute">com</span>:{用户名}<span class="hljs-selector-class">.github</span><span class="hljs-selector-class">.io</span><br></code></pre></td></tr></tbody></table></figure><p>重新执行 hexo clean 等指令</p><h6 id="或者"><a href="#或者" class="headerlink" title="或者"></a>或者</h6><p>删除<code>.deplot_git</code>文件夹,在git bash中<code>git config --global core.autocrlf false</code>并且重新执行hexo clean等指令</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>线段树</title>
     <link href="/posts/8893d943/"/>
     <url>/posts/8893d943/</url>
