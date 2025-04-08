@@ -16,27 +16,24 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="概述LCA（Lowest Common Ancestor，最近公共祖先）是树结构中常用的一个问题，指的是树中两个节点的最低共同祖先节点。LCA树链抛分法和倍增法，我们这里讲述倍增法，倍增法是一种高效解决LCA问题的算法之一，通过预处理和动态规划的方式，可以在较快的时间内回答多次LCA查询。 算法步骤 预处理： 算法首先对树进行预处理，计算每个节点的深度和其与2的幂次方祖先的关系。  构建倍增表：">
+    <meta name="description" content="资料分析考点 ABRX  ABRX类基本公式$$基期A &#x3D; \frac{B}{1+R} &#x3D; \frac{X}{R}$$$$现期B &#x3D; A+AR$$$$增量X &#x3D; B-A &#x3D; \frac{B}{1+R} * R &#x3D; A * R$$$$隔年增长率q&#x3D;q_1+q_2+q_1q_2$$ A类 一般基期：代入、直除、假设分配； 间隔基期：求出隔年增长率，即变成第一类考法； 基期差值：假设分配法求得两个基期作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LCA最近公共祖先">
-<meta property="og:url" content="http://pikachuxpf.github.io/posts/7cc481cf/index.html">
+<meta property="og:title" content="资料分析">
+<meta property="og:url" content="http://pikachuxpf.github.io/posts/9362be7c/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="概述LCA（Lowest Common Ancestor，最近公共祖先）是树结构中常用的一个问题，指的是树中两个节点的最低共同祖先节点。LCA树链抛分法和倍增法，我们这里讲述倍增法，倍增法是一种高效解决LCA问题的算法之一，通过预处理和动态规划的方式，可以在较快的时间内回答多次LCA查询。 算法步骤 预处理： 算法首先对树进行预处理，计算每个节点的深度和其与2的幂次方祖先的关系。  构建倍增表：">
+<meta property="og:description" content="资料分析考点 ABRX  ABRX类基本公式$$基期A &#x3D; \frac{B}{1+R} &#x3D; \frac{X}{R}$$$$现期B &#x3D; A+AR$$$$增量X &#x3D; B-A &#x3D; \frac{B}{1+R} * R &#x3D; A * R$$$$隔年增长率q&#x3D;q_1+q_2+q_1q_2$$ A类 一般基期：代入、直除、假设分配； 间隔基期：求出隔年增长率，即变成第一类考法； 基期差值：假设分配法求得两个基期作">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-27T07:13:25.000Z">
-<meta property="article:modified_time" content="2024-01-27T08:39:06.422Z">
+<meta property="article:published_time" content="2025-04-08T05:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-08T14:03:48.751Z">
 <meta property="article:author" content="Pikachu_fpx">
-<meta property="article:tag" content="algorithm">
-<meta property="article:tag" content="lca">
-<meta property="article:tag" content="图论">
-<meta property="article:tag" content="倍增">
+<meta property="article:tag" content="行测">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>LCA最近公共祖先 - Pikachu_fpx|博客</title>
+  <title>资料分析 - Pikachu_fpx|博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -319,7 +316,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="LCA最近公共祖先"></span>
+            <span id="subtitle" data-typed-text="资料分析"></span>
           
         </div>
 
@@ -330,8 +327,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-27 15:13" pubdate>
-          2024年1月27日 下午
+        <time datetime="2025-04-08 13:00" pubdate>
+          2025年4月8日 下午
         </time>
       </span>
     
@@ -342,7 +339,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          466 字
         
       </span>
     
@@ -353,7 +350,7 @@
         
         
         
-          10 分钟
+          4 分钟
         
       </span>
     
@@ -399,27 +396,38 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">LCA最近公共祖先</h1>
+            <h1 id="seo-header">资料分析</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>LCA（Lowest Common Ancestor，最近公共祖先）是树结构中常用的一个问题，指的是树中两个节点的最低共同祖先节点。<strong>LCA树链抛分法</strong>和<strong>倍增法</strong>，我们这里讲述倍增法，倍增法是一种高效解决LCA问题的算法之一，通过预处理和动态规划的方式，可以在较快的时间内回答多次LCA查询。</p>
-<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><ol>
-<li><p><strong>预处理：</strong> 算法首先对树进行预处理，计算每个节点的深度和其与2的幂次方祖先的关系。</p>
-</li>
-<li><p><strong>构建倍增表：</strong> 通过构建一个称为倍增表的数据结构，记录每个节点跳跃2^k步后的祖先节点。这样，我们就能够在O(log N)的时间内找到一个节点的第k个祖先。</p>
-</li>
-<li><p><strong>查询：</strong> 对于给定的两个节点u和v，首先确定它们的深度，然后将深度较大的节点跳跃到与深度较小的节点相同深度。接着，同时向上跳跃两个节点，直到找到它们的最近公共祖先。在跳跃的过程中，通过倍增表的信息加速查询。</p>
-</li>
+                <h1 id="资料分析"><a href="#资料分析" class="headerlink" title="资料分析"></a>资料分析</h1><h2 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h2><ol>
+<li>ABRX</li>
 </ol>
-<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>LCA倍增法的时间复杂度是O(N log N)的预处理时间加上O(log N)的查询时间，其中N是树中节点的数量。这种方法在多次查询LCA的情况下非常高效，因为预处理的成本被分摊到了多个查询中。</p>
-<p>这个算法在解决树上的LCA问题时，提供了一种有效的方法，尤其适用于需要频繁查询LCA的情况，例如在树上进行大量的图论算法或树算法时。</p>
-<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><p>对于预处理，我们的递推公式为$$f[i][j] = f[f[i][j-1]][j-1]$$ $f[i][j]$代表从i开始，走$2^j$步到达的点。所以我们要想求出来，可以把$2^j$分为两个$2^{j-1}$的部分。</p>
-<p>代入进树：<br>$$f[x][i] = f[f[x][i-1]][i-1]$$<br>从节点x往上跳$2^i$的点。</p>
-<h3 id="查询结果"><a href="#查询结果" class="headerlink" title="查询结果"></a>查询结果</h3><p>对于lca,普遍情况我们查询到的结果并不是他们的最近公共祖先，而是最近公祖先的下一层，为什么不能直接查询到lca的公共祖先，因为在倍增当中，我们可能会出现查询到了公共祖先，但是不是最近的，所以我们转换思路，我们如果查询到同一个点，就代表不成立，缩短重新进行查询，这样就可以避免我们查询到非最近的公共祖先。</p>
-<h2 id="封装模板"><a href="#封装模板" class="headerlink" title="封装模板"></a>封装模板</h2><p>基础封装，无权图,注意点只能是$1 - n$ ，如果不是则需要离散化。 </p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">LCA</span> {<br>&nbsp; &nbsp; <span class="hljs-type">int</span> n;<br>&nbsp; &nbsp; vector&lt;vector&lt;<span class="hljs-type">int</span>&gt; &gt; h,f;<span class="hljs-comment">//存图，从i开始向上走2^j步到的点</span><br>&nbsp; &nbsp; vector&lt;<span class="hljs-type">int</span>&gt; dep,lg;<br>&nbsp; &nbsp; <span class="hljs-built_in">LCA</span>(<span class="hljs-type">int</span> n) {<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">this</span>-&gt;n = n;<br>&nbsp; &nbsp; &nbsp; &nbsp; h.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; &nbsp; &nbsp; f.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(<span class="hljs-number">30</span>));<br>&nbsp; &nbsp; &nbsp; &nbsp; dep.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; &nbsp; &nbsp; lg.<span class="hljs-built_in">resize</span>(n + <span class="hljs-number">1</span>);<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lg[i] = lg[i<span class="hljs-number">-1</span>] + (<span class="hljs-number">1</span> &lt;&lt; lg[i<span class="hljs-number">-1</span>] == i);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <span class="hljs-comment">// 建立双向边</span><br>&nbsp; &nbsp; &nbsp; &nbsp; h[x].<span class="hljs-built_in">push_back</span>(y);<br>&nbsp; &nbsp; &nbsp; &nbsp; h[y].<span class="hljs-built_in">push_back</span>(x);<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> fa)</span> </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; f[x][<span class="hljs-number">0</span>] = fa; <span class="hljs-comment">// 储存 x 的父节点</span><br>&nbsp; &nbsp; &nbsp; &nbsp; dep[x] = dep[fa] + <span class="hljs-number">1</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= lg[dep[x]]; i++) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; f[x][i] = f[f[x][i - <span class="hljs-number">1</span>]][i - <span class="hljs-number">1</span>];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> y : h[x]) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (y == fa) <span class="hljs-keyword">continue</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-built_in">dfs</span>(y, x);<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">lca</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (dep[x] &lt; dep[y]) <span class="hljs-built_in">swap</span>(x, y);<span class="hljs-comment">//保证x更深</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">while</span> (dep[x] &gt; dep[y]) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x = f[x][lg[dep[x] - dep[y]] - <span class="hljs-number">1</span>];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (x == y) <span class="hljs-keyword">return</span> x;<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = lg[dep[x]] - <span class="hljs-number">1</span>; k &gt;= <span class="hljs-number">0</span>; k--) {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">if</span> (f[x][k] == f[y][k]) <span class="hljs-keyword">continue</span>;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x = f[x][k];<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y = f[y][k];<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> f[x][<span class="hljs-number">0</span>];<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">clac</span><span class="hljs-params">(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y)</span> </span>{ <span class="hljs-comment">// 倍增查询两点间距离</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-keyword">return</span> dep[x] + dep[y] - <span class="hljs-number">2</span> * dep[<span class="hljs-built_in">lca</span>(x, y)];<br>&nbsp; &nbsp; }<br>&nbsp; &nbsp; <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">work</span><span class="hljs-params">(<span class="hljs-type">int</span> root = <span class="hljs-number">1</span>)</span> </span>{ <span class="hljs-comment">// 在此初始化</span><br>&nbsp; &nbsp; &nbsp; &nbsp; <span class="hljs-built_in">dfs</span>(root, <span class="hljs-number">0</span>);<br>&nbsp; &nbsp; }<br>};<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="ABRX类"><a href="#ABRX类" class="headerlink" title="ABRX类"></a>ABRX类</h2><h3 id="基本公式"><a href="#基本公式" class="headerlink" title="基本公式"></a>基本公式</h3><p>$$基期A = \frac{B}{1+R} = \frac{X}{R}$$<br>$$现期B = A+A<em>R$$<br>$$增量X = B-A = \frac{B}{1+R} * R = A * R$$<br>$$隔年增长率q=q_1+q_2+q_1</em>q_2$$</p>
+<h3 id="A类"><a href="#A类" class="headerlink" title="A类"></a>A类</h3><ul>
+<li>一般基期：代入、直除、假设分配；</li>
+<li>间隔基期：求出隔年增长率，即变成第一类考法；</li>
+<li>基期差值：假设分配法求得两个基期作差。</li>
+<li>已知变化情况求基期：利用$A = \frac{X}{R}$求出基期。</li>
+</ul>
+<h3 id="B类"><a href="#B类" class="headerlink" title="B类"></a>B类</h3><ul>
+<li>假设增量求后期：求出 $X$，列不等式即可；</li>
+<li>假设增速求后期：利用公式“$B＝A＋AR$”依次求出后一年，一般两到三次即可求得答案；</li>
+<li>按照实际增长率求后期：根据名义增长率求得基期后，在利用实际增长率求后期。</li>
+</ul>
+<h3 id="X类"><a href="#X类" class="headerlink" title="X类"></a>X类</h3><ul>
+<li>一般增长量（求 $X$）：$R$ 靠近某分数可使用 $415$ 份数法，$R$ 极小可直接 $BR$，其他可假设分配；</li>
+<li>两期增长量倍数或比值（$X_1/X_2$）：依次求得 $X_1$、$X_2$，再求比值即可；</li>
+<li>整体增量/部分增量（$X＝X_1＋X_2＋X_3…$）：各部分增量相加等于总增量。</li>
+</ul>
+<h3 id="R类"><a href="#R类" class="headerlink" title="R类"></a>R类</h3><ul>
+<li>一般增长率：直接套用公式“$R＝X/A$”即可；</li>
+<li>隔年增长率：已知今年较去年增长 $R_1$，去年较前年增长 $R_2$，则今年较前年增长 $R_1＋R_2＋R_1R_2$；</li>
+<li>比值增长率：符合表达式 $A＝B/C$，材料中有 $B$、$C$ 增长率，求 $A$ 的增长率，即为比值增长率（多以平均数增长率形式出现），公式为$\frac{R_b−R_c}{1+R_C}$； </li>
+<li>乘积增长率：符合表达式 $A＝B×C$，材料中有 $B$、$C$ 增长率，求 $A$ 的增长率，即为乘积增长率（多以实际含义关系式和部分增长率形式出现），公式为 $R_b＋R_c＋R_b×R_c$(比重的也可以用，部分=整体*占比)。</li>
+</ul>
+
                 
               </div>
             
@@ -437,7 +445,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E8%A1%8C%E6%B5%8B/" class="category-chain-item">行测</a>
   
   
 
@@ -452,13 +460,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/algorithm/" class="print-no-link">#algorithm</a>
-      
-        <a href="/tags/lca/" class="print-no-link">#lca</a>
-      
-        <a href="/tags/%E5%9B%BE%E8%AE%BA/" class="print-no-link">#图论</a>
-      
-        <a href="/tags/%E5%80%8D%E5%A2%9E/" class="print-no-link">#倍增</a>
+        <a href="/tags/%E8%A1%8C%E6%B5%8B/" class="print-no-link">#行测</a>
       
     </div>
   
@@ -470,8 +472,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>LCA最近公共祖先</div>
-      <div>http://pikachuxpf.github.io/posts/7cc481cf/</div>
+      <div>资料分析</div>
+      <div>http://pikachuxpf.github.io/posts/9362be7c/</div>
     </div>
     <div class="license-meta">
       
@@ -483,7 +485,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月27日</div>
+          <div>2025年4月8日</div>
         </div>
       
       
@@ -515,18 +517,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/e139af66/" title="简单配置VScodeC or Cpp环境">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">简单配置VScodeC or Cpp环境</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/996e4f07/" title="筛质数">
-                        <span class="hidden-mobile">筛质数</span>
+                      <a href="/posts/8893d943/" title="线段树">
+                        <span class="hidden-mobile">线段树</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
