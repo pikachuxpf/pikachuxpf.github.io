@@ -16,15 +16,15 @@
   <meta name="author" content="Pikachu_fpx">
   <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
   
-    <meta name="description" content="Pikachu_fpx|博客">
+    <meta name="description" content="留言板     欢迎在这里留下您的想法、建议或问题                                                   留言指南                    欢迎提出技术问题，我会尽快回复           可以分享您的学习心得和建议           请保持友善和尊重的交流环境           支">
 <meta property="og:type" content="website">
 <meta property="og:title" content="留言板">
 <meta property="og:url" content="http://pikachuxpf.github.io/contact/index.html">
 <meta property="og:site_name" content="Pikachu_fpx|博客">
-<meta property="og:description" content="Pikachu_fpx|博客">
+<meta property="og:description" content="留言板     欢迎在这里留下您的想法、建议或问题                                                   留言指南                    欢迎提出技术问题，我会尽快回复           可以分享您的学习心得和建议           请保持友善和尊重的交流环境           支">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-01-12T14:50:49.000Z">
-<meta property="article:modified_time" content="2024-01-21T14:47:24.355Z">
+<meta property="article:modified_time" content="2026-02-15T11:02:09.225Z">
 <meta property="article:author" content="Pikachu_fpx">
 <meta property="article:tag" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
 <meta name="twitter:card" content="summary_large_image">
@@ -339,7 +339,309 @@
                 
 
 <article class="page-content">
+  <div class="contact-enhanced">
+  <div class="contact-header">
+    <div class="header-icon">
+      <i class="iconfont icon-message"></i>
+    </div>
+    <div class="header-title">留言板</div>
+    <div class="header-subtitle">欢迎在这里留下您的想法、建议或问题</div>
+  </div>
+
+  <div class="contact-intro">
+    <div class="intro-card">
+      <div class="intro-icon">
+        <i class="iconfont icon-edit"></i>
+      </div>
+      <div class="intro-content">
+        <h3>留言指南</h3>
+        <ul>
+          <li>欢迎提出技术问题，我会尽快回复</li>
+          <li>可以分享您的学习心得和建议</li>
+          <li>请保持友善和尊重的交流环境</li>
+          <li>支持 Markdown 格式，让表达更丰富</li>
+        </ul>
+      </div>
+    </div>
+    
+<pre><code class="hljs">&lt;div class="intro-card"&gt;
+  &lt;div class="intro-icon"&gt;
+    &lt;i class="iconfont icon-lightbulb"&gt;&lt;/i&gt;
+  &lt;/div&gt;
+  &lt;div class="intro-content"&gt;
+    &lt;h3&gt;热门话题&lt;/h3&gt;
+    &lt;div class="topic-tags"&gt;
+      &lt;span class="topic-tag"&gt;算法问题&lt;/span&gt;
+      &lt;span class="topic-tag"&gt;博客建议&lt;/span&gt;
+      &lt;span class="topic-tag"&gt;技术交流&lt;/span&gt;
+      &lt;span class="topic-tag"&gt;学习资源&lt;/span&gt;
+      &lt;span class="topic-tag"&gt;合作机会&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+  <div class="contact-reminder">
+    <div class="reminder-icon">
+      <i class="iconfont icon-notification"></i>
+    </div>
+    <div class="reminder-content">
+      <p>如果您有紧急问题需要联系，也可以通过以下方式：</p>
+      <div class="contact-methods">
+        <div class="contact-method">
+          <i class="iconfont icon-github-fill"></i>
+          <a href="https://github.com/pikachuxpf" target="_blank">GitHub</a>
+        </div>
+        <div class="contact-method">
+          <i class="iconfont icon-qq-fill"></i>
+          <span>QQ: 3096707586</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.contact-enhanced {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 30px 20px;
+  background: var(--board-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--link_hover_color), var(--post_link_color));
+}
+
+.header-icon {
+  font-size: 3rem;
+  color: var(--link_hover_color);
+  margin-bottom: 15px;
+}
+
+.header-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--post_heading_color);
+  margin-bottom: 10px;
+}
+
+.header-subtitle {
+  font-size: 1.1rem;
+  color: var(--sec_text_color);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.intro-card {
+  display: flex;
+  background: var(--board-color);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.intro-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--button_hover_bg_color);
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.intro-icon i {
+  font-size: 1.5rem;
+  color: var(--link_hover_color);
+}
+
+.intro-content {
+  flex-grow: 1;
+}
+
+.intro-content h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--post_heading_color);
+  font-size: 1.3rem;
+}
+
+.intro-content ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.intro-content li {
+  margin-bottom: 8px;
+  color: var(--post_text_color);
+  line-height: 1.6;
+}
+
+.topic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.topic-tag {
+  padding: 6px 12px;
+  background: var(--button_hover_bg_color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--post_text_color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.topic-tag:hover {
+  background-color: var(--link_hover_color);
+  color: white;
+}
+
+.contact-reminder {
+  background: var(--board-color);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-start;
+}
+
+.reminder-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--button_hover_bg_color);
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.reminder-icon i {
+  font-size: 1.2rem;
+  color: var(--link_hover_color);
+}
+
+.reminder-content {
+  flex-grow: 1;
+}
+
+.reminder-content p {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--post_text_color);
+}
+
+.contact-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background: var(--button_hover_bg_color);
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.contact-method i {
+  margin-right: 8px;
+  color: var(--link_hover_color);
+}
+
+.contact-method a {
+  color: var(--post_link_color);
+  text-decoration: none;
+}
+
+.contact-method a:hover {
+  color: var(--link_hover_color);
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .contact-enhanced {
+    padding: 15px;
+  }
   
+  .contact-header {
+    padding: 20px 15px;
+  }
+  
+  .header-title {
+    font-size: 1.8rem;
+  }
+  
+  .contact-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .intro-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .intro-icon {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .contact-reminder {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .reminder-icon {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .contact-methods {
+    justify-content: center;
+  }
+}
+</style>
+
+
 
   
   

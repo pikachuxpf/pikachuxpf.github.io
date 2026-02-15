@@ -1,0 +1,1263 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Pikachu_fpx">
+  <meta name="keywords" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
+  
+    <meta name="description" content="在线代码编辑器                                   新建                                保存                                分享                               语言:                JavaScript">
+<meta property="og:type" content="website">
+<meta property="og:title" content="代码编辑器">
+<meta property="og:url" content="http://pikachuxpf.github.io/code-editor/index.html">
+<meta property="og:site_name" content="Pikachu_fpx|博客">
+<meta property="og:description" content="在线代码编辑器                                   新建                                保存                                分享                               语言:                JavaScript">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-15T11:30:00.000Z">
+<meta property="article:modified_time" content="2026-02-15T11:06:52.092Z">
+<meta property="article:author" content="Pikachu_fpx">
+<meta property="article:tag" content="hexo,fpx,pikachu,java,c++,算法,博客,fluid,python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>代码编辑器 - Pikachu_fpx|博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"pikachuxpf.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Pikachu_fpx</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-brush"></i>
+                <span>文章</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/" target="_self">
+                    <i class="iconfont icon-archive-fill"></i>
+                    <span>归档</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/" target="_self">
+                    <i class="iconfont icon-category-fill"></i>
+                    <span>分类</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/" target="_self">
+                    <i class="iconfont icon-tags-fill"></i>
+                    <span>标签</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/navigate/" target="_self">
+                    <i class="iconfont icon-books"></i>
+                    <span>导航</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/about/" target="_self">
+                    <i class="iconfont icon-addrcard"></i>
+                    <span>站长</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/contact/" target="_self">
+                    <i class="iconfont icon-comment"></i>
+                    <span>留言板</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-switch-fill"></i>
+                <span>游戏</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mf" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>魔方</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/sl" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>扫雷</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/2048" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>2048</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/wzq" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>五子棋</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/txz" target="_self">
+                    <i class="iconfont icon-switch-fill"></i>
+                    <span>推箱子</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="代码编辑器"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <div class="code-editor-container">
+  <div class="editor-header">
+    <div class="editor-title">
+      <i class="iconfont icon-code"></i>
+      <span>在线代码编辑器</span>
+    </div>
+    <div class="editor-actions">
+      <button id="new-file" class="btn btn-secondary">
+        <i class="iconfont icon-file"></i>
+        新建
+      </button>
+      <button id="save-file" class="btn btn-primary">
+        <i class="iconfont icon-save"></i>
+        保存
+      </button>
+      <button id="share-code" class="btn btn-secondary">
+        <i class="iconfont icon-share"></i>
+        分享
+      </button>
+    </div>
+  </div>
+
+  <div class="editor-toolbar">
+    <div class="toolbar-section">
+      <label for="language-select">语言:</label>
+      <select id="language-select" class="language-select">
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="cpp">C++</option>
+        <option value="c">C</option>
+        <option value="csharp">C#</option>
+        <option value="php">PHP</option>
+        <option value="ruby">Ruby</option>
+        <option value="go">Go</option>
+        <option value="rust">Rust</option>
+        <option value="typescript">TypeScript</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="json">JSON</option>
+        <option value="xml">XML</option>
+        <option value="sql">SQL</option>
+        <option value="markdown">Markdown</option>
+        <option value="yaml">YAML</option>
+        <option value="plaintext">Plain Text</option>
+      </select>
+    </div>
+    
+<pre><code class="hljs">&lt;div class="toolbar-section"&gt;
+  &lt;label for="theme-select"&gt;主题:&lt;/label&gt;
+  &lt;select id="theme-select" class="theme-select"&gt;
+    &lt;option value="vs"&gt;Light&lt;/option&gt;
+    &lt;option value="vs-dark" selected&gt;Dark&lt;/option&gt;
+    &lt;option value="hc-black"&gt;High Contrast&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div class="toolbar-section"&gt;
+  &lt;label for="font-size"&gt;字体大小:&lt;/label&gt;
+  &lt;select id="font-size" class="font-size-select"&gt;
+    &lt;option value="12"&gt;12px&lt;/option&gt;
+    &lt;option value="14"&gt;14px&lt;/option&gt;
+    &lt;option value="16" selected&gt;16px&lt;/option&gt;
+    &lt;option value="18"&gt;18px&lt;/option&gt;
+    &lt;option value="20"&gt;20px&lt;/option&gt;
+    &lt;option value="22"&gt;22px&lt;/option&gt;
+    &lt;option value="24"&gt;24px&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/div&gt;
+
+&lt;div class="toolbar-section"&gt;
+  &lt;button id="word-wrap" class="btn btn-icon" title="自动换行"&gt;
+    &lt;i class="iconfont icon-wrap"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+  &lt;button id="minimap" class="btn btn-icon active" title="小地图"&gt;
+    &lt;i class="iconfont icon-map"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+  &lt;button id="line-numbers" class="btn btn-icon active" title="行号"&gt;
+    &lt;i class="iconfont icon-list-ordered"&gt;&lt;/i&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+  <div class="editor-body">
+    <div class="editor-tabs" id="editor-tabs">
+      <!-- 标签页将通过JavaScript动态生成 -->
+    </div>
+    
+<pre><code class="hljs">&lt;div class="editor-content"&gt;
+  &lt;div id="monaco-editor" class="monaco-editor"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+
+  <div class="editor-footer">
+    <div class="status-info">
+      <span id="cursor-position">行 1, 列 1</span>
+      <span id="selection-info">已选择 0 个字符</span>
+      <span id="file-info">未命名</span>
+    </div>
+    <div class="encoding-info">
+      <span>UTF-8</span>
+    </div>
+  </div>
+</div>
+
+<!-- 引入 Monaco Editor -->
+<script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.44.0/min/vs/loader.js"></script>
+
+<style>
+.code-editor-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--board-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: var(--navbar_bg_color);
+  color: var(--navbar_text_color);
+  border-bottom: 1px solid var(--line_color);
+}
+
+.editor-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.editor-title i {
+  margin-right: 8px;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn i {
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background: var(--link_hover_color);
+  color: white;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: var(--button_hover_bg_color);
+  color: var(--post_text_color);
+}
+
+.btn-secondary:hover {
+  background: var(--line_color);
+}
+
+.btn-icon {
+  padding: 6px;
+  background: transparent;
+  color: var(--post_text_color);
+}
+
+.btn-icon:hover {
+  background: var(--button_hover_bg_color);
+}
+
+.btn-icon.active {
+  background: var(--link_hover_color);
+  color: white;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  background: var(--button_hover_bg_color);
+  border-bottom: 1px solid var(--line_color);
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.toolbar-section label {
+  font-size: 0.9rem;
+  color: var(--post_text_color);
+  white-space: nowrap;
+}
+
+.language-select,
+.theme-select,
+.font-size-select {
+  padding: 4px 8px;
+  border: 1px solid var(--line_color);
+  border-radius: 4px;
+  background: var(--board-color);
+  color: var(--post_text_color);
+  font-size: 0.9rem;
+}
+
+.editor-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.editor-tabs {
+  display: flex;
+  background: var(--button_hover_bg_color);
+  border-bottom: 1px solid var(--line_color);
+  overflow-x: auto;
+}
+
+.editor-tab {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  border-right: 1px solid var(--line_color);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.editor-tab:hover {
+  background: var(--line_color);
+}
+
+.editor-tab.active {
+  background: var(--board-color);
+  font-weight: 600;
+}
+
+.tab-name {
+  margin-right: 5px;
+}
+
+.tab-close {
+  margin-left: 5px;
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-close:hover {
+  background: var(--line_color);
+}
+
+.editor-content {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.monaco-editor {
+  width: 100%;
+  height: 100%;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  background: var(--button_hover_bg_color);
+  border-top: 1px solid var(--line_color);
+  font-size: 0.85rem;
+  color: var(--sec_text_color);
+}
+
+.status-info {
+  display: flex;
+  gap: 15px;
+}
+
+.encoding-info {
+  font-size: 0.85rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .code-editor-container {
+    height: calc(100vh - 150px);
+  }
+  
+  .editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .editor-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .toolbar-section {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .status-info {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Monaco Editor 配置
+  let editor;
+  let currentFiles = [];
+  let activeFileIndex = 0;
+  let wordWrap = false;
+  let minimap = true;
+  let lineNumbers = true;
+  
+  // DOM 元素
+  const languageSelect = document.getElementById('language-select');
+  const themeSelect = document.getElementById('theme-select');
+  const fontSizeSelect = document.getElementById('font-size');
+  const wordWrapBtn = document.getElementById('word-wrap');
+  const minimapBtn = document.getElementById('minimap');
+  const lineNumbersBtn = document.getElementById('line-numbers');
+  const newFileBtn = document.getElementById('new-file');
+  const saveFileBtn = document.getElementById('save-file');
+  const shareCodeBtn = document.getElementById('share-code');
+  const editorTabs = document.getElementById('editor-tabs');
+  const cursorPosition = document.getElementById('cursor-position');
+  const selectionInfo = document.getElementById('selection-info');
+  const fileInfo = document.getElementById('file-info');
+  
+  // 加载 Monaco Editor
+  require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.44.0/min/vs' }});
+  require(['vs/editor/editor.main'], function () {
+    // 创建初始文件
+    createNewFile('javascript', 'untitled-1.js');
+    
+    // 创建编辑器实例
+    editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+      value: currentFiles[0].content,
+      language: currentFiles[0].language,
+      theme: themeSelect.value,
+      fontSize: parseInt(fontSizeSelect.value),
+      wordWrap: wordWrap ? 'on' : 'off',
+      minimap: { enabled: minimap },
+      lineNumbers: lineNumbers ? 'on' : 'off',
+      automaticLayout: true,
+      scrollBeyondLastLine: false,
+      renderWhitespace: 'selection',
+      tabSize: 2,
+      insertSpaces: true,
+      folding: true,
+      foldingStrategy: 'indentation',
+      showFoldingControls: 'always',
+      contextmenu: true,
+      mouseWheelZoom: true,
+      cursorBlinking: 'blink',
+      cursorSmoothCaretAnimation: true,
+      smoothScrolling: true,
+      bracketPairColorization: {
+        enabled: true
+      }
+    });
+    
+    // 监听编辑器变化
+    editor.onDidChangeCursorPosition(updateCursorPosition);
+    editor.onDidChangeCursorSelection(updateSelectionInfo);
+    editor.onDidChangeModelContent(() => {
+      currentFiles[activeFileIndex].content = editor.getValue();
+      updateTabModified(activeFileIndex, true);
+    });
+    
+    // 更新初始状态
+    updateCursorPosition();
+    updateSelectionInfo();
+    updateFileInfo();
+  });
+  
+  // 创建新文件
+  function createNewFile(language = 'javascript', fileName = null) {
+    const languageExtensions = {
+      javascript: 'js',
+      typescript: 'ts',
+      python: 'py',
+      java: 'java',
+      cpp: 'cpp',
+      c: 'c',
+      csharp: 'cs',
+      php: 'php',
+      ruby: 'rb',
+      go: 'go',
+      rust: 'rs',
+      html: 'html',
+      css: 'css',
+      json: 'json',
+      xml: 'xml',
+      sql: 'sql',
+      markdown: 'md',
+      yaml: 'yml',
+      plaintext: 'txt'
+    };
+    
+    const extension = languageExtensions[language] || 'txt';
+    const name = fileName || `untitled-${currentFiles.length + 1}.${extension}`;
+    
+    const newFile = {
+      name: name,
+      language: language,
+      content: getDefaultContent(language),
+      modified: false
+    };
+    
+    currentFiles.push(newFile);
+    return currentFiles.length - 1;
+  }
+  
+  // 获取默认内容
+  function getDefaultContent(language) {
+    const templates = {
+      javascript: `// JavaScript 示例代码
+function hello(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+
+hello('World');
+`,
+      python: `# Python 示例代码
+def hello(name):
+    print(f"Hello, {name}!")
+
+if __name__ == "__main__":
+    hello("World")
+`,
+      java: `// Java 示例代码
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+`,
+      cpp: `// C++ 示例代码
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+    return 0;
+}
+`,
+      html: `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>示例页面</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+</body>
+</html>`,
+      css: `/* CSS 示例代码 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}`,
+      json: `{
+  "name": "示例",
+  "version": "1.0.0",
+  "description": "这是一个示例JSON文件"
+}`,
+      markdown: `# 示例 Markdown
+
+这是一个 **Markdown** 示例文档。
+
+## 功能特性
+
+- 特性 1
+- 特性 2
+- 特性 3
+
+\`\`\`javascript
+console.log("Hello, World!");
+\`\`\``
+    };
+    
+    return templates[language] || '';
+  }
+  
+  // 更新标签页
+  function updateTabs() {
+    editorTabs.innerHTML = '';
+    
+    currentFiles.forEach((file, index) => {
+      const tab = document.createElement('div');
+      tab.className = `editor-tab ${index === activeFileIndex ? 'active' : ''}`;
+      tab.dataset.index = index;
+      
+      const name = document.createElement('span');
+      name.className = 'tab-name';
+      name.textContent = file.name;
+      
+      const close = document.createElement('span');
+      close.className = 'tab-close';
+      close.innerHTML = '×';
+      close.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeFile(index);
+      });
+      
+      tab.appendChild(name);
+      tab.appendChild(close);
+      
+      tab.addEventListener('click', () => switchToFile(index));
+      
+      editorTabs.appendChild(tab);
+    });
+  }
+  
+  // 切换文件
+  function switchToFile(index) {
+    if (index === activeFileIndex) return;
+    
+    // 保存当前文件内容
+    currentFiles[activeFileIndex].content = editor.getValue();
+    
+    // 切换到新文件
+    activeFileIndex = index;
+    editor.setValue(currentFiles[index].content);
+    monaco.editor.setModelLanguage(editor.getModel(), currentFiles[index].language);
+    
+    // 更新UI
+    updateTabs();
+    languageSelect.value = currentFiles[index].language;
+    updateFileInfo();
+  }
+  
+  // 关闭文件
+  function closeFile(index) {
+    if (currentFiles.length <= 1) return;
+    
+    currentFiles.splice(index, 1);
+    
+    if (activeFileIndex >= currentFiles.length) {
+      activeFileIndex = currentFiles.length - 1;
+    } else if (activeFileIndex > index) {
+      activeFileIndex--;
+    }
+    
+    editor.setValue(currentFiles[activeFileIndex].content);
+    monaco.editor.setModelLanguage(editor.getModel(), currentFiles[activeFileIndex].language);
+    
+    updateTabs();
+    updateFileInfo();
+  }
+  
+  // 更新标签修改状态
+  function updateTabModified(index, modified) {
+    currentFiles[index].modified = modified;
+    
+    const tab = editorTabs.querySelector(`[data-index="${index}"]`);
+    if (tab) {
+      const name = tab.querySelector('.tab-name');
+      name.textContent = modified ? `*${currentFiles[index].name}` : currentFiles[index].name;
+    }
+  }
+  
+  // 更新光标位置
+  function updateCursorPosition() {
+    if (!editor) return;
+    
+    const position = editor.getPosition();
+    cursorPosition.textContent = `行 ${position.lineNumber}, 列 ${position.column}`;
+  }
+  
+  // 更新选择信息
+  function updateSelectionInfo() {
+    if (!editor) return;
+    
+    const selection = editor.getSelection();
+    const selectedText = editor.getModel().getValueInRange(selection);
+    selectionInfo.textContent = `已选择 ${selectedText.length} 个字符`;
+  }
+  
+  // 更新文件信息
+  function updateFileInfo() {
+    if (!currentFiles[activeFileIndex]) return;
+    
+    fileInfo.textContent = currentFiles[activeFileIndex].name;
+  }
+  
+  // 保存文件
+  function saveFile() {
+    const file = currentFiles[activeFileIndex];
+    const content = editor.getValue();
+    
+    // 创建下载链接
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    URL.revokeObjectURL(url);
+    
+    // 标记为未修改
+    updateTabModified(activeFileIndex, false);
+  }
+  
+  // 分享代码
+  function shareCode() {
+    const content = editor.getValue();
+    
+    // 创建一个简单的分享弹窗
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    `;
+    
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+      background: var(--board-color);
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    `;
+    
+    modalContent.innerHTML = `
+      <h3 style="margin-top: 0;">分享代码</h3>
+      <p>复制下面的代码分享给他人：</p>
+      <textarea style="width: 100%; height: 200px; padding: 10px; border: 1px solid var(--line_color); border-radius: 4px; font-family: monospace;">${content}</textarea>
+      <div style="margin-top: 15px; text-align: right;">
+        <button id="copy-code" class="btn btn-primary">复制</button>
+        <button id="close-modal" class="btn btn-secondary" style="margin-left: 10px;">关闭</button>
+      </div>
+    `;
+    
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // 添加事件监听
+    document.getElementById('copy-code').addEventListener('click', () => {
+      navigator.clipboard.writeText(content).then(() => {
+        alert('代码已复制到剪贴板！');
+      });
+    });
+    
+    document.getElementById('close-modal').addEventListener('click', () => {
+      document.body.removeChild(modal);
+    });
+    
+    // 点击背景关闭
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        document.body.removeChild(modal);
+      }
+    });
+  }
+  
+  // 事件监听器
+  languageSelect.addEventListener('change', () => {
+    const language = languageSelect.value;
+    currentFiles[activeFileIndex].language = language;
+    monaco.editor.setModelLanguage(editor.getModel(), language);
+    
+    // 更新文件扩展名
+    const nameParts = currentFiles[activeFileIndex].name.split('.');
+    if (nameParts.length > 1) {
+      const languageExtensions = {
+        javascript: 'js', typescript: 'ts', python: 'py', java: 'java',
+        cpp: 'cpp', c: 'c', csharp: 'cs', php: 'php', ruby: 'rb',
+        go: 'go', rust: 'rs', html: 'html', css: 'css', json: 'json',
+        xml: 'xml', sql: 'sql', markdown: 'md', yaml: 'yml', plaintext: 'txt'
+      };
+      
+      const extension = languageExtensions[language] || 'txt';
+      currentFiles[activeFileIndex].name = `${nameParts[0]}.${extension}`;
+      updateTabs();
+      updateFileInfo();
+    }
+  });
+  
+  themeSelect.addEventListener('change', () => {
+    monaco.editor.setTheme(themeSelect.value);
+  });
+  
+  fontSizeSelect.addEventListener('change', () => {
+    editor.updateOptions({ fontSize: parseInt(fontSizeSelect.value) });
+  });
+  
+  wordWrapBtn.addEventListener('click', () => {
+    wordWrap = !wordWrap;
+    editor.updateOptions({ wordWrap: wordWrap ? 'on' : 'off' });
+    wordWrapBtn.classList.toggle('active', wordWrap);
+  });
+  
+  minimapBtn.addEventListener('click', () => {
+    minimap = !minimap;
+    editor.updateOptions({ minimap: { enabled: minimap } });
+    minimapBtn.classList.toggle('active', minimap);
+  });
+  
+  lineNumbersBtn.addEventListener('click', () => {
+    lineNumbers = !lineNumbers;
+    editor.updateOptions({ lineNumbers: lineNumbers ? 'on' : 'off' });
+    lineNumbersBtn.classList.toggle('active', lineNumbers);
+  });
+  
+  newFileBtn.addEventListener('click', () => {
+    const index = createNewFile(languageSelect.value);
+    switchToFile(index);
+  });
+  
+  saveFileBtn.addEventListener('click', saveFile);
+  shareCodeBtn.addEventListener('click', shareCode);
+});
+</script>
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/pikachuxpf" target="_blank" rel="nofollow noopener"><span>fpx</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Lines -->
+  <script type="text/javascript" color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"> </script>
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
